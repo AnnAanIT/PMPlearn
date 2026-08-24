@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PMP Vocabulary — Học từ vựng PMP</title>
+<meta name="description" content="Học từ vựng PMP theo từng module, flashcard song ngữ, theo dõi tiến độ." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">PMP</span>
+        <span class="brand-name">Vocabulary</span>
+      </div>
+      <div class="global-stats" id="globalStats"></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <button class="module-item all-item active" data-module="all">
+        <span class="module-name">Tất cả module</span>
+        <span class="module-count" id="countAll"></span>
+      </button>
+      <div class="module-list" id="moduleList"></div>
+    </aside>
+
+    <main class="content">
+      <nav class="tabs" id="tabs">
+        <button class="tab-btn active" data-tab="flashcard">🃏 Flashcard</button>
+        <button class="tab-btn" data-tab="list">📋 Danh sách</button>
+      </nav>
+
+      <section id="flashcardView" class="view active">
+        <div class="flash-controls">
+          <div class="flash-filter">
+            <label><input type="radio" name="flashFilter" value="all" checked /> Tất cả</label>
+            <label><input type="radio" name="flashFilter" value="unknown" /> Chưa thuộc</label>
+            <label><input type="radio" name="flashFilter" value="known" /> Đã thuộc</label>
+          </div>
+          <button id="shuffleBtn" class="btn-ghost">🔀 Xáo trộn</button>
+        </div>
+
+        <div class="flash-progress">
+          <span id="flashPosition">0 / 0</span>
+          <div class="flash-progress-bar"><div id="flashProgressFill" class="flash-progress-fill"></div></div>
+        </div>
+
+        <div id="flashStage" class="flash-stage">
+          <div id="flashCard" class="flash-card" tabindex="0" role="button" aria-label="Bấm hoặc nhấn Enter/Space để lật thẻ">
+            <div class="flash-face flash-front">
+              <span class="flash-module-tag" id="flashModuleTag"></span>
+              <p class="flash-term" id="flashTerm"></p>
+              <span class="flash-hint">Bấm để xem nghĩa</span>
+            </div>
+            <div class="flash-face flash-back">
+              <p class="flash-vi" id="flashVi"></p>
+              <span class="flash-hint">Bấm để quay lại</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flash-actions">
+          <button id="prevBtn" class="btn-ghost">← Trước</button>
+          <button id="markUnknownBtn" class="btn-danger">✗ Chưa thuộc</button>
+          <button id="markKnownBtn" class="btn-success">✓ Đã thuộc</button>
+          <button id="nextBtn" class="btn-ghost">Sau →</button>
+        </div>
+
+        <p id="flashEmpty" class="flash-empty" hidden>🎉 Không còn từ nào trong bộ lọc này. Hãy đổi bộ lọc hoặc module khác!</p>
+      </section>
+
+      <section id="listView" class="view">
+        <div class="list-controls">
+          <input type="search" id="searchInput" placeholder="Tìm thuật ngữ hoặc định nghĩa..." />
+          <select id="statusFilter">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="known">Đã thuộc</option>
+            <option value="unknown">Chưa thuộc</option>
+          </select>
+        </div>
+        <div class="list-count" id="listCount"></div>
+        <div class="vocab-list" id="vocabList"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
