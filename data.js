@@ -88,6 +88,7 @@ const VOCAB = [
   { id: "m2-42", m: 2, term: "Kickoff Meeting", vi: "Cuộc họp khởi động: buổi gặp mặt đội dự án và các stakeholder chính vào đầu dự án nhằm thiết lập kỳ vọng chung và chính thức bắt đầu công việc." },
   { id: "m2-43", m: 2, term: "Steering Committee", vi: "Ban chỉ đạo: nhóm các stakeholder cấp cao đưa ra định hướng, hỗ trợ cho dự án và ra quyết định vượt quá thẩm quyền của đội dự án." },
   { id: "m2-44", m: 2, term: "Go/No-Go Decision", vi: "Quyết định tiếp tục hay dừng: xác định một sáng kiến/dự án nên tiếp tục hay bị dừng lại, thường được đưa ra tại các phase gate." },
+  { id: "m2-45", m: 2, term: "Sustainability", vi: "Tính bền vững: thực hành mang lại kết quả theo cách có thể duy trì lâu dài, cân bằng giữa năng suất với con người, tài nguyên và môi trường — khái niệm ngày càng được nhấn mạnh trong Domain III." },
 
   // ===== MODULE 3: Stakeholder & Communication =====
   { id: "m3-01", m: 3, term: "Stakeholder", vi: "Cá nhân, nhóm hoặc tổ chức có thể ảnh hưởng, bị ảnh hưởng, hoặc tự cảm thấy bị ảnh hưởng bởi quyết định, hoạt động hay kết quả của dự án." },
@@ -120,6 +121,9 @@ const VOCAB = [
   { id: "m3-28", m: 3, term: "Sunk Cost", vi: "Chi phí chìm: chi phí đã bỏ ra và không thể thu hồi, không nên ảnh hưởng đến quyết định trong tương lai." },
   { id: "m3-29", m: 3, term: "Salience Model", vi: "Mô hình phân loại stakeholder theo 3 yếu tố: Power (quyền lực), Urgency (tính cấp bách), Legitimacy (tính chính danh)." },
   { id: "m3-30", m: 3, term: "Directions of Influence", vi: "Hướng ảnh hưởng của stakeholder: Upward (cấp trên), Downward (cấp dưới), Outward (bên ngoài dự án), Sideward (ngang hàng, cùng cấp PM)." },
+  { id: "m3-31", m: 3, term: "Business Value", vi: "Giá trị kinh doanh: lợi ích ròng (có thể định lượng hoặc không) mà một dự án/hoạt động mang lại cho tổ chức, vượt trên chi phí bỏ ra." },
+  { id: "m3-32", m: 3, term: "Feasibility Analysis", vi: "Phân tích khả thi: nghiên cứu đánh giá tính khả thi của dự án trên nhiều khía cạnh (vận hành, công nghệ, chi phí, thời gian) trước khi quyết định đầu tư." },
+  { id: "m3-33", m: 3, term: "Stakeholder Engagement Plan", vi: "Kế hoạch gắn kết stakeholder: thành phần của kế hoạch quản lý dự án xác định chiến lược và hành động cần thiết để thúc đẩy sự tham gia hiệu quả của các stakeholder." },
 
   // ===== MODULE 4: Resource & Team =====
   { id: "m4-01", m: 4, term: "RACI Chart (RAM)", vi: "Ma trận phân công trách nhiệm: Responsible (người thực hiện), Accountable (người chịu trách nhiệm cuối cùng), Consulted (được tham vấn), Informed (được thông báo)." },
@@ -180,6 +184,8 @@ const VOCAB = [
   { id: "m5-21", m: 5, term: "Verify vs Validate", vi: "Verify (kiểm tra kỹ thuật nội bộ — \"làm đúng cách chưa?\") khác với Validate (xác nhận từ khách hàng — \"có phải điều đúng cần làm không?\")." },
   { id: "m5-22", m: 5, term: "Change Control Board (CCB)", vi: "Hội đồng kiểm soát thay đổi: nhóm có thẩm quyền phê duyệt hoặc từ chối các yêu cầu thay đổi của dự án." },
   { id: "m5-23", m: 5, term: "Design Thinking", vi: "Tư duy thiết kế: quy trình phi tuyến tính, lặp đi lặp lại để thấu hiểu người dùng, thách thức giả định, định nghĩa lại vấn đề và tạo ra giải pháp sáng tạo." },
+  { id: "m5-24", m: 5, term: "Acceptance Criteria", vi: "Tiêu chí chấp nhận: tập hợp các điều kiện phải được đáp ứng trước khi một deliverable được chính thức chấp nhận." },
+  { id: "m5-25", m: 5, term: "Requirements Management Plan", vi: "Kế hoạch quản lý yêu cầu: thành phần của kế hoạch quản lý dự án mô tả cách các yêu cầu sẽ được phân tích, tài liệu hóa và quản lý xuyên suốt dự án." },
 
   // ===== MODULE 6: Schedule Management =====
   { id: "m6-01", m: 6, term: "Milestone", vi: "Cột mốc: sự kiện quan trọng đánh dấu hoàn thành một deliverable lớn, luôn có thời lượng bằng 0." },
@@ -212,6 +218,9 @@ const VOCAB = [
   { id: "m6-28", m: 6, term: "Gantt Chart (Bar Chart)", vi: "Biểu đồ thanh ngang thể hiện hoạt động theo trục thời gian; dùng để theo dõi tiến độ và báo cáo cho đội dự án." },
   { id: "m6-29", m: 6, term: "Milestone Chart", vi: "Biểu đồ cột mốc: tương tự Gantt nhưng chỉ hiển thị các mốc chính, thường dùng để báo cáo cho quản lý cấp cao/senior management." },
   { id: "m6-30", m: 6, term: "Critical Chain Method", vi: "Phương pháp chuỗi găng: kỹ thuật lập lịch cho phép đội dự án đặt các buffer (vùng đệm) trên bất kỳ đường nào của lịch trình để ứng phó với nguồn lực hạn chế và sự không chắc chắn của dự án." },
+  { id: "m6-31", m: 6, term: "Predecessor / Successor Activity", vi: "Predecessor: hoạt động đứng trước, xảy ra trước một hoạt động phụ thuộc trong lịch trình. Successor: hoạt động đứng sau, phụ thuộc logic vào hoạt động trước đó." },
+  { id: "m6-32", m: 6, term: "Forward Pass / Backward Pass", vi: "Forward Pass: kỹ thuật CPM tính ngày bắt đầu sớm (ES) và kết thúc sớm (EF) bằng cách đi xuôi từ đầu lịch trình. Backward Pass: tính ngày bắt đầu trễ (LS) và kết thúc trễ (LF) bằng cách đi ngược từ cuối lịch trình." },
+  { id: "m6-33", m: 6, term: "Schedule Compression", vi: "Nén tiến độ: kỹ thuật rút ngắn thời gian lịch trình mà không giảm phạm vi dự án — gồm 2 kỹ thuật chính: Crashing và Fast Tracking." },
 
   // ===== MODULE 7: Agile & Scrum =====
   { id: "m7-01", m: 7, term: "Agile Manifesto", vi: "Tuyên ngôn Agile (2001): 4 giá trị cốt lõi ưu tiên con người, sản phẩm hoạt động, hợp tác với khách hàng và thích ứng với thay đổi." },
@@ -296,16 +305,17 @@ const VOCAB = [
   { id: "m9-19", m: 9, term: "Cost Variance (CV)", vi: "Sai lệch chi phí. Công thức: CV = EV − AC; CV > 0 nghĩa là dưới ngân sách (under budget)." },
   { id: "m9-20", m: 9, term: "Schedule Performance Index (SPI)", vi: "Chỉ số hiệu suất tiến độ. Công thức: SPI = EV/PV; SPI > 1 là hiệu suất tốt." },
   { id: "m9-21", m: 9, term: "Cost Performance Index (CPI)", vi: "Chỉ số hiệu suất chi phí. Công thức: CPI = EV/AC; CPI > 1 là hiệu suất tốt." },
-  { id: "m9-22", m: 9, term: "Estimate at Completion (EAC)", vi: "Ước lượng tổng chi phí khi hoàn thành. Công thức phổ biến: EAC = BAC/CPI (khi giả định xu hướng hiện tại tiếp diễn)." },
+  { id: "m9-22", m: 9, term: "Estimate at Completion (EAC)", vi: "Ước lượng tổng chi phí khi hoàn thành dự án. Công thức phổ biến nhất: EAC = BAC/CPI (giả định hiệu suất chi phí hiện tại sẽ tiếp diễn cho phần việc còn lại). Nếu ước lượng lại toàn bộ phần còn lại từ đầu (bottom-up): EAC = AC + ETC." },
   { id: "m9-23", m: 9, term: "Estimate to Complete (ETC)", vi: "Ước lượng chi phí còn cần để hoàn thành phần việc còn lại. Công thức: ETC = EAC − AC." },
   { id: "m9-24", m: 9, term: "Variance at Completion (VAC)", vi: "Sai lệch tại thời điểm hoàn thành. Công thức: VAC = BAC − EAC." },
-  { id: "m9-25", m: 9, term: "To-Complete Performance Index (TCPI)", vi: "Chỉ số hiệu suất cần đạt để hoàn thành. Công thức: TCPI = Work Remaining / Funds Remaining; TCPI > 1 nghĩa là khó hoàn thành hơn." },
+  { id: "m9-25", m: 9, term: "To-Complete Performance Index (TCPI)", vi: "Chỉ số hiệu suất chi phí cần đạt cho phần việc còn lại để hoàn thành đúng mục tiêu ngân sách. Công thức theo BAC: TCPI = (BAC − EV) / (BAC − AC); nếu ngân sách gốc không còn khả thi, dùng theo EAC: TCPI = (BAC − EV) / (EAC − AC). TCPI > 1 nghĩa là khó hoàn thành hơn (cần hiệu suất cao hơn mức đã đạt được)." },
   { id: "m9-26", m: 9, term: "Value Engineering (Value Analysis)", vi: "Phân tích giá trị: tìm cách thực hiện cùng công việc với chi phí thấp hơn." },
   { id: "m9-27", m: 9, term: "Earned Value Management (EVM)", vi: "Phương pháp luận kết hợp đo lường phạm vi, tiến độ, chi phí và nguồn lực để đánh giá hiệu suất và tiến độ dự án — nền tảng cho các chỉ số PV/EV/AC/SPI/CPI." },
   { id: "m9-28", m: 9, term: "Project Budget", vi: "Tổng ngân sách dự án. Công thức: Project Budget = tổng ước lượng chi phí work package + Contingency Reserve + Management Reserve." },
   { id: "m9-29", m: 9, term: "Performance Measurement Baseline (PMB)", vi: "Đường cơ sở đo lường hiệu suất: tích hợp scope baseline, schedule baseline và cost baseline để làm cơ sở so sánh, quản lý và kiểm soát việc thực thi dự án." },
   { id: "m9-30", m: 9, term: "S-Curve Analysis", vi: "Phân tích đường cong chữ S: kỹ thuật thể hiện xu hướng hiệu suất bằng đồ thị chi phí lũy kế theo thời gian, thường thấp lúc đầu và cao dần về cuối dự án." },
   { id: "m9-31", m: 9, term: "Total Cost of Ownership (TCO)", vi: "Tổng chi phí sở hữu: ước lượng tài chính giúp xác định toàn bộ chi phí trực tiếp và gián tiếp của một sản phẩm/dịch vụ trong suốt vòng đời sử dụng." },
+  { id: "m9-32", m: 9, term: "Earning Rules (0/100, 50/50, Milestone, % Complete)", vi: "Các quy tắc ghi nhận Earned Value cho work package: 0/100 (chỉ ghi nhận 100% khi hoàn thành, dùng cho công việc ngắn); 50/50 (50% khi bắt đầu, 50% khi xong); Milestone (chia theo % tại từng mốc, dùng cho công việc dài có nhiều giai đoạn); % Complete (ước lượng % hoàn thành chủ quan — ít đáng tin cậy nhất)." },
 
   // ===== MODULE 10: Quality Management =====
   { id: "m10-01", m: 10, term: "Quality", vi: "Chất lượng: mức độ mà một tập hợp các đặc tính vốn có đáp ứng yêu cầu (định nghĩa theo ISO 9000)." },
@@ -366,7 +376,7 @@ const VOCAB = [
   { id: "m11-30", m: 11, term: "Risk Owner", vi: "Chủ sở hữu rủi ro: người chịu trách nhiệm lập kế hoạch phản ứng phù hợp và đảm bảo nó được thực hiện." },
   { id: "m11-31", m: 11, term: "Risk Audit", vi: "Đánh giá hiệu quả của risk owner trong việc triển khai phản ứng rủi ro, cũng như hiệu quả của toàn bộ quy trình quản lý rủi ro." },
   { id: "m11-32", m: 11, term: "SWOT Analysis", vi: "Phân tích Điểm mạnh - Điểm yếu - Cơ hội - Thách thức (Strengths, Weaknesses, Opportunities, Threats) — một kỹ thuật nhận diện rủi ro." },
-  { id: "m11-33", m: 11, term: "Risk Categories (TECOP)", vi: "Nhóm nguồn rủi ro phổ biến dùng để phân loại: Technical, External, Organizational, Project management." },
+  { id: "m11-33", m: 11, term: "Risk Categories (RBS Level 1)", vi: "4 nhóm nguồn rủi ro cấp cao nhất thường dùng trong Risk Breakdown Structure (RBS): Technical (kỹ thuật), External (bên ngoài), Organizational (tổ chức), Project Management (quản lý dự án)." },
   { id: "m11-34", m: 11, term: "Watch List", vi: "Danh sách theo dõi: các rủi ro có mức ưu tiên thấp, không cần phản ứng ngay nhưng vẫn được giám sát định kỳ trong Monitor Risk." },
   { id: "m11-35", m: 11, term: "Risk Management Plan", vi: "Kế hoạch quản lý rủi ro: thành phần của kế hoạch quản lý dự án mô tả cách các hoạt động quản lý rủi ro sẽ được cấu trúc và thực hiện." },
   { id: "m11-36", m: 11, term: "Reserve Analysis", vi: "Phân tích dự phòng: đánh giá lượng rủi ro còn lại của dự án so với lượng dự phòng thời gian/ngân sách còn lại, để xác định dự phòng có còn đủ hay không." },
@@ -374,6 +384,12 @@ const VOCAB = [
   { id: "m11-38", m: 11, term: "Trigger Condition", vi: "Điều kiện kích hoạt: sự kiện hoặc tình huống báo hiệu rằng một rủi ro sắp xảy ra, dùng để kích hoạt contingency plan." },
   { id: "m11-39", m: 11, term: "Workaround", vi: "Giải pháp tình thế: phản ứng tức thời, tạm thời trước một rủi ro đã xảy ra mà chưa có phản ứng được lên kế hoạch trước, hoặc phản ứng đã lên kế hoạch không hiệu quả." },
   { id: "m11-40", m: 11, term: "PESTLE Analysis", vi: "Công cụ hoạch định chiến lược đánh giá có hệ thống các yếu tố Political, Economic, Sociocultural, Technological, Legal, Environmental — giúp nhìn nhận môi trường bên ngoài dự án (thuộc Domain III)." },
+  { id: "m11-41", m: 11, term: "Risk Avoidance", vi: "Né tránh rủi ro: loại bỏ hoàn toàn threat hoặc bảo vệ dự án khỏi tác động của nó (VD: thay đổi kế hoạch để loại bỏ nguyên nhân gây rủi ro)." },
+  { id: "m11-42", m: 11, term: "Risk Mitigation", vi: "Giảm thiểu rủi ro: hành động làm giảm xác suất xảy ra và/hoặc mức độ ảnh hưởng của một threat xuống ngưỡng có thể chấp nhận được." },
+  { id: "m11-43", m: 11, term: "Risk Transference", vi: "Chuyển giao rủi ro: dịch chuyển tác động của threat cùng với quyền sở hữu phản ứng sang bên thứ ba (VD: mua bảo hiểm, thuê ngoài qua hợp đồng)." },
+  { id: "m11-44", m: 11, term: "Risk Exploiting", vi: "Khai thác rủi ro: hành động chủ động để đảm bảo một opportunity chắc chắn xảy ra, thay vì chỉ hy vọng nó xảy ra." },
+  { id: "m11-45", m: 11, term: "Risk Enhancement", vi: "Tăng cường rủi ro: hành động làm tăng xác suất xảy ra và/hoặc mức độ tác động tích cực của một opportunity." },
+  { id: "m11-46", m: 11, term: "Risk Sharing", vi: "Chia sẻ rủi ro: phân bổ quyền sở hữu một opportunity cho bên thứ ba có khả năng nắm bắt cơ hội đó tốt nhất (VD: liên doanh, hợp tác)." },
 
   // ===== MODULE 12: Procurement Management =====
   { id: "m12-01", m: 12, term: "Procurement", vi: "Mua sắm: quy trình thu mua sản phẩm, dịch vụ hoặc kết quả cần thiết từ bên ngoài đội dự án." },
@@ -406,7 +422,7 @@ const VOCAB = [
   { id: "m12-28", m: 12, term: "Money for Nothing (Agile Contracting)", vi: "Điều khoản \"tiền không cho gì\": cho phép khách hàng chấm dứt hợp đồng sớm nếu thấy backlog còn lại không còn đáng giá." },
   { id: "m12-29", m: 12, term: "Graduated Fixed Price (Agile Contracting)", vi: "Giá cố định phân bậc: chia sẻ rủi ro/thưởng giữa hai bên dựa trên biến động tiến độ, với đơn giá khác nhau tùy giao hàng sớm/đúng hạn/trễ." },
   { id: "m12-30", m: 12, term: "Fixed Price Work Packages (Agile Contracting)", vi: "Giá cố định theo từng gói công việc nhỏ, giảm rủi ro ước lượng sai cho cả gói lớn." },
-  { id: "m12-31", m: 12, term: "Point of Total Assumption (PTA)", vi: "Điểm giả định toàn phần: mức chi phí mà từ đó trở đi, seller trong hợp đồng FPIF phải tự chịu toàn bộ chi phí vượt trội, không còn được buyer chia sẻ." },
+  { id: "m12-31", m: 12, term: "Point of Total Assumption (PTA)", vi: "Điểm giả định toàn phần: mức chi phí mà từ đó trở đi, seller trong hợp đồng FPIF phải tự chịu toàn bộ chi phí vượt trội, không còn được buyer chia sẻ. Công thức: PTA = [(Ceiling Price − Target Price) / Buyer's Share Ratio] + Target Cost." },
   { id: "m12-32", m: 12, term: "Warranty", vi: "Bảo hành: cam kết của seller về chất lượng/hiệu năng sản phẩm trong một khoảng thời gian nhất định sau khi bàn giao." },
   { id: "m12-33", m: 12, term: "Termination for Convenience / for Cause", vi: "Chấm dứt hợp đồng vì thuận tiện (buyer tự quyết, không cần lỗi từ seller) hoặc vì lý do vi phạm (seller không thực hiện đúng nghĩa vụ hợp đồng)." },
 ];
