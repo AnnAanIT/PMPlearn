@@ -89,6 +89,10 @@ const VOCAB = [
   { id: "m2-43", m: 2, term: "Steering Committee", vi: "Ban chỉ đạo: nhóm các stakeholder cấp cao đưa ra định hướng, hỗ trợ cho dự án và ra quyết định vượt quá thẩm quyền của đội dự án." },
   { id: "m2-44", m: 2, term: "Go/No-Go Decision", vi: "Quyết định tiếp tục hay dừng: xác định một sáng kiến/dự án nên tiếp tục hay bị dừng lại, thường được đưa ra tại các phase gate." },
   { id: "m2-45", m: 2, term: "Sustainability", vi: "Tính bền vững: thực hành mang lại kết quả theo cách có thể duy trì lâu dài, cân bằng giữa năng suất với con người, tài nguyên và môi trường — khái niệm ngày càng được nhấn mạnh trong Domain III." },
+  { id: "m2-46", m: 2, term: "Business Objective", vi: "Mục tiêu kinh doanh: đại diện có thể đo lường được cho những gì tổ chức muốn đạt được; phải cụ thể và gắn kết với mục tiêu chiến lược của tổ chức." },
+  { id: "m2-47", m: 2, term: "Benefits Realization Plan", vi: "Kế hoạch hiện thực hóa lợi ích: tài liệu nêu các hoạt động cần thiết để đạt được lợi ích đã hoạch định, kèm mốc thời gian và nguồn lực cần thiết." },
+  { id: "m2-48", m: 2, term: "Change Management Plan", vi: "Kế hoạch quản lý thay đổi: thành phần của kế hoạch quản lý dự án thiết lập change control board, phạm vi thẩm quyền của nó, và cách hệ thống kiểm soát thay đổi sẽ được triển khai." },
+  { id: "m2-49", m: 2, term: "Objectives and Key Results (OKRs)", vi: "Khung thiết lập mục tiêu dùng để xác định và theo dõi mục tiêu (Objectives) cùng kết quả then chốt (Key Results); giúp gắn kết mục tiêu cá nhân, đội nhóm và tổ chức." },
 
   // ===== MODULE 3: Stakeholder & Communication =====
   { id: "m3-01", m: 3, term: "Stakeholder", vi: "Cá nhân, nhóm hoặc tổ chức có thể ảnh hưởng, bị ảnh hưởng, hoặc tự cảm thấy bị ảnh hưởng bởi quyết định, hoạt động hay kết quả của dự án." },
@@ -124,6 +128,8 @@ const VOCAB = [
   { id: "m3-31", m: 3, term: "Business Value", vi: "Giá trị kinh doanh: lợi ích ròng (có thể định lượng hoặc không) mà một dự án/hoạt động mang lại cho tổ chức, vượt trên chi phí bỏ ra." },
   { id: "m3-32", m: 3, term: "Feasibility Analysis", vi: "Phân tích khả thi: nghiên cứu đánh giá tính khả thi của dự án trên nhiều khía cạnh (vận hành, công nghệ, chi phí, thời gian) trước khi quyết định đầu tư." },
   { id: "m3-33", m: 3, term: "Stakeholder Engagement Plan", vi: "Kế hoạch gắn kết stakeholder: thành phần của kế hoạch quản lý dự án xác định chiến lược và hành động cần thiết để thúc đẩy sự tham gia hiệu quả của các stakeholder." },
+  { id: "m3-34", m: 3, term: "Communications Management Plan", vi: "Kế hoạch quản lý truyền thông: thành phần của kế hoạch quản lý dự án mô tả cách thức, thời điểm và người chịu trách nhiệm quản lý, phổ biến thông tin dự án." },
+  { id: "m3-35", m: 3, term: "Disbenefit", vi: "Kết quả tiêu cực: hệ quả đo lường được từ một outcome mà một hoặc nhiều stakeholder cho là bất lợi — cần được xác định và quản lý tương tự như benefit." },
 
   // ===== MODULE 4: Resource & Team =====
   { id: "m4-01", m: 4, term: "RACI Chart (RAM)", vi: "Ma trận phân công trách nhiệm: Responsible (người thực hiện), Accountable (người chịu trách nhiệm cuối cùng), Consulted (được tham vấn), Informed (được thông báo)." },
@@ -221,6 +227,7 @@ const VOCAB = [
   { id: "m6-31", m: 6, term: "Predecessor / Successor Activity", vi: "Predecessor: hoạt động đứng trước, xảy ra trước một hoạt động phụ thuộc trong lịch trình. Successor: hoạt động đứng sau, phụ thuộc logic vào hoạt động trước đó." },
   { id: "m6-32", m: 6, term: "Forward Pass / Backward Pass", vi: "Forward Pass: kỹ thuật CPM tính ngày bắt đầu sớm (ES) và kết thúc sớm (EF) bằng cách đi xuôi từ đầu lịch trình. Backward Pass: tính ngày bắt đầu trễ (LS) và kết thúc trễ (LF) bằng cách đi ngược từ cuối lịch trình." },
   { id: "m6-33", m: 6, term: "Schedule Compression", vi: "Nén tiến độ: kỹ thuật rút ngắn thời gian lịch trình mà không giảm phạm vi dự án — gồm 2 kỹ thuật chính: Crashing và Fast Tracking." },
+  { id: "m6-34", m: 6, term: "ES / EF / LS / LF Dates", vi: "4 mốc thời gian dùng trong Critical Path Method: Early Start/Early Finish (tính từ Forward Pass — sớm nhất có thể bắt đầu/kết thúc), Late Start/Late Finish (tính từ Backward Pass — trễ nhất có thể bắt đầu/kết thúc mà không ảnh hưởng ngày hoàn thành dự án)." },
 
   // ===== MODULE 7: Agile & Scrum =====
   { id: "m7-01", m: 7, term: "Agile Manifesto", vi: "Tuyên ngôn Agile (2001): 4 giá trị cốt lõi ưu tiên con người, sản phẩm hoạt động, hợp tác với khách hàng và thích ứng với thay đổi." },
@@ -282,6 +289,7 @@ const VOCAB = [
   { id: "m8-30", m: 8, term: "DevOps", vi: "Tập hợp các thực hành nhằm tạo luồng giao hàng mượt mà bằng cách cải thiện sự hợp tác giữa đội phát triển (Dev) và đội vận hành (Ops)." },
   { id: "m8-31", m: 8, term: "Technical Debt", vi: "Nợ kỹ thuật: chi phí bị trì hoãn của công việc chưa được làm đúng cách ở giai đoạn trước trong vòng đời sản phẩm, sẽ phải trả giá (khắc phục) về sau." },
   { id: "m8-32", m: 8, term: "Value Stream", vi: "Dòng giá trị: cấu trúc tổ chức tập trung vào luồng giá trị chảy đến khách hàng thông qua việc cung cấp sản phẩm/dịch vụ cụ thể." },
+  { id: "m8-33", m: 8, term: "Release Planning", vi: "Lập kế hoạch phát hành: quá trình xác định kế hoạch cấp cao cho việc phát hành hoặc chuyển giao một sản phẩm/deliverable/increment giá trị đến khách hàng, thường trải qua nhiều iteration." },
 
   // ===== MODULE 9: Financial Management =====
   { id: "m9-01", m: 9, term: "CapEx (Capital Expenditure)", vi: "Chi phí đầu tư: khoản đầu tư để mua, nâng cấp tài sản vật chất dài hạn (bất động sản, thiết bị, công nghệ)." },
@@ -316,6 +324,7 @@ const VOCAB = [
   { id: "m9-30", m: 9, term: "S-Curve Analysis", vi: "Phân tích đường cong chữ S: kỹ thuật thể hiện xu hướng hiệu suất bằng đồ thị chi phí lũy kế theo thời gian, thường thấp lúc đầu và cao dần về cuối dự án." },
   { id: "m9-31", m: 9, term: "Total Cost of Ownership (TCO)", vi: "Tổng chi phí sở hữu: ước lượng tài chính giúp xác định toàn bộ chi phí trực tiếp và gián tiếp của một sản phẩm/dịch vụ trong suốt vòng đời sử dụng." },
   { id: "m9-32", m: 9, term: "Earning Rules (0/100, 50/50, Milestone, % Complete)", vi: "Các quy tắc ghi nhận Earned Value cho work package: 0/100 (chỉ ghi nhận 100% khi hoàn thành, dùng cho công việc ngắn); 50/50 (50% khi bắt đầu, 50% khi xong); Milestone (chia theo % tại từng mốc, dùng cho công việc dài có nhiều giai đoạn); % Complete (ước lượng % hoàn thành chủ quan — ít đáng tin cậy nhất)." },
+  { id: "m9-33", m: 9, term: "Cost-Benefit Analysis", vi: "Phân tích chi phí - lợi ích: phương pháp tài chính so sánh lợi ích dự kiến thu được với chi phí bỏ ra, dùng để quyết định có nên đầu tư hay không (khác BCR ở chỗ đây là phân tích tổng quát, không chỉ ra một tỷ lệ cụ thể)." },
 
   // ===== MODULE 10: Quality Management =====
   { id: "m10-01", m: 10, term: "Quality", vi: "Chất lượng: mức độ mà một tập hợp các đặc tính vốn có đáp ứng yêu cầu (định nghĩa theo ISO 9000)." },
@@ -390,6 +399,9 @@ const VOCAB = [
   { id: "m11-44", m: 11, term: "Risk Exploiting", vi: "Khai thác rủi ro: hành động chủ động để đảm bảo một opportunity chắc chắn xảy ra, thay vì chỉ hy vọng nó xảy ra." },
   { id: "m11-45", m: 11, term: "Risk Enhancement", vi: "Tăng cường rủi ro: hành động làm tăng xác suất xảy ra và/hoặc mức độ tác động tích cực của một opportunity." },
   { id: "m11-46", m: 11, term: "Risk Sharing", vi: "Chia sẻ rủi ro: phân bổ quyền sở hữu một opportunity cho bên thứ ba có khả năng nắm bắt cơ hội đó tốt nhất (VD: liên doanh, hợp tác)." },
+  { id: "m11-47", m: 11, term: "Emergent Risk", vi: "Rủi ro mới nổi: rủi ro phát sinh mà không thể được nhận diện từ trước, chỉ xuất hiện trong quá trình dự án diễn ra." },
+  { id: "m11-48", m: 11, term: "Enterprise Risk Management (ERM)", vi: "Quản lý rủi ro doanh nghiệp: cách tiếp cận quản lý rủi ro phản ánh văn hóa, năng lực và chiến lược của cả tổ chức nhằm tạo và duy trì giá trị — ở cấp độ cao hơn quản lý rủi ro của một dự án đơn lẻ." },
+  { id: "m11-49", m: 11, term: "Probability and Impact Matrix", vi: "Ma trận xác suất - tác động: lưới dùng để ánh xạ xác suất xảy ra của từng rủi ro với mức độ ảnh hưởng của nó lên mục tiêu dự án, làm công cụ trực quan cho Qualitative Risk Analysis." },
 
   // ===== MODULE 12: Procurement Management =====
   { id: "m12-01", m: 12, term: "Procurement", vi: "Mua sắm: quy trình thu mua sản phẩm, dịch vụ hoặc kết quả cần thiết từ bên ngoài đội dự án." },
