@@ -79,6 +79,15 @@ const VOCAB = [
   { id: "m2-33", m: 2, term: "ADKAR Model", vi: "Mô hình quản lý thay đổi ở cấp cá nhân: Awareness, Desire, Knowledge, Ability, Reinforcement." },
   { id: "m2-34", m: 2, term: "Benefits Management Plan", vi: "Kế hoạch quản lý lợi ích: mô tả lợi ích của dự án sẽ được tạo ra, tối đa hóa và đo lường như thế nào, khi nào." },
   { id: "m2-35", m: 2, term: "Compliance", vi: "Tuân thủ: đảm bảo dự án đáp ứng luật pháp, quy định, tiêu chuẩn ngành và chính sách nội bộ liên quan — một task trọng tâm của Domain III." },
+  { id: "m2-36", m: 2, term: "Project Management Plan", vi: "Kế hoạch quản lý dự án: tài liệu trung tâm mô tả cách dự án sẽ được thực thi, giám sát/kiểm soát và kết thúc; tổng hợp tất cả các kế hoạch phụ (scope, schedule, cost, risk, quality...)." },
+  { id: "m2-37", m: 2, term: "Deliverable", vi: "Sản phẩm bàn giao: bất kỳ sản phẩm, kết quả hoặc khả năng cung cấp dịch vụ nào là duy nhất và có thể kiểm chứng được, cần tạo ra để hoàn thành một quy trình, giai đoạn hoặc dự án." },
+  { id: "m2-38", m: 2, term: "Change Request", vi: "Yêu cầu thay đổi: đề xuất chính thức nhằm sửa đổi một tài liệu, deliverable hoặc baseline của dự án; là đầu vào cho quy trình Perform Integrated Change Control." },
+  { id: "m2-39", m: 2, term: "Project Manager", vi: "Người được tổ chức thực hiện bổ nhiệm để dẫn dắt đội ngũ chịu trách nhiệm đạt được mục tiêu dự án." },
+  { id: "m2-40", m: 2, term: "Progressive Elaboration", vi: "Chi tiết hóa dần: quá trình lặp đi lặp lại, tăng dần mức độ chi tiết của kế hoạch quản lý dự án khi có thêm thông tin và ước lượng chính xác hơn — nền tảng của Rolling Wave Planning." },
+  { id: "m2-41", m: 2, term: "Key Performance Indicator (KPI)", vi: "Chỉ số hiệu suất chính: thước đo do lãnh đạo tổ chức xác định để đánh giá mức độ đạt được mục tiêu chiến lược." },
+  { id: "m2-42", m: 2, term: "Kickoff Meeting", vi: "Cuộc họp khởi động: buổi gặp mặt đội dự án và các stakeholder chính vào đầu dự án nhằm thiết lập kỳ vọng chung và chính thức bắt đầu công việc." },
+  { id: "m2-43", m: 2, term: "Steering Committee", vi: "Ban chỉ đạo: nhóm các stakeholder cấp cao đưa ra định hướng, hỗ trợ cho dự án và ra quyết định vượt quá thẩm quyền của đội dự án." },
+  { id: "m2-44", m: 2, term: "Go/No-Go Decision", vi: "Quyết định tiếp tục hay dừng: xác định một sáng kiến/dự án nên tiếp tục hay bị dừng lại, thường được đưa ra tại các phase gate." },
 
   // ===== MODULE 3: Stakeholder & Communication =====
   { id: "m3-01", m: 3, term: "Stakeholder", vi: "Cá nhân, nhóm hoặc tổ chức có thể ảnh hưởng, bị ảnh hưởng, hoặc tự cảm thấy bị ảnh hưởng bởi quyết định, hoạt động hay kết quả của dự án." },
@@ -144,6 +153,8 @@ const VOCAB = [
   { id: "m4-29", m: 4, term: "Performing", vi: "Giai đoạn hiệu suất cao: đội hoạt động trơn tru, tự tổ chức tốt, đạt hiệu quả cao nhất." },
   { id: "m4-30", m: 4, term: "Adjourning", vi: "Giai đoạn kết thúc (còn gọi là Mourning): đội giải tán sau khi hoàn thành mục tiêu công việc." },
   { id: "m4-31", m: 4, term: "Negotiation (Acquire Resource)", vi: "Đàm phán để đảm bảo nguồn lực: PM thương lượng với functional manager hoặc PM khác để có được nhân sự/nguồn lực khan hiếm cần thiết." },
+  { id: "m4-32", m: 4, term: "Psychological Safety", vi: "An toàn tâm lý: niềm tin chung trong đội rằng các thành viên sẽ được chấp nhận, có thể lên tiếng, chấp nhận rủi ro và bày tỏ ý kiến mà không sợ hậu quả tiêu cực." },
+  { id: "m4-33", m: 4, term: "Organizational Breakdown Structure (OBS)", vi: "Cấu trúc phân cấp tổ chức: biểu diễn phân cấp thể hiện mối quan hệ giữa các hoạt động dự án và các đơn vị tổ chức thực hiện chúng — song song với RBS và WBS." },
 
   // ===== MODULE 5: Scope Management =====
   { id: "m5-01", m: 5, term: "Requirement", vi: "Yêu cầu: điều kiện hoặc khả năng cần có ở sản phẩm/dịch vụ/kết quả để thỏa mãn một thỏa thuận hoặc đặc tả chính thức." },
@@ -168,6 +179,7 @@ const VOCAB = [
   { id: "m5-20", m: 5, term: "Validate Scope", vi: "Xác nhận phạm vi: quy trình chính thức chấp nhận các deliverable đã hoàn thành, do khách hàng/sponsor thực hiện (khác Control Quality)." },
   { id: "m5-21", m: 5, term: "Verify vs Validate", vi: "Verify (kiểm tra kỹ thuật nội bộ — \"làm đúng cách chưa?\") khác với Validate (xác nhận từ khách hàng — \"có phải điều đúng cần làm không?\")." },
   { id: "m5-22", m: 5, term: "Change Control Board (CCB)", vi: "Hội đồng kiểm soát thay đổi: nhóm có thẩm quyền phê duyệt hoặc từ chối các yêu cầu thay đổi của dự án." },
+  { id: "m5-23", m: 5, term: "Design Thinking", vi: "Tư duy thiết kế: quy trình phi tuyến tính, lặp đi lặp lại để thấu hiểu người dùng, thách thức giả định, định nghĩa lại vấn đề và tạo ra giải pháp sáng tạo." },
 
   // ===== MODULE 6: Schedule Management =====
   { id: "m6-01", m: 6, term: "Milestone", vi: "Cột mốc: sự kiện quan trọng đánh dấu hoàn thành một deliverable lớn, luôn có thời lượng bằng 0." },
@@ -199,6 +211,7 @@ const VOCAB = [
   { id: "m6-27", m: 6, term: "Network Diagram", vi: "Sơ đồ mạng lưới: biểu diễn đồ họa các mối quan hệ logic (phụ thuộc) giữa các hoạt động trong lịch trình dự án." },
   { id: "m6-28", m: 6, term: "Gantt Chart (Bar Chart)", vi: "Biểu đồ thanh ngang thể hiện hoạt động theo trục thời gian; dùng để theo dõi tiến độ và báo cáo cho đội dự án." },
   { id: "m6-29", m: 6, term: "Milestone Chart", vi: "Biểu đồ cột mốc: tương tự Gantt nhưng chỉ hiển thị các mốc chính, thường dùng để báo cáo cho quản lý cấp cao/senior management." },
+  { id: "m6-30", m: 6, term: "Critical Chain Method", vi: "Phương pháp chuỗi găng: kỹ thuật lập lịch cho phép đội dự án đặt các buffer (vùng đệm) trên bất kỳ đường nào của lịch trình để ứng phó với nguồn lực hạn chế và sự không chắc chắn của dự án." },
 
   // ===== MODULE 7: Agile & Scrum =====
   { id: "m7-01", m: 7, term: "Agile Manifesto", vi: "Tuyên ngôn Agile (2001): 4 giá trị cốt lõi ưu tiên con người, sản phẩm hoạt động, hợp tác với khách hàng và thích ứng với thay đổi." },
@@ -224,6 +237,8 @@ const VOCAB = [
   { id: "m7-21", m: 7, term: "Timebox", vi: "Khung thời gian cố định không thay đổi cho một hoạt động hoặc sự kiện (Sprint, Daily Scrum...)." },
   { id: "m7-22", m: 7, term: "Definition of Ready (DoR)", vi: "Định nghĩa sẵn sàng: tiêu chí xác định một hạng mục backlog đã đủ rõ ràng, chi tiết để có thể đưa vào Sprint tiếp theo." },
   { id: "m7-23", m: 7, term: "Spike", vi: "Hoạt động nghiên cứu/thử nghiệm ngắn nhằm giảm rủi ro kỹ thuật hoặc làm rõ yêu cầu trước khi ước lượng chính thức một story." },
+  { id: "m7-24", m: 7, term: "Impediment (Blocker)", vi: "Trở ngại: bất kỳ rào cản nào ngăn đội đạt được mục tiêu; thường được nêu ra trong Daily Scrum để Scrum Master hỗ trợ tháo gỡ." },
+  { id: "m7-25", m: 7, term: "Increment", vi: "Phần tăng trưởng sản phẩm: một deliverable có chức năng, đã được kiểm thử và chấp nhận, là kết quả đầu ra của mỗi Sprint và là một phần của tổng thể sản phẩm dự án." },
 
   // ===== MODULE 8: Adaptive Planning & Value Delivery =====
   { id: "m8-01", m: 8, term: "MoSCoW", vi: "Kỹ thuật ưu tiên hóa: Must have, Should have, Could have, Would like to have (Won't have)." },
@@ -254,6 +269,10 @@ const VOCAB = [
   { id: "m8-26", m: 8, term: "Value vs Non-value vs Anti-value", vi: "Value (đóng góp trực tiếp mục tiêu), Non-value/Waste (không đóng góp nhưng tốn công), Anti-value (gây hại cho mục tiêu)." },
   { id: "m8-27", m: 8, term: "Burndown Chart", vi: "Biểu đồ giảm dần: thể hiện khối lượng công việc còn lại theo thời gian trong một Sprint/Release; đường lý tưởng đi xuống dần về 0." },
   { id: "m8-28", m: 8, term: "Burnup Chart", vi: "Biểu đồ tăng dần: thể hiện khối lượng công việc đã hoàn thành theo thời gian, đồng thời có thể hiển thị thay đổi tổng phạm vi (scope) trong dự án." },
+  { id: "m8-29", m: 8, term: "Continuous Delivery (CD)", vi: "Giao hàng liên tục: thực hành chuyển giao các gói tính năng tăng dần đến khách hàng ngay lập tức, thường qua các lô công việc nhỏ kết hợp tự động hóa." },
+  { id: "m8-30", m: 8, term: "DevOps", vi: "Tập hợp các thực hành nhằm tạo luồng giao hàng mượt mà bằng cách cải thiện sự hợp tác giữa đội phát triển (Dev) và đội vận hành (Ops)." },
+  { id: "m8-31", m: 8, term: "Technical Debt", vi: "Nợ kỹ thuật: chi phí bị trì hoãn của công việc chưa được làm đúng cách ở giai đoạn trước trong vòng đời sản phẩm, sẽ phải trả giá (khắc phục) về sau." },
+  { id: "m8-32", m: 8, term: "Value Stream", vi: "Dòng giá trị: cấu trúc tổ chức tập trung vào luồng giá trị chảy đến khách hàng thông qua việc cung cấp sản phẩm/dịch vụ cụ thể." },
 
   // ===== MODULE 9: Financial Management =====
   { id: "m9-01", m: 9, term: "CapEx (Capital Expenditure)", vi: "Chi phí đầu tư: khoản đầu tư để mua, nâng cấp tài sản vật chất dài hạn (bất động sản, thiết bị, công nghệ)." },
@@ -282,6 +301,11 @@ const VOCAB = [
   { id: "m9-24", m: 9, term: "Variance at Completion (VAC)", vi: "Sai lệch tại thời điểm hoàn thành. Công thức: VAC = BAC − EAC." },
   { id: "m9-25", m: 9, term: "To-Complete Performance Index (TCPI)", vi: "Chỉ số hiệu suất cần đạt để hoàn thành. Công thức: TCPI = Work Remaining / Funds Remaining; TCPI > 1 nghĩa là khó hoàn thành hơn." },
   { id: "m9-26", m: 9, term: "Value Engineering (Value Analysis)", vi: "Phân tích giá trị: tìm cách thực hiện cùng công việc với chi phí thấp hơn." },
+  { id: "m9-27", m: 9, term: "Earned Value Management (EVM)", vi: "Phương pháp luận kết hợp đo lường phạm vi, tiến độ, chi phí và nguồn lực để đánh giá hiệu suất và tiến độ dự án — nền tảng cho các chỉ số PV/EV/AC/SPI/CPI." },
+  { id: "m9-28", m: 9, term: "Project Budget", vi: "Tổng ngân sách dự án. Công thức: Project Budget = tổng ước lượng chi phí work package + Contingency Reserve + Management Reserve." },
+  { id: "m9-29", m: 9, term: "Performance Measurement Baseline (PMB)", vi: "Đường cơ sở đo lường hiệu suất: tích hợp scope baseline, schedule baseline và cost baseline để làm cơ sở so sánh, quản lý và kiểm soát việc thực thi dự án." },
+  { id: "m9-30", m: 9, term: "S-Curve Analysis", vi: "Phân tích đường cong chữ S: kỹ thuật thể hiện xu hướng hiệu suất bằng đồ thị chi phí lũy kế theo thời gian, thường thấp lúc đầu và cao dần về cuối dự án." },
+  { id: "m9-31", m: 9, term: "Total Cost of Ownership (TCO)", vi: "Tổng chi phí sở hữu: ước lượng tài chính giúp xác định toàn bộ chi phí trực tiếp và gián tiếp của một sản phẩm/dịch vụ trong suốt vòng đời sử dụng." },
 
   // ===== MODULE 10: Quality Management =====
   { id: "m10-01", m: 10, term: "Quality", vi: "Chất lượng: mức độ mà một tập hợp các đặc tính vốn có đáp ứng yêu cầu (định nghĩa theo ISO 9000)." },
@@ -344,6 +368,12 @@ const VOCAB = [
   { id: "m11-32", m: 11, term: "SWOT Analysis", vi: "Phân tích Điểm mạnh - Điểm yếu - Cơ hội - Thách thức (Strengths, Weaknesses, Opportunities, Threats) — một kỹ thuật nhận diện rủi ro." },
   { id: "m11-33", m: 11, term: "Risk Categories (TECOP)", vi: "Nhóm nguồn rủi ro phổ biến dùng để phân loại: Technical, External, Organizational, Project management." },
   { id: "m11-34", m: 11, term: "Watch List", vi: "Danh sách theo dõi: các rủi ro có mức ưu tiên thấp, không cần phản ứng ngay nhưng vẫn được giám sát định kỳ trong Monitor Risk." },
+  { id: "m11-35", m: 11, term: "Risk Management Plan", vi: "Kế hoạch quản lý rủi ro: thành phần của kế hoạch quản lý dự án mô tả cách các hoạt động quản lý rủi ro sẽ được cấu trúc và thực hiện." },
+  { id: "m11-36", m: 11, term: "Reserve Analysis", vi: "Phân tích dự phòng: đánh giá lượng rủi ro còn lại của dự án so với lượng dự phòng thời gian/ngân sách còn lại, để xác định dự phòng có còn đủ hay không." },
+  { id: "m11-37", m: 11, term: "Risk Exposure", vi: "Mức độ phơi nhiễm rủi ro: thước đo tổng hợp về tác động tiềm tàng của tất cả rủi ro tại một thời điểm bất kỳ trong dự án." },
+  { id: "m11-38", m: 11, term: "Trigger Condition", vi: "Điều kiện kích hoạt: sự kiện hoặc tình huống báo hiệu rằng một rủi ro sắp xảy ra, dùng để kích hoạt contingency plan." },
+  { id: "m11-39", m: 11, term: "Workaround", vi: "Giải pháp tình thế: phản ứng tức thời, tạm thời trước một rủi ro đã xảy ra mà chưa có phản ứng được lên kế hoạch trước, hoặc phản ứng đã lên kế hoạch không hiệu quả." },
+  { id: "m11-40", m: 11, term: "PESTLE Analysis", vi: "Công cụ hoạch định chiến lược đánh giá có hệ thống các yếu tố Political, Economic, Sociocultural, Technological, Legal, Environmental — giúp nhìn nhận môi trường bên ngoài dự án (thuộc Domain III)." },
 
   // ===== MODULE 12: Procurement Management =====
   { id: "m12-01", m: 12, term: "Procurement", vi: "Mua sắm: quy trình thu mua sản phẩm, dịch vụ hoặc kết quả cần thiết từ bên ngoài đội dự án." },
