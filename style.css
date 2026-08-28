@@ -377,7 +377,7 @@ button, input, select { font-family: inherit; }
     padding: 8px;
   }
   .module-list { display: flex; gap: 6px; }
-  .module-item { flex: 0 0 auto; white-space: nowrap; }
+  .module-item { flex: 0 0 auto; width: auto; white-space: nowrap; }
   .module-progress-track { display: none; }
   .all-item { border-bottom: none; border-right: 1px solid var(--gray-200); border-radius: 8px; }
   .flash-term { font-size: 21px; }
