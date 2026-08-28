@@ -97,6 +97,26 @@
     allBtn.classList.toggle("active", state.activeModule === "all");
     document.getElementById("countAll").textContent =
       VOCAB.filter(function (v) { return isKnown(v.id); }).length + "/" + VOCAB.length;
+
+    renderMobileSelect();
+  }
+
+  function renderMobileSelect() {
+    var select = document.getElementById("moduleSelect");
+    if (!select) return;
+
+    var totalKnown = VOCAB.filter(function (v) { return isKnown(v.id); }).length;
+    var html = '<option value="all">Tất cả module (' + totalKnown + "/" + VOCAB.length + ")</option>";
+    MODULES.forEach(function (m) {
+      var terms = vocabByModule(m.id);
+      var knownCount = terms.filter(function (v) { return isKnown(v.id); }).length;
+      html +=
+        '<option value="' + m.id + '">' +
+        m.id + ". " + escapeHtml(m.name) + " (" + knownCount + "/" + terms.length + ")" +
+        "</option>";
+    });
+    select.innerHTML = html;
+    select.value = state.activeModule === "all" ? "all" : String(state.activeModule);
   }
 
   function renderGlobalStats() {
@@ -339,6 +359,11 @@
     initList();
     document.querySelector(".all-item").addEventListener("click", function () {
       state.activeModule = "all";
+      onModuleOrFilterChange();
+    });
+    document.getElementById("moduleSelect").addEventListener("change", function (e) {
+      var v = e.target.value;
+      state.activeModule = v === "all" ? "all" : Number(v);
       onModuleOrFilterChange();
     });
 

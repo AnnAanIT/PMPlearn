@@ -135,6 +135,29 @@ button, input, select { font-family: inherit; }
   transition: width 0.2s ease;
 }
 
+/* Mobile-only module picker (native <select>). Hidden on desktop; the
+   .sidebar chip row is used there instead. */
+.mobile-module-select { display: none; }
+.mobile-module-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin-bottom: 6px;
+}
+#moduleSelect {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--navy-900);
+  box-shadow: var(--shadow-sm);
+}
+#moduleSelect:focus { outline: 2px solid var(--blue-500); border-color: transparent; }
+
 /* ---------- Content ---------- */
 .content { flex: 1; min-width: 0; }
 
@@ -366,20 +389,8 @@ button, input, select { font-family: inherit; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .layout { flex-direction: column; padding: 12px; gap: 12px; }
-  .sidebar {
-    flex: none;
-    width: 100%;
-    position: static;
-    max-height: none;
-    display: flex;
-    overflow-x: auto;
-    gap: 6px;
-    padding: 8px;
-  }
-  .module-list { display: flex; gap: 6px; }
-  .module-item { flex: 0 0 auto; width: auto; white-space: nowrap; }
-  .module-progress-track { display: none; }
-  .all-item { border-bottom: none; border-right: 1px solid var(--gray-200); border-radius: 8px; }
+  .sidebar { display: none; }
+  .mobile-module-select { display: block; }
   .flash-term { font-size: 21px; }
   .flash-card { min-height: 220px; }
 }
