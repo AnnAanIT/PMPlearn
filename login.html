@@ -62,15 +62,38 @@
     font-weight: 600;
     text-align: center;
   }
-  input[type="password"] {
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .input-wrapper input {
     width: 100%;
-    padding: 12px 14px;
+    padding: 12px 44px 12px 14px;
     border-radius: 10px;
     border: 1px solid var(--gray-300);
     font-size: 15px;
-    margin-bottom: 14px;
   }
-  input[type="password"]:focus { outline: 2px solid var(--blue-500); border-color: transparent; }
+  .input-wrapper input:focus { outline: 2px solid var(--blue-500); border-color: transparent; }
+  .toggle-eye {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-500);
+    cursor: pointer;
+  }
+  .toggle-eye:hover { color: var(--gray-700); }
+  .toggle-eye svg { width: 20px; height: 20px; }
+  .toggle-eye .eye-off { display: none; }
+  .toggle-eye.is-visible .eye { display: none; }
+  .toggle-eye.is-visible .eye-off { display: block; }
   button {
     width: 100%;
     padding: 12px;
@@ -104,13 +127,26 @@
     <h1>Nhập mã truy cập để tiếp tục</h1>
     <p class="error" id="errorBox"></p>
     <form id="loginForm">
-      <input
-        type="password"
-        id="codeInput"
-        placeholder="Mã truy cập"
-        autocomplete="off"
-        autofocus
-      />
+      <div class="input-wrapper">
+        <input
+          type="password"
+          id="codeInput"
+          placeholder="Mã truy cập"
+          autocomplete="off"
+          autofocus
+        />
+        <button type="button" id="toggleEyeBtn" class="toggle-eye" aria-label="Hiện mã" aria-pressed="false">
+          <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.3 20.3 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a20.3 20.3 0 0 1-2.44 3.34"></path>
+            <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+          </svg>
+        </button>
+      </div>
       <button type="submit" id="submitBtn">Vào học</button>
     </form>
     <p class="hint">Đăng nhập một lần, phiên có hiệu lực 30 ngày trên trình duyệt này.</p>
@@ -122,6 +158,16 @@
       var input = document.getElementById("codeInput");
       var btn = document.getElementById("submitBtn");
       var errorBox = document.getElementById("errorBox");
+      var toggleEyeBtn = document.getElementById("toggleEyeBtn");
+
+      toggleEyeBtn.addEventListener("click", function () {
+        var willShow = input.type === "password";
+        input.type = willShow ? "text" : "password";
+        toggleEyeBtn.classList.toggle("is-visible", willShow);
+        toggleEyeBtn.setAttribute("aria-label", willShow ? "Ẩn mã" : "Hiện mã");
+        toggleEyeBtn.setAttribute("aria-pressed", willShow ? "true" : "false");
+        input.focus();
+      });
 
       function getRedirectTarget() {
         var params = new URLSearchParams(window.location.search);
