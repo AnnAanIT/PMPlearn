@@ -73,8 +73,12 @@ module.exports = async function handler(req, res) {
   var validCodes = await getValidCodes();
 
   if (!secret || validCodes === null || validCodes.length === 0) {
+    var missing = [];
+    if (!secret) missing.push("SESSION_SECRET (Settings -> Environment Variables)");
+    if (validCodes === null) missing.push("Global Config chưa được liên kết với project này (Storage -> login-config -> Connect Project)");
+    else if (validCodes.length === 0) missing.push("Global Config \"access_codes\" đang rỗng hoặc chưa lưu (Storage -> login-config -> Items -> Save)");
     res.status(500).json({
-      error: "Server chưa được cấu hình (thiếu Global Config \"access_codes\" hoặc SESSION_SECRET trên Vercel Dashboard).",
+      error: "Server chưa được cấu hình đầy đủ. Còn thiếu: " + missing.join("; ") + ".",
     });
     return;
   }
