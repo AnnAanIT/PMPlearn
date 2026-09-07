@@ -1,6 +1,8 @@
 // Vercel Node.js Serverless Function — validates the submitted access code
 // and, on success, issues a signed, self-expiring session cookie that
-// middleware.js verifies.
+// middleware.js re-verifies against Global Config on every request (so
+// deleting or changing someone's code revokes their session immediately,
+// not just at their next login).
 //
 // Valid codes live directly at the root of the Vercel Global Config store
 // (Dashboard -> Storage -> Global Config — formerly called "Edge Config"),
@@ -14,10 +16,17 @@
 // automatically; the SDK below reads it from there (falling back to the
 // older EDGE_CONFIG variable name for stores connected before the rename).
 //
-// The cookie never stores the access code itself — only a signed token
-// (HMAC-SHA256 over "ok:<expiryTimestamp>" using SESSION_SECRET), so the
-// code cannot be recovered from the cookie value, and forging a token
-// without knowing SESSION_SECRET is infeasible.
+// Cookie payload: "ok:<expiryMs>:<label>:<codeFingerprint>" + "." + <sig>
+//   - <label>           which Global Config key matched at login time
+//   - <codeFingerprint> HMAC-SHA256(SESSION_SECRET, "code:" + theActualCode)
+//   - <sig>             HMAC-SHA256(SESSION_SECRET, payload) — tamper-proofs
+//                       the whole payload
+// The raw code is never stored in the cookie, only its fingerprint, so a
+// leaked cookie can't be used to recover the code itself. On every request,
+// middleware.js looks up <label> in Global Config and recomputes the
+// fingerprint of its CURRENT value — if the label was deleted, or its value
+// changed, the fingerprint no longer matches and the session is rejected
+// immediately, even though the cookie itself hasn't expired.
 
 const { webcrypto } = require("crypto");
 const { getAll } = require("@vercel/global-config");
@@ -40,17 +49,20 @@ async function hmacHex(secret, message) {
     .join("");
 }
 
-async function getValidCodes() {
+async function getCodesMap() {
   var allItems;
   try {
     allItems = await getAll();
   } catch (e) {
     return null; // Global Config not linked/configured — caller returns 500
   }
-  if (!allItems || typeof allItems !== "object") return [];
-  return Object.keys(allItems)
-    .map(function (k) { return allItems[k] ? String(allItems[k]).trim() : ""; })
-    .filter(Boolean);
+  if (!allItems || typeof allItems !== "object") return {};
+  var map = {};
+  Object.keys(allItems).forEach(function (k) {
+    var v = allItems[k];
+    if (v) map[k] = String(v).trim();
+  });
+  return map;
 }
 
 module.exports = async function handler(req, res) {
@@ -70,26 +82,38 @@ module.exports = async function handler(req, res) {
   var code = body && body.code ? String(body.code).trim() : "";
 
   var secret = process.env.SESSION_SECRET;
-  var validCodes = await getValidCodes();
+  var codesMap = await getCodesMap();
+  var codeCount = codesMap ? Object.keys(codesMap).length : 0;
 
-  if (!secret || validCodes === null || validCodes.length === 0) {
+  if (!secret || codesMap === null || codeCount === 0) {
     var missing = [];
     if (!secret) missing.push("SESSION_SECRET (Settings -> Environment Variables)");
-    if (validCodes === null) missing.push("Global Config chưa được liên kết với project này (Storage -> login-config -> Connect Project)");
-    else if (validCodes.length === 0) missing.push("Global Config đang rỗng hoặc chưa lưu (Storage -> login-config -> Items -> Save)");
+    if (codesMap === null) missing.push("Global Config chưa được liên kết với project này (Storage -> login-config -> Connect Project)");
+    else if (codeCount === 0) missing.push("Global Config đang rỗng hoặc chưa lưu (Storage -> login-config -> Items -> Save)");
     res.status(500).json({
       error: "Server chưa được cấu hình đầy đủ. Còn thiếu: " + missing.join("; ") + ".",
     });
     return;
   }
 
-  if (!code || validCodes.indexOf(code) === -1) {
+  var matchedLabel = null;
+  if (code) {
+    for (var label in codesMap) {
+      if (codesMap[label] === code) {
+        matchedLabel = label;
+        break;
+      }
+    }
+  }
+
+  if (!matchedLabel) {
     res.status(401).json({ error: "Mã không đúng." });
     return;
   }
 
   var expiry = Date.now() + THIRTY_DAYS_MS;
-  var payload = "ok:" + expiry;
+  var codeFingerprint = await hmacHex(secret, "code:" + code);
+  var payload = "ok:" + expiry + ":" + matchedLabel + ":" + codeFingerprint;
   var sig = await hmacHex(secret, payload);
   var token = payload + "." + sig;
 
