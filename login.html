@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Đăng nhập — PMP Vocabulary</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  :root {
+    --navy-900: #0b1f3a;
+    --navy-700: #1a3a68;
+    --blue-500: #3b82f6;
+    --red-600: #dc2626;
+    --red-100: #fee2e2;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 360px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 22px;
+    justify-content: center;
+  }
+  .brand-mark {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    background: #f59e0b;
+    color: var(--navy-900);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .brand-name { font-size: 17px; font-weight: 600; color: var(--navy-900); }
+  h1 {
+    font-size: 15.5px;
+    margin: 0 0 18px;
+    color: var(--gray-700);
+    font-weight: 600;
+    text-align: center;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--gray-300);
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  input[type="password"]:focus { outline: 2px solid var(--blue-500); border-color: transparent; }
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--navy-900);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .error {
+    background: var(--red-100);
+    color: var(--red-600);
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .hint { margin-top: 16px; font-size: 12px; color: var(--gray-500); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">
+      <span class="brand-mark">PMP</span>
+      <span class="brand-name">Vocabulary</span>
+    </div>
+    <h1>Nhập mã truy cập để tiếp tục</h1>
+    <p class="error" id="errorBox"></p>
+    <form id="loginForm">
+      <input
+        type="password"
+        id="codeInput"
+        placeholder="Mã truy cập"
+        autocomplete="off"
+        autofocus
+      />
+      <button type="submit" id="submitBtn">Vào học</button>
+    </form>
+    <p class="hint">Đăng nhập một lần, phiên có hiệu lực 30 ngày trên trình duyệt này.</p>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById("loginForm");
+      var input = document.getElementById("codeInput");
+      var btn = document.getElementById("submitBtn");
+      var errorBox = document.getElementById("errorBox");
+
+      function getRedirectTarget() {
+        var params = new URLSearchParams(window.location.search);
+        var target = params.get("redirect");
+        // Only allow same-origin relative paths — never let this become an
+        // open redirect to an external site via a crafted ?redirect= value.
+        if (!target || target.charAt(0) !== "/" || target.charAt(1) === "/") {
+          return "/";
+        }
+        return target;
+      }
+
+      function showError(message) {
+        errorBox.textContent = message;
+        errorBox.style.display = "block";
+      }
+
+      function setLoading(loading) {
+        btn.disabled = loading;
+        btn.textContent = loading ? "Đang kiểm tra..." : "Vào học";
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var code = input.value.trim();
+        if (!code) return;
+
+        errorBox.style.display = "none";
+        setLoading(true);
+
+        fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: code }),
+        })
+          .then(function (res) {
+            return res
+              .json()
+              .catch(function () { return {}; })
+              .then(function (data) { return { ok: res.ok, data: data }; });
+          })
+          .then(function (result) {
+            if (result.ok) {
+              window.location.href = getRedirectTarget();
+              return;
+            }
+            setLoading(false);
+            showError((result.data && result.data.error) || "Mã không đúng.");
+            input.select();
+          })
+          .catch(function () {
+            setLoading(false);
+            showError("Có lỗi xảy ra, vui lòng thử lại.");
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
