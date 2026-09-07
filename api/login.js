@@ -2,16 +2,15 @@
 // and, on success, issues a signed, self-expiring session cookie that
 // middleware.js verifies.
 //
-// Each person gets their OWN environment variable, named with the
-// ACCESS_CODE_ prefix, e.g.:
-//   ACCESS_CODE_LAN   = hoaxinhgai
-//   ACCESS_CODE_MINH  = hiencute
-//   ACCESS_CODE_HOA   = anhdeptrai
-// The part after the prefix is just a label for YOU to recognize whose
-// entry is whose in the Vercel Dashboard list — the code itself is only
-// ever the variable's value. To revoke one person, delete their single
-// variable; nobody else's code is affected, and you never need to know
-// (or reconstruct) anyone else's code to do it.
+// Valid codes live in Vercel Edge Config (Dashboard -> Storage -> Edge
+// Config), as a single JSON object under the key "access_codes":
+//   { "lan": "hoaxinhgai", "minh": "hiencute", "hoa": "anhdeptrai" }
+// The object's keys are just labels for YOU to recognize whose entry is
+// whose when editing; the actual codes are the values. Adding/removing a
+// person = editing that one JSON object in the Dashboard — no redeploy
+// needed, changes apply within moments. Linking an Edge Config store to
+// this project makes Vercel inject the EDGE_CONFIG connection string
+// automatically; the SDK below reads it from there.
 //
 // The cookie never stores the access code itself — only a signed token
 // (HMAC-SHA256 over "ok:<expiryTimestamp>" using SESSION_SECRET), so the
@@ -19,10 +18,10 @@
 // without knowing SESSION_SECRET is infeasible.
 
 const { webcrypto } = require("crypto");
+const { get } = require("@vercel/edge-config");
 const subtle = webcrypto.subtle;
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
-const CODE_VAR_PREFIX = "ACCESS_CODE_";
 
 async function hmacHex(secret, message) {
   const enc = new TextEncoder();
@@ -39,15 +38,17 @@ async function hmacHex(secret, message) {
     .join("");
 }
 
-function getValidCodes() {
-  var codes = [];
-  for (var key in process.env) {
-    if (key.indexOf(CODE_VAR_PREFIX) === 0) {
-      var val = process.env[key];
-      if (val && String(val).trim()) codes.push(String(val).trim());
-    }
+async function getValidCodes() {
+  var codesObj;
+  try {
+    codesObj = await get("access_codes");
+  } catch (e) {
+    return null; // Edge Config not linked/configured — caller returns 500
   }
-  return codes;
+  if (!codesObj || typeof codesObj !== "object") return [];
+  return Object.keys(codesObj)
+    .map(function (k) { return codesObj[k] ? String(codesObj[k]).trim() : ""; })
+    .filter(Boolean);
 }
 
 module.exports = async function handler(req, res) {
@@ -67,11 +68,11 @@ module.exports = async function handler(req, res) {
   var code = body && body.code ? String(body.code).trim() : "";
 
   var secret = process.env.SESSION_SECRET;
-  var validCodes = getValidCodes();
+  var validCodes = await getValidCodes();
 
-  if (!secret || validCodes.length === 0) {
+  if (!secret || validCodes === null || validCodes.length === 0) {
     res.status(500).json({
-      error: "Server chưa được cấu hình (thiếu biến ACCESS_CODE_* hoặc SESSION_SECRET trên Vercel Dashboard).",
+      error: "Server chưa được cấu hình (thiếu Edge Config \"access_codes\" hoặc SESSION_SECRET trên Vercel Dashboard).",
     });
     return;
   }
