@@ -1,7 +1,17 @@
 // Vercel Node.js Serverless Function — validates the submitted access code
-// against ACCESS_CODES (comma-separated list, set in Vercel Dashboard ->
-// Project Settings -> Environment Variables) and, on success, issues a
-// signed, self-expiring session cookie that middleware.js verifies.
+// and, on success, issues a signed, self-expiring session cookie that
+// middleware.js verifies.
+//
+// Each person gets their OWN environment variable, named with the
+// ACCESS_CODE_ prefix, e.g.:
+//   ACCESS_CODE_LAN   = hoaxinhgai
+//   ACCESS_CODE_MINH  = hiencute
+//   ACCESS_CODE_HOA   = anhdeptrai
+// The part after the prefix is just a label for YOU to recognize whose
+// entry is whose in the Vercel Dashboard list — the code itself is only
+// ever the variable's value. To revoke one person, delete their single
+// variable; nobody else's code is affected, and you never need to know
+// (or reconstruct) anyone else's code to do it.
 //
 // The cookie never stores the access code itself — only a signed token
 // (HMAC-SHA256 over "ok:<expiryTimestamp>" using SESSION_SECRET), so the
@@ -12,6 +22,7 @@ const { webcrypto } = require("crypto");
 const subtle = webcrypto.subtle;
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+const CODE_VAR_PREFIX = "ACCESS_CODE_";
 
 async function hmacHex(secret, message) {
   const enc = new TextEncoder();
@@ -26,6 +37,17 @@ async function hmacHex(secret, message) {
   return Array.from(new Uint8Array(sigBuf))
     .map(function (b) { return b.toString(16).padStart(2, "0"); })
     .join("");
+}
+
+function getValidCodes() {
+  var codes = [];
+  for (var key in process.env) {
+    if (key.indexOf(CODE_VAR_PREFIX) === 0) {
+      var val = process.env[key];
+      if (val && String(val).trim()) codes.push(String(val).trim());
+    }
+  }
+  return codes;
 }
 
 module.exports = async function handler(req, res) {
@@ -45,15 +67,11 @@ module.exports = async function handler(req, res) {
   var code = body && body.code ? String(body.code).trim() : "";
 
   var secret = process.env.SESSION_SECRET;
-  var codesRaw = process.env.ACCESS_CODES || "";
-  var validCodes = codesRaw
-    .split(",")
-    .map(function (c) { return c.trim(); })
-    .filter(Boolean);
+  var validCodes = getValidCodes();
 
   if (!secret || validCodes.length === 0) {
     res.status(500).json({
-      error: "Server chưa được cấu hình (thiếu ACCESS_CODES hoặc SESSION_SECRET trên Vercel Dashboard).",
+      error: "Server chưa được cấu hình (thiếu biến ACCESS_CODE_* hoặc SESSION_SECRET trên Vercel Dashboard).",
     });
     return;
   }
