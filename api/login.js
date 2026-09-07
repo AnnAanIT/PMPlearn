@@ -2,13 +2,13 @@
 // and, on success, issues a signed, self-expiring session cookie that
 // middleware.js verifies.
 //
-// Valid codes live in Vercel Global Config (Dashboard -> Storage ->
-// Global Config — formerly called "Edge Config"), as a single JSON
-// object under the key "access_codes":
-//   { "lan": "hoaxinhgai", "minh": "hiencute", "hoa": "anhdeptrai" }
-// The object's keys are just labels for YOU to recognize whose entry is
-// whose when editing; the actual codes are the values. Adding/removing a
-// person = editing that one JSON object in the Dashboard — no redeploy
+// Valid codes live directly at the root of the Vercel Global Config store
+// (Dashboard -> Storage -> Global Config — formerly called "Edge Config"),
+// one key per person:
+//   { "hoa": "hoaxinhgai", "hien": "hiencute", "anh": "anhdeptrai" }
+// The keys are just labels for YOU to recognize whose entry is whose when
+// editing; the actual codes are the values. Adding/removing a person =
+// editing that JSON in the Dashboard and clicking Save — no redeploy
 // needed, changes apply within moments. Linking a Global Config store to
 // this project makes Vercel inject the GLOBAL_CONFIG connection string
 // automatically; the SDK below reads it from there (falling back to the
@@ -20,7 +20,7 @@
 // without knowing SESSION_SECRET is infeasible.
 
 const { webcrypto } = require("crypto");
-const { get } = require("@vercel/global-config");
+const { getAll } = require("@vercel/global-config");
 const subtle = webcrypto.subtle;
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -41,15 +41,15 @@ async function hmacHex(secret, message) {
 }
 
 async function getValidCodes() {
-  var codesObj;
+  var allItems;
   try {
-    codesObj = await get("access_codes");
+    allItems = await getAll();
   } catch (e) {
     return null; // Global Config not linked/configured — caller returns 500
   }
-  if (!codesObj || typeof codesObj !== "object") return [];
-  return Object.keys(codesObj)
-    .map(function (k) { return codesObj[k] ? String(codesObj[k]).trim() : ""; })
+  if (!allItems || typeof allItems !== "object") return [];
+  return Object.keys(allItems)
+    .map(function (k) { return allItems[k] ? String(allItems[k]).trim() : ""; })
     .filter(Boolean);
 }
 
@@ -76,7 +76,7 @@ module.exports = async function handler(req, res) {
     var missing = [];
     if (!secret) missing.push("SESSION_SECRET (Settings -> Environment Variables)");
     if (validCodes === null) missing.push("Global Config chưa được liên kết với project này (Storage -> login-config -> Connect Project)");
-    else if (validCodes.length === 0) missing.push("Global Config \"access_codes\" đang rỗng hoặc chưa lưu (Storage -> login-config -> Items -> Save)");
+    else if (validCodes.length === 0) missing.push("Global Config đang rỗng hoặc chưa lưu (Storage -> login-config -> Items -> Save)");
     res.status(500).json({
       error: "Server chưa được cấu hình đầy đủ. Còn thiếu: " + missing.join("; ") + ".",
     });
