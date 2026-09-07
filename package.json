@@ -4,6 +4,6 @@
   "private": true,
   "description": "PMP vocabulary flashcard app (static site + Vercel Edge Middleware access gate).",
   "dependencies": {
-    "@vercel/edge-config": "^1.5.1"
+    "@vercel/global-config": "^1.5.1"
   }
 }
