@@ -10,6 +10,8 @@
   --red-600: #dc2626;
   --red-100: #fee2e2;
   --amber-500: #f59e0b;
+  --amber-50: #fffbeb;
+  --amber-700: #b45309;
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
@@ -274,6 +276,11 @@ button, input, select { font-family: inherit; }
   color: var(--gray-900);
   transform: rotateY(180deg);
   border: 1px solid var(--gray-200);
+  overflow-y: auto;
+  /* "safe center": centers short content like the front face, but falls
+     back to start-alignment for tall content so it scrolls correctly
+     instead of clipping above an unreachable negative scroll offset. */
+  justify-content: safe center;
 }
 .flash-module-tag {
   font-size: 11.5px;
@@ -296,6 +303,38 @@ button, input, select { font-family: inherit; }
   margin: 0;
   color: var(--gray-800);
   max-width: 560px;
+}
+.flash-note {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--amber-50);
+  border-left: 3px solid var(--amber-500);
+  border-radius: 8px;
+  max-width: 560px;
+  text-align: left;
+}
+.flash-note-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--amber-700);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.flash-note-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--gray-700);
+  white-space: pre-line;
+}
+/* On the back face, the hint flows after the note (so it scrolls with
+   content) instead of floating over it like on the front face. */
+.flash-back .flash-hint {
+  position: static;
+  display: block;
+  margin-top: 14px;
+  opacity: 0.5;
 }
 .flash-hint {
   position: absolute;
@@ -368,6 +407,18 @@ button, input, select { font-family: inherit; }
   white-space: nowrap;
 }
 .vocab-vi { font-size: 13.5px; color: var(--gray-700); line-height: 1.55; margin: 0; }
+.vocab-note {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--amber-700);
+  background: var(--amber-50);
+  border-left: 3px solid var(--amber-500);
+  border-radius: 6px;
+  padding: 6px 10px;
+  white-space: pre-line;
+  margin: 8px 0 0;
+}
+.vocab-note-label { margin-right: 2px; }
 .vocab-toggle {
   flex-shrink: 0;
   width: 34px;

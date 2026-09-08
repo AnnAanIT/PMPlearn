@@ -183,6 +183,14 @@
     document.getElementById("flashTerm").textContent = v.term;
     document.getElementById("flashVi").textContent = v.vi;
 
+    var noteBox = document.getElementById("flashNote");
+    if (v.note) {
+      document.getElementById("flashNoteText").textContent = v.note;
+      noteBox.hidden = false;
+    } else {
+      noteBox.hidden = true;
+    }
+
     card.classList.toggle("flipped", state.flashFlipped);
   }
 
@@ -267,7 +275,10 @@
           '<span class="vocab-term">' + escapeHtml(v.term) + "</span>" +
           '<span class="vocab-module-tag">' + v.m + ". " + escapeHtml(moduleName(v.m)) + "</span>" +
         "</div>" +
-        '<p class="vocab-vi">' + escapeHtml(v.vi) + "</p>";
+        '<p class="vocab-vi">' + escapeHtml(v.vi) + "</p>" +
+        (v.note
+          ? '<p class="vocab-note"><span class="vocab-note-label">💡</span> ' + escapeHtml(v.note) + "</p>"
+          : "");
 
       var toggle = document.createElement("button");
       toggle.className = "vocab-toggle" + (known ? " checked" : "");
