@@ -3,100 +3,119 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PMP Vocabulary — Học từ vựng PMP</title>
-<meta name="description" content="Học từ vựng PMP theo từng module, flashcard song ngữ, theo dõi tiến độ." />
-<link rel="stylesheet" href="style.css" />
+<title>Luyện thi chứng chỉ</title>
+<meta name="description" content="Chọn bộ ôn luyện: từ vựng PMP hoặc bộ đề chứng chỉ Claude." />
+<style>
+  :root {
+    --navy-900: #0b1f3a;
+    --blue-600: #2563eb;
+    --blue-500: #3b82f6;
+    --gray-50: #f8fafc;
+    --gray-200: #e2e8f0;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-900: #0f172a;
+    --white: #ffffff;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--navy-900), var(--blue-600));
+    color: #fff;
+    padding: 56px 20px 72px;
+    text-align: center;
+  }
+  .hero h1 { margin: 0 0 10px; font-size: 28px; font-weight: 800; }
+  .hero p { margin: 0; font-size: 15px; opacity: 0.85; }
+  .wrap {
+    max-width: 920px;
+    margin: -40px auto 60px;
+    padding: 0 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: #eff6ff;
+    color: var(--blue-600);
+    margin-bottom: 12px;
+  }
+  .card.pmp .tag { background: #fffbeb; color: #b45309; }
+  .card h2 { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--gray-600); line-height: 1.5; }
+  .card .count { margin-top: 14px; font-size: 12.5px; color: var(--gray-500); font-weight: 600; }
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="brand-mark">PMP</span>
-        <span class="brand-name">Vocabulary</span>
-      </div>
-      <div class="global-stats" id="globalStats"></div>
-    </div>
-  </header>
-
-  <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <button class="module-item all-item active" data-module="all">
-        <span class="module-name">Tất cả module</span>
-        <span class="module-count" id="countAll"></span>
-      </button>
-      <div class="module-list" id="moduleList"></div>
-    </aside>
-
-    <div class="mobile-module-select">
-      <label for="moduleSelect" class="mobile-module-label">Đang học module:</label>
-      <select id="moduleSelect" aria-label="Chọn module để học"></select>
-    </div>
-
-    <main class="content">
-      <nav class="tabs" id="tabs">
-        <button class="tab-btn active" data-tab="flashcard">🃏 Flashcard</button>
-        <button class="tab-btn" data-tab="list">📋 Danh sách</button>
-      </nav>
-
-      <section id="flashcardView" class="view active">
-        <div class="flash-controls">
-          <div class="flash-filter">
-            <label><input type="radio" name="flashFilter" value="all" checked /> Tất cả</label>
-            <label><input type="radio" name="flashFilter" value="unknown" /> Chưa thuộc</label>
-            <label><input type="radio" name="flashFilter" value="known" /> Đã thuộc</label>
-          </div>
-          <button id="shuffleBtn" class="btn-ghost">🔀 Xáo trộn</button>
-        </div>
-
-        <div class="flash-progress">
-          <span id="flashPosition">0 / 0</span>
-          <div class="flash-progress-bar"><div id="flashProgressFill" class="flash-progress-fill"></div></div>
-        </div>
-
-        <div id="flashStage" class="flash-stage">
-          <div id="flashCard" class="flash-card" tabindex="0" role="button" aria-label="Bấm hoặc nhấn Enter/Space để lật thẻ">
-            <div class="flash-face flash-front">
-              <span class="flash-module-tag" id="flashModuleTag"></span>
-              <p class="flash-term" id="flashTerm"></p>
-              <span class="flash-hint">Bấm để xem nghĩa</span>
-            </div>
-            <div class="flash-face flash-back">
-              <p class="flash-vi" id="flashVi"></p>
-              <div class="flash-note" id="flashNote" hidden>
-                <span class="flash-note-label">💡 Ví dụ / Mẹo phân biệt</span>
-                <span class="flash-note-text" id="flashNoteText"></span>
-              </div>
-              <span class="flash-hint">Bấm để quay lại</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="flash-actions">
-          <button id="prevBtn" class="btn-ghost">← Trước</button>
-          <button id="markUnknownBtn" class="btn-danger">✗ Chưa thuộc</button>
-          <button id="markKnownBtn" class="btn-success">✓ Đã thuộc</button>
-          <button id="nextBtn" class="btn-ghost">Sau →</button>
-        </div>
-
-        <p id="flashEmpty" class="flash-empty" hidden>🎉 Không còn từ nào trong bộ lọc này. Hãy đổi bộ lọc hoặc module khác!</p>
-      </section>
-
-      <section id="listView" class="view">
-        <div class="list-controls">
-          <input type="search" id="searchInput" placeholder="Tìm thuật ngữ hoặc định nghĩa..." />
-          <select id="statusFilter">
-            <option value="all">Tất cả trạng thái</option>
-            <option value="known">Đã thuộc</option>
-            <option value="unknown">Chưa thuộc</option>
-          </select>
-        </div>
-        <div class="list-count" id="listCount"></div>
-        <div class="vocab-list" id="vocabList"></div>
-      </section>
-    </main>
+  <div class="hero">
+    <h1>Luyện thi chứng chỉ</h1>
+    <p>Chọn bộ ôn luyện bạn muốn học hôm nay</p>
   </div>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <div class="wrap">
+    <div class="grid">
+      <a class="card pmp" href="/pmp/">
+        <span class="tag">PMP</span>
+        <h2>Từ vựng PMP</h2>
+        <p>Flashcard song ngữ Anh–Việt theo 12 module, có ví dụ/mẹo phân biệt và theo dõi tiến độ.</p>
+        <div class="count">396 thuật ngữ</div>
+      </a>
+
+      <a class="card" href="/claude/ccdv-f.html">
+        <span class="tag">CCDV-F</span>
+        <h2>Claude Certified Developer – Foundations</h2>
+        <p>Bộ câu hỏi trắc nghiệm song ngữ, có giải thích đáp án.</p>
+        <div class="count">95 câu hỏi</div>
+      </a>
+
+      <a class="card" href="/claude/cca-p.html">
+        <span class="tag">CCA-P</span>
+        <h2>Claude Certified Architect – Professional</h2>
+        <p>Ôn tập &amp; thi thử, lọc theo trạng thái/chủ đề, giải thích chi tiết kèm nguồn tài liệu.</p>
+        <div class="count">113 câu hỏi</div>
+      </a>
+
+      <a class="card" href="/claude/ccar-f.html">
+        <span class="tag">CCAR-F</span>
+        <h2>Claude Certified Architect – Foundations</h2>
+        <p>Ôn tập &amp; thi thử, lọc theo trạng thái/chủ đề, giải thích chi tiết kèm nguồn tài liệu.</p>
+        <div class="count">162 câu hỏi</div>
+      </a>
+    </div>
+  </div>
 </body>
 </html>
