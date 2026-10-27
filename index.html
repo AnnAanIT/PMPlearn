@@ -42,8 +42,11 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 18px;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
@@ -100,6 +103,13 @@
         <h2>Claude Certified Developer – Foundations</h2>
         <p>Bộ câu hỏi trắc nghiệm song ngữ, có giải thích đáp án.</p>
         <div class="count">95 câu hỏi</div>
+      </a>
+
+      <a class="card" href="/claude/ccao-f.html">
+        <span class="tag">CCAO-F</span>
+        <h2>Claude Certified Associate – Foundations</h2>
+        <p>Ôn tập &amp; thi thử theo 7 domain đúng tỷ trọng blueprint, giải thích chi tiết từng đáp án.</p>
+        <div class="count">60 câu hỏi</div>
       </a>
 
       <a class="card" href="/claude/cca-p.html">

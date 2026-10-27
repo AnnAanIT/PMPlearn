@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CCAO-F · Claude Certified Associate - Foundations</title>
+<meta name="description" content="Bộ đề luyện thi CCAO-F.">
+<meta name="color-scheme" content="dark light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<script>
+/* đặt theme trước khi vẽ để không nháy màu */
+(function(){
+  var th="dark";
+  try{
+    var d=JSON.parse(localStorage.getItem('examtrainer.CCAO-F')||"{}");
+    if(d.theme) th=d.theme;
+    else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches) th="light";
+  }catch(e){}
+  document.documentElement.setAttribute("data-theme",th);
+})();
+</script>
+<style>
+/* ============================================================
+   Exam Trainer — bảng điều khiển + tờ đề in (tông ấm)
+   ============================================================ */
+
+:root{                      /* TỐI — mỗi màu chữ đều đo trên nền sáng nhất mà nó nằm lên */
+  --shell:#171310;          /* khung ngoài            */
+  --shell-2:#201A15;        /* cột trái / cột phải    */
+  --shell-3:#2E251C;        /* nền nổi khi rê chuột   */
+  --sunken:#100D0A;         /* ô nhập liệu — chìm     */
+  --paper:#1C1712;          /* vùng đọc               */
+  --paper-2:#252019;
+  --ink:#F1EFEA;            /* ≥13.1:1 mọi nền        */
+  --ink-2:#C6BCAA;          /* ≥ 8.0:1 — nhãn, chú thích */
+  --ink-3:#ABA08B;          /* ≥ 5.8:1 — số đếm, gợi ý ô nhập */
+  --rule:#3D3428;           /* kẻ trang trí           */
+  --rule-2:#786853;         /* viền điều khiển ≥3:1   */
+  --on-accent:#171310;      /* chữ nằm trên mảng màu đặc */
+  --ok:#8FD98C;
+  --ok-bg:rgba(143,217,140,.15);
+  --bad:#FF9781;
+  --bad-bg:rgba(255,151,129,.15);
+  --flag:#F7C25A;
+  --flag-bg:rgba(247,194,90,.17);
+  --pick:#8ECBF0;
+  --pick-bg:rgba(142,203,240,.15);
+  --stamp:#FF9781;
+  --focus:#F7C25A;
+  --thumb:#5A4E3D;
+  color-scheme:dark;
+}
+[data-theme="light"]{       /* SÁNG — cùng nguyên tắc, giấy ngà để bớt chói */
+  --shell:#E9E3D5;
+  --shell-2:#F2EDE2;
+  --shell-3:#E7E1D2;
+  --sunken:#FFFFFF;
+  --paper:#FDFBF5;
+  --paper-2:#F5F1E6;
+  --ink:#201C16;            /* ≥13.0:1 */
+  --ink-2:#463E35;          /* ≥ 8.0:1 */
+  --ink-3:#5B5347;          /* ≥ 5.8:1 */
+  --rule:#DED6C4;
+  --rule-2:#8F8269;
+  --on-accent:#FFFFFF;
+  --ok:#256B42;
+  --ok-bg:rgba(37,107,66,.10);
+  --bad:#B32E1F;
+  --bad-bg:rgba(179,46,31,.09);
+  --flag:#7F5405;
+  --flag-bg:rgba(127,84,5,.13);
+  --pick:#175D91;
+  --pick-bg:rgba(23,93,145,.09);
+  --stamp:#B32E1F;
+  --focus:#7F5405;
+  --thumb:#B0A48D;
+  color-scheme:light;
+}
+:root{
+  --sans:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+  --top:52px;
+  --gut:clamp(16px,1.8vw,26px);
+  --pad:clamp(24px,2.6vw,46px);
+  --perf:26px;
+  --recpad:clamp(12px,1.2vw,20px);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+*{scrollbar-width:thin;scrollbar-color:var(--thumb) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent;border-left:1px solid var(--rule)}
+::-webkit-scrollbar-thumb{background:var(--thumb);border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--ink-3);border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-corner{background:transparent}
+body{
+  margin:0;background:var(--shell);color:var(--ink);
+  font-family:var(--serif);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+b,strong{font-weight:600}
+h1,h2,h3,h4{margin:0}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hide{display:none!important}
+.grow{flex:1}
+
+.lbl{
+  font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+
+/* ============================ TOP ============================ */
+.top{
+  position:sticky;top:0;z-index:60;height:var(--top);
+  background:var(--shell-2);border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:var(--gut);padding:0 var(--gut);
+}
+.mark{display:flex;align-items:baseline;gap:9px;flex:none}
+.mark .w{font-family:var(--sans);font-weight:700;font-size:17px;letter-spacing:.06em;text-transform:uppercase}
+.mark .w em{font-style:normal;color:var(--stamp)}
+.mark .s{font-family:var(--sans);font-size:12px;letter-spacing:.02em;color:var(--ink-2);white-space:nowrap}
+
+.seg{display:flex;border:1px solid var(--rule-2);flex:none}
+.seg button{
+  background:transparent;border:0;border-right:1px solid var(--rule-2);
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-2);padding:6px 13px;cursor:pointer;line-height:1.45;
+}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--ink);background:var(--shell-3)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--on-accent)}
+.seg.mini button{padding:5px 9px;font-size:10px;letter-spacing:.1em}
+.top .right{display:flex;gap:8px;align-items:center;flex:none}
+.icb{
+  background:transparent;border:1px solid var(--rule-2);color:var(--ink-2);
+  width:29px;height:29px;display:grid;place-items:center;cursor:pointer;
+  font-family:var(--sans);font-weight:700;font-size:12px;flex:none;
+}
+.icb:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* ============================ GRID ============================ */
+.app{
+  display:grid;
+  grid-template-columns:266px minmax(0,1fr) 304px;
+  grid-template-areas:"rail main aside";
+  align-items:stretch;min-height:calc(100vh - var(--top));
+}
+.rail{grid-area:rail;border-right:1px solid var(--rule);background:var(--shell-2)}
+.main{grid-area:main;min-width:0;background:var(--paper);position:relative;min-height:calc(100vh - var(--top))}
+.aside{grid-area:aside;border-left:1px solid var(--rule);background:var(--shell-2)}
+.rail-in,.aside-in{
+  position:sticky;top:var(--top);height:calc(100vh - var(--top));
+  overflow-y:auto;overflow-x:hidden;padding:16px var(--gut) 40px;
+}
+@media(max-width:1319px){
+  .app{grid-template-columns:244px minmax(0,1fr);grid-template-areas:"rail aside" "rail main";align-content:start}
+  .aside{border-left:0;border-bottom:1px solid var(--rule)}
+  .aside-in{position:static;height:auto;max-height:none;padding:12px var(--gut)}
+  .aside .stack{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 26px;align-items:start}
+}
+@media(max-width:899px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-areas:"rail" "main" "aside"}
+  .aside{border-top:1px solid var(--rule);border-bottom:0}
+  .only-lg{display:none}
+  .rail{border-right:0;border-bottom:1px solid var(--rule)}
+  .rail-in{position:static;height:auto;max-height:none;padding:12px var(--gut) 18px}
+  body:not(.rail-open) .rail-in{display:none}
+  .rail-in .stack{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 26px;align-items:start}
+}
+@media(min-width:900px){ .railtoggle{display:none} }
+@media(max-width:899px){
+  .top{height:auto;min-height:var(--top);flex-wrap:wrap;gap:8px 10px;padding:8px var(--gut)}
+  .mark .s{display:none}
+  .top .right{margin-left:auto}
+  .seg button{padding:6px 9px;font-size:10px;letter-spacing:.07em}
+  .seg.mini button{padding:5px 7px}
+}
+@media(max-width:640px){
+  :root{--perf:14px}
+  .paper::before,.paper::after{background-size:100% 20px}
+}
+
+/* ============================ CONTROLS ============================ */
+.blk{margin-bottom:22px}
+.blk > .lbl{display:block;margin-bottom:8px}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+
+.fld{
+  width:100%;background:var(--sunken);border:1px solid var(--rule-2);color:var(--ink);
+  font-family:var(--serif);font-size:14.5px;padding:8px 10px;
+}
+.fld::placeholder{color:var(--ink-3);opacity:1}
+.fld:focus{outline:none;border-color:var(--stamp);box-shadow:inset 0 0 0 1px var(--stamp)}
+
+/* select tự vẽ — không dùng mũi tên mặc định của hệ điều hành */
+.sel{position:relative;display:block}
+.sel select{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  width:100%;background:var(--sunken);color:var(--ink);
+  border:1px solid var(--rule-2);border-radius:0;
+  padding:9px 42px 9px 12px;font-family:var(--mono);font-size:13.5px;line-height:1.35;
+  cursor:pointer;
+}
+.sel select:hover{border-color:var(--ink-3)}
+.sel select:focus{outline:none;border-color:var(--stamp);box-shadow:inset 0 0 0 1px var(--stamp)}
+.sel .cap{
+  position:absolute;top:1px;right:1px;bottom:1px;width:30px;
+  border-left:1px solid var(--rule-2);background:var(--shell-3);
+  display:grid;place-items:center;pointer-events:none;
+}
+.sel .cap::after{
+  content:"";width:0;height:0;
+  border-left:4.5px solid transparent;border-right:4.5px solid transparent;
+  border-top:5.5px solid var(--ink-2);
+}
+.sel select:hover + .cap::after{border-top-color:var(--ink)}
+.sel select:focus + .cap{background:var(--stamp);border-left-color:var(--stamp)}
+.sel select:focus + .cap::after{border-top-color:var(--on-accent)}
+.sel.on select{border-color:var(--pick);box-shadow:inset 0 0 0 1px var(--pick)}
+.sel.on .cap{border-left-color:var(--pick)}
+
+.tlist{display:grid;gap:1px}
+.slist{display:grid;border-top:1px solid var(--rule)}
+.srow{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+  background:transparent;border:0;border-bottom:1px solid var(--rule);
+  border-left:2px solid transparent;padding:8px 10px;
+}
+.srow:hover{background:var(--shell-3)}
+.srow[aria-pressed="true"]{border-left-color:var(--stamp);background:var(--shell-3)}
+.srow[aria-pressed="true"] .nm{color:var(--ink)}
+.srow .dot{width:10px;height:10px;flex:none;position:relative;color:var(--ink-3)}
+.srow[aria-pressed="true"] .dot{color:var(--ink)}
+.srow .dot::before{content:"";position:absolute;inset:1px;border:1px solid currentColor}
+.srow .dot.g{color:var(--ok)}   .srow .dot.g::before{background:currentColor}
+.srow .dot.r{color:var(--bad)}  .srow .dot.r::before{background:currentColor}
+.srow .dot.f{color:var(--flag)} .srow .dot.f::before{background:currentColor}
+/* dấu hiệu của từng dạng câu, vẽ lại đúng hình dáng điều khiển tương ứng */
+.srow .dot.m-mcq::before{box-shadow:inset 0 0 0 2px currentColor}
+.srow .dot.m-yesno::before{border:0;background:linear-gradient(currentColor 0 34%,transparent 34% 66%,currentColor 66% 100%)}
+.srow .dot.m-drop::before{border:0;background:currentColor;clip-path:polygon(0 22%,100% 22%,50% 86%)}
+.srow .nm{flex:1;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--ink-2)}
+.srow .ct{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* nhóm nút dữ liệu — hàng đầy chiều rộng, thống nhất với các danh sách khác */
+.vlist{display:grid;border-top:1px solid var(--rule)}
+.vrow{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+  background:transparent;border:0;border-bottom:1px solid var(--rule);padding:10px;
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+.vrow:hover{background:var(--shell-3);color:var(--ink)}
+.vrow svg{flex:none;width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.7}
+.vrow.danger{color:var(--bad)}
+.vrow.danger:hover{background:var(--bad-bg)}
+.trow{
+  display:grid;grid-template-columns:1fr auto;gap:3px 8px;align-items:center;
+  background:transparent;border:0;border-left:2px solid transparent;
+  padding:6px 8px;cursor:pointer;text-align:left;width:100%;min-width:0;
+}
+.trow:hover{background:var(--shell-3)}
+.trow[aria-pressed="true"]{border-left-color:var(--stamp);background:var(--shell-3)}
+.trow .nm{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.trow .ct{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.meter{grid-column:1/-1;height:4px;background:var(--rule);display:flex;overflow:hidden}
+.meter i{display:block;height:100%}
+.meter .g{background:var(--ok)}
+.meter .r{background:var(--bad)}
+
+.act{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;background:transparent;color:var(--ink);
+  border:1px solid var(--rule-2);padding:7px 13px;cursor:pointer;line-height:1.4;
+}
+.btn:hover{border-color:var(--ink);background:var(--shell-3)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn:disabled:hover{border-color:var(--rule-2);background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);border-color:var(--ink);color:var(--on-accent)}
+.btn.solid:hover:not(:disabled){filter:brightness(1.12)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.danger:hover{background:var(--bad-bg)}
+.btn.sm{padding:5px 10px;font-size:10px}
+
+/* ============================ ASIDE ============================ */
+.kv{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:3px 0}
+.kv span{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.kv b{font-family:var(--mono);font-size:12.5px;font-weight:600}
+.bigbar{height:8px;border:1px solid var(--rule-2);display:flex;margin:6px 0;overflow:hidden}
+.bigbar i{display:block;height:100%}
+.queue{display:grid;gap:2px;max-height:270px;overflow:auto}
+.qbtn{
+  display:flex;gap:8px;align-items:baseline;background:transparent;border:0;
+  border-left:2px solid var(--rule-2);padding:5px 8px;text-align:left;cursor:pointer;width:100%;min-width:0;
+}
+.qbtn:hover{background:var(--shell-3)}
+.qbtn.is-wrong{border-left-color:var(--bad)}
+.qbtn.is-flag{border-left-color:var(--flag)}
+.qbtn .n{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);flex:none}
+.qbtn .t{min-width:0;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.keys{display:grid;gap:3px}
+.keyrow{display:flex;gap:8px;align-items:center;font-family:var(--serif);font-size:12.5px;color:var(--ink-2)}
+kbd{
+  font-family:var(--mono);font-size:10px;background:var(--shell-3);border:1px solid var(--rule-2);
+  border-bottom-width:2px;padding:1px 5px;color:var(--ink);min-width:18px;text-align:center;
+}
+
+/* ============================ PAPER ============================ */
+.paper{position:relative;padding:0 var(--perf);min-height:100%}
+.paper::before,.paper::after{
+  content:"";position:absolute;top:0;bottom:0;width:var(--perf);
+  background:var(--paper-2);pointer-events:none;
+}
+.paper::before{left:0;border-right:1px solid var(--rule);box-shadow:inset -4px 0 0 -3px var(--rule)}
+.paper::after{right:0;border-left:1px solid var(--rule);box-shadow:inset 4px 0 0 -3px var(--rule)}
+.sheet{padding:0 var(--pad) 64px}
+
+.head{padding:30px 0 18px;border-bottom:2px solid var(--ink);display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap}
+.head h2{font-family:var(--sans);font-weight:700;font-size:clamp(22px,2.6vw,34px);letter-spacing:-.01em;text-transform:uppercase;line-height:1}
+.head p{font-family:var(--serif);font-size:14.5px;color:var(--ink-2);margin:8px 0 0;max-width:62ch}
+.head .r{margin-left:auto;text-align:right}
+
+.rec{
+  border-bottom:1px solid var(--rule);
+  padding:22px var(--recpad) 24px;margin:0 calc(-1 * var(--recpad));
+  scroll-margin-top:calc(var(--top) + 12px);
+}
+.rec.cur{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--stamp)}
+.rec.cur .idx{color:var(--stamp)}
+.rechead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px;max-width:86ch}
+.idx{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.05em}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.flagbtn{
+  flex:none;width:26px;height:24px;display:grid;place-items:center;cursor:pointer;
+  background:transparent;border:1px solid var(--rule-2);color:var(--ink-2);
+}
+.flagbtn svg{width:12px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9}
+.flagbtn:hover{color:var(--flag);border-color:var(--flag)}
+.flagbtn[aria-pressed="true"]{color:var(--flag);border-color:var(--flag);background:var(--flag-bg)}
+.flagbtn[aria-pressed="true"] svg{fill:currentColor}
+.tag{
+  font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule-2);color:var(--ink-2);padding:2px 6px;white-space:nowrap;
+}
+.tag.ok{color:var(--ok);border-color:var(--ok)}
+.tag.bad{color:var(--bad);border-color:var(--bad)}
+.tag.flag{color:var(--flag);border-color:var(--flag)}
+.tag.multi{color:var(--pick);border-color:var(--pick)}
+
+.stem{font-family:var(--mono);font-size:14.5px;line-height:1.62;margin:0;max-width:78ch}
+.gloss{
+  display:block;font-family:var(--serif);font-size:14.5px;line-height:1.6;
+  color:var(--ink-2);max-width:74ch;margin:4px 0 0;
+}
+.qbody{margin-top:16px}
+.qimg{display:block;margin:14px 0 4px;border:1px solid var(--rule-2);max-width:min(100%,620px);cursor:zoom-in}
+
+/* --- phương án nhiều lựa chọn --- */
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:2px;max-width:86ch}
+.opt{
+  display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;
+  background:transparent;border:1px solid transparent;color:var(--ink);
+  padding:8px 10px;cursor:pointer;
+}
+.opt:hover{border-color:var(--rule-2)}
+.opt .k{
+  flex:none;width:22px;height:22px;display:grid;place-items:center;margin-top:1px;
+  border:1px solid var(--rule-2);font-family:var(--mono);font-weight:600;font-size:11.5px;
+}
+.opt .tx{flex:1;min-width:0;font-family:var(--mono);font-size:13.5px;line-height:1.55}
+.opt .tx .gloss{font-size:13.5px;margin-top:3px}
+.opt .mk{
+  font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;white-space:nowrap;padding-top:5px;display:none;
+}
+.opt[data-pick="1"]{border-color:var(--pick);background:var(--pick-bg)}
+.opt[data-pick="1"] .k{background:var(--pick);border-color:var(--pick);color:var(--on-accent)}
+.opt[data-pick="1"] .mk-you{display:block;color:var(--pick)}
+.rec[data-done="1"] .opt{cursor:default}
+.rec[data-done="1"] .opt:hover{border-color:transparent}
+.rec[data-done="1"] .opt[data-right="1"]{border-color:var(--ok);background:var(--ok-bg)}
+.rec[data-done="1"] .opt[data-right="1"] .k{background:var(--ok);border-color:var(--ok);color:var(--on-accent)}
+.rec[data-done="1"] .opt[data-right="1"] .mk-ok{display:block;color:var(--ok)}
+.rec[data-done="1"] .opt[data-right="1"] .mk-you{display:none}
+.rec[data-done="1"] .opt[data-pick="1"][data-right="0"]{border-color:var(--bad);background:var(--bad-bg)}
+.rec[data-done="1"] .opt[data-pick="1"][data-right="0"] .k{background:var(--bad);border-color:var(--bad);color:var(--on-accent)}
+.rec[data-done="1"] .opt[data-pick="1"][data-right="0"] .mk-you{display:block;color:var(--bad)}
+
+/* --- dạng Có / Không theo dòng --- */
+.ynlist{list-style:none;margin:0;padding:0;max-width:92ch;border-top:1px solid var(--rule)}
+.yn{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center;
+  padding:12px 10px;border-bottom:1px solid var(--rule);
+}
+.yn .ynt{font-family:var(--mono);font-size:13.5px;line-height:1.55;min-width:0}
+.yn .ynt .gloss{font-size:13.5px;margin-top:3px}
+.ynb{display:flex;flex:none;border:1px solid var(--rule-2)}
+.ynb button{
+  background:transparent;border:0;border-right:1px solid var(--rule-2);
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-2);padding:6px 14px;cursor:pointer;min-width:64px;
+}
+.ynb button:last-child{border-right:0}
+.ynb button:hover{background:var(--shell-3);color:var(--ink)}
+.ynb button[aria-pressed="true"]{background:var(--pick);color:var(--on-accent)}
+.rec[data-done="1"] .ynb button{cursor:default}
+.rec[data-done="1"] .ynb button:hover{background:transparent;color:var(--ink-2)}
+.rec[data-done="1"] .ynb button[aria-pressed="true"]{background:var(--bad);color:var(--on-accent)}
+.rec[data-done="1"] .yn[data-right="1"] .ynb button[aria-pressed="true"]{background:var(--ok);color:var(--on-accent)}
+.rec[data-done="1"] .yn[data-right="0"] .ynb button[data-correct="1"]{box-shadow:inset 0 0 0 2px var(--ok);color:var(--ok)}
+
+/* --- dạng chọn từ danh sách --- */
+.blanks{display:grid;gap:18px;max-width:78ch}
+.blank .blabel{display:block;font-family:var(--mono);font-size:13px;line-height:1.55;margin-bottom:8px;color:var(--ink)}
+.blank .blabel .gloss{font-size:13px;margin-top:3px}
+.blank .ansline{
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  margin-top:7px;display:none;
+}
+.rec[data-done="1"] .blank[data-right="0"] .ansline{display:block}
+.blank .ansline.ok{color:var(--ok)}
+.blank .ansline.bad{color:var(--bad)}
+.rec[data-done="1"] .sel select{pointer-events:none}
+.rec[data-done="1"] .blank[data-right="1"] select{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.rec[data-done="1"] .blank[data-right="0"] select{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
+
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:18px;max-width:86ch}
+.note{font-family:var(--serif);font-size:13.5px;color:var(--ink-2)}
+
+/* --- khối đáp án --- */
+.rev{display:none;margin-top:20px;border-top:1px solid var(--ink);padding-top:18px}
+.rec[data-done="1"] .rev{display:block}
+.revtop{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.stamp{
+  border:2.5px solid var(--stamp);color:var(--stamp);padding:5px 13px 6px;
+  transform:rotate(-2.2deg);box-shadow:inset 0 0 0 1px var(--stamp);
+  display:flex;align-items:baseline;gap:10px;flex:none;max-width:100%;
+}
+.stamp .t{font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.stamp .v{font-family:var(--sans);font-weight:700;font-size:26px;line-height:1;letter-spacing:.06em}
+.stamp.txt .v{font-size:15px;letter-spacing:.02em;font-family:var(--mono);font-weight:600;line-height:1.35}
+.verdict{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.verdict.ok{color:var(--ok)}
+.verdict.bad{color:var(--bad)}
+.conf{
+  font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid currentColor;padding:3px 8px;
+}
+.conf.h{color:var(--ok)}
+.conf.m{color:var(--flag)}
+.conf.l{color:var(--bad)}
+
+.revgrid{display:grid;gap:20px 36px}
+@media(min-width:1500px){ .revgrid.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.sech{
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-2);display:flex;align-items:center;gap:10px;margin-bottom:8px;
+}
+.sech::after{content:"";flex:1;height:0;border-top:1px dotted var(--rule-2)}
+.prose{font-family:var(--serif);font-size:15.5px;line-height:1.7;max-width:72ch;margin:0}
+.prose b{box-shadow:inset 0 -2px 0 var(--flag)}
+ul.elim{list-style:none;margin:0;padding:0;max-width:72ch}
+ul.elim li{font-family:var(--serif);font-size:15px;line-height:1.65;padding-left:20px;position:relative;margin-bottom:6px}
+ul.elim li::before{content:"\00D7";position:absolute;left:2px;top:-1px;font-family:var(--sans);font-weight:700;color:var(--bad);font-size:16px}
+.cite{
+  font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:16px;
+  padding-top:10px;border-top:1px dotted var(--rule-2);max-width:78ch;word-break:break-word;
+}
+.notewrap{margin-top:20px;padding-top:16px;border-top:1px dotted var(--rule-2)}
+.notewrap .lbl{display:block;margin-bottom:6px}
+.notewrap textarea{
+  display:block;width:100%;max-width:72ch;min-height:64px;resize:vertical;background:var(--sunken);
+  border:1px solid var(--rule-2);color:var(--ink);font-family:var(--serif);font-size:14.5px;padding:9px 11px;
+}
+.notewrap textarea:focus{outline:none;border-color:var(--stamp)}
+
+/* ============================ EXAM ============================ */
+.panel{border:1px solid var(--rule-2);background:var(--paper-2);padding:24px var(--pad);margin-top:24px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px 24px;align-items:end}
+.grid2 .lbl{min-height:15px}
+.fldw{display:grid;gap:6px}
+.timer{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:.06em}
+.timer.low{color:var(--bad)}
+.pal{display:flex;flex-wrap:wrap;gap:4px}
+.pd{
+  width:30px;height:28px;border:1px solid var(--rule-2);background:transparent;color:var(--ink-2);
+  font-family:var(--mono);font-size:11px;cursor:pointer;position:relative;
+}
+.pd:hover{border-color:var(--ink-3);color:var(--ink)}
+.pd.is-ans{border-color:var(--pick);color:var(--pick)}
+.pd.is-flag::after{content:"";position:absolute;top:2px;right:2px;width:4px;height:4px;background:var(--flag)}
+.pd.is-cur{background:var(--ink);border-color:var(--ink);color:var(--on-accent)}
+
+.score{display:flex;gap:36px;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:132px;height:132px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .n{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring .n b{font-family:var(--sans);font-weight:700;font-size:34px;line-height:1}
+.ring .n span{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);letter-spacing:.1em;text-transform:uppercase}
+.result-h{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.02em;text-transform:uppercase}
+.result-h.ok{color:var(--ok)}
+.result-h.bad{color:var(--flag)}
+.figs{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}
+.fig b{display:block;font-family:var(--mono);font-size:23px;font-weight:600}
+
+/* ============================ TABLE ============================ */
+.tw{overflow-x:auto;margin-top:12px}
+.tw table{min-width:440px}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:12.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);border-bottom-color:var(--rule-2)}
+td:first-child{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono)}
+.sbar{height:5px;background:var(--rule);display:flex;min-width:70px}
+.sbar i{display:block;height:100%}
+
+.empty{padding:64px 10px;text-align:center;font-family:var(--serif);font-size:14.5px;color:var(--ink-2)}
+.empty b{display:block;font-family:var(--sans);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+
+/* ============================ OVERLAY ============================ */
+.ov{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:20px}
+.ov .box{background:var(--shell-2);border:1px solid var(--rule-2);max-width:520px;width:100%;padding:22px 24px;max-height:86vh;overflow:auto}
+.ov h3{font-family:var(--sans);font-weight:700;font-size:17px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.ov p{font-family:var(--serif);font-size:14.5px;color:var(--ink-2);margin:0 0 16px}
+.ov.zoom{cursor:zoom-out}
+.ov.zoom img{max-width:96vw;max-height:92vh;border:1px solid var(--rule-2)}
+
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:90;
+  background:var(--ink);color:var(--on-accent);font-family:var(--mono);font-size:12.5px;
+  padding:9px 16px;border:1px solid var(--ink);
+}
+
+/* ============ RESPONSIVE OVERRIDES (phải nằm sau mọi component) ============ */
+@media(max-width:640px){
+  .yn{grid-template-columns:minmax(0,1fr);gap:12px}
+  .ynb{justify-self:start}
+  .ynb button{min-width:84px;padding:7px 16px}
+  .stem,.opt .tx,.yn .ynt{font-size:13.5px}
+  .revtop{gap:12px}
+  .stamp{transform:none}
+}
+
+/* ============================ PRINT ============================ */
+@media print{
+  body{background:#fff;color:#000}
+  .top,.rail,.aside,.bar,.notewrap,.ov,.toast{display:none!important}
+  .app{display:block}
+  .main{background:#fff}
+  .paper{padding:0}
+  .paper::before,.paper::after{display:none}
+  .rec{break-inside:avoid;background:#fff!important}
+  .rev{display:block!important}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="mark">
+    <span class="w" id="markCode">EXAM</span>
+    <span class="s" data-t="sub">Bộ đề luyện thi</span>
+  </div>
+  <button class="icb railtoggle" id="railToggle" aria-expanded="false" title="Bộ lọc">≡</button>
+  <div class="seg" role="group" aria-label="Chế độ">
+    <button data-mode="study" aria-pressed="true" data-t="mStudy">Ôn tập</button>
+    <button data-mode="exam"  aria-pressed="false" data-t="mExam">Thi thử</button>
+    <button data-mode="stats" aria-pressed="false" data-t="mStats">Thống kê</button>
+  </div>
+  <span class="grow"></span>
+  <div class="right">
+    <div class="seg mini" role="group" aria-label="Ngôn ngữ giao diện">
+      <button data-lang="vi" aria-pressed="true">VI</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="icb" id="themeBtn" title="Giao diện sáng/tối" aria-label="Giao diện sáng/tối">◐</button>
+    <button class="icb" id="helpBtn" title="Phím tắt" aria-label="Phím tắt">?</button>
+  </div>
+</header>
+
+<div class="app">
+  <nav class="rail" aria-label="Bộ lọc">
+    <div class="rail-in">
+      <div class="stack">
+        <div class="blk">
+          <span class="lbl" data-t="lSearch">Tìm trong đề</span>
+          <input class="fld" id="search" type="search" data-t-ph="phSearch" placeholder="Tìm theo từ khoá…" aria-label="Tìm trong đề">
+          <p class="note" data-t="searchHint" style="margin:6px 0 0;font-size:12px">Gõ có dấu hay không dấu đều tìm được.</p>
+        </div>
+        <div class="blk">
+          <span class="lbl" data-t="lStatus">Trạng thái</span>
+          <div class="slist" id="fStatus"></div>
+        </div>
+        <div class="blk" id="fTypeBlk">
+          <span class="lbl" data-t="lType">Dạng câu</span>
+          <div class="slist" id="fType"></div>
+        </div>
+        <div class="blk">
+          <span class="lbl" data-t="lTopics">Chủ đề &amp; mức thuộc bài</span>
+          <div class="tlist" id="fTopics"></div>
+        </div>
+        <div class="blk">
+          <span class="lbl" data-t="lData">Dữ liệu học</span>
+          <div class="vlist">
+            <button class="vrow" id="btnExport"><span class="ic" data-icon="down"></span><span data-t="bExport">Xuất tiến độ</span></button>
+            <button class="vrow" id="btnImport"><span class="ic" data-icon="up"></span><span data-t="bImport">Nhập tiến độ</span></button>
+            <button class="vrow danger" id="btnReset"><span class="ic" data-icon="trash"></span><span data-t="bReset">Xoá hết</span></button>
+          </div>
+          <p class="note" id="storeNote" style="margin-top:8px"></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="aside" aria-label="Phiên làm bài">
+    <div class="aside-in"><div class="stack" id="asideBody"></div></div>
+  </aside>
+
+  <main class="main">
+    <div class="paper"><div class="sheet" id="view"></div></div>
+  </main>
+</div>
+
+<input type="file" id="fileIn" accept="application/json,.json" class="hide">
+
+<script>
+/* ============================================================
+   Exam Trainer — engine
+   Hỗ trợ 3 dạng câu: mcq · yesno · dropdown
+   ============================================================ */
+const DATA = {"meta":{"code":"CCAO-F","title":{"en":"Claude Certified Associate - Foundations"},"org":"Anthropic","pass":70},"topics":[{"n":1,"title":{"en":"Prompting and Task Execution","vi":"Prompting và Thực thi Nhiệm vụ"},"questions":[{"id":"d1q1","n":1,"topic":1,"type":"mcq","stem":{"en":"A marketing associate types \"write something about our new product\" and is disappointed with the generic result. Which revision best reflects effective prompting for a business task?"},"options":[{"k":"A","t":{"en":"\"Write something better about our new product.\""}},{"k":"B","t":{"en":"\"Write a 150-word LinkedIn post announcing our scheduling app to small-business owners; friendly, professional tone; end with a waitlist call to action.\""}},{"k":"C","t":{"en":"\"Write about our product\" repeated three times in a row so the model understands the request is serious and takes it seriously."}},{"k":"D","t":{"en":"\"You are the world's greatest copywriter, with decades of award-winning experience. Write something about our product that really captures how great it is.\""}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Prompt hiệu quả cung cấp những gì model không thể tự đoán: sản phẩm giao, độ dài, đối tượng, giọng văn, mục tiêu. B nêu đủ cả 5 yếu tố.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chỉ tạo áp lực mà không thêm thông tin; C lặp lại đúng phần thông tin còn thiếu; D thêm vai trò (persona) nhưng vẫn thiếu đối tượng, định dạng, mục đích.</em></p>"}},{"id":"d1q2","n":2,"topic":1,"type":"mcq","stem":{"en":"An operations lead must produce a quarterly review covering budget variance, project status, staffing, and next-quarter risks. A single prompt asking for the whole document produces shallow, uneven coverage. Which technique addresses this?"},"options":[{"k":"A","t":{"en":"Ask for the whole document again, but double the requested word count so every section has enough room to be covered in proper depth"}},{"k":"B","t":{"en":"Ask Claude to try harder on the weak sections"}},{"k":"C","t":{"en":"Switch to bullet points only, so gaps are less visible"}},{"k":"D","t":{"en":"Decompose it: work through each section as its own request, review each, then ask for a combined, consistent draft"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Phân rã nhiệm vụ (task decomposition) biến 1 yêu cầu quá tải thành chuỗi yêu cầu tập trung; mỗi phần được chú ý đầy đủ, lỗi phát hiện ngay tại bước phát sinh, bản tổng hợp cuối dựa trên các phần đã kiểm chứng.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chỉ tạo nội dung dài hơn nhưng vẫn hời hợt; B không phải chỉ dẫn model có thể hành động cụ thể; C che giấu vấn đề thay vì giải quyết.</em></p>"}},{"id":"d1q3","n":3,"topic":1,"type":"mcq","stem":{"en":"Claude's first draft of a client email is too formal and buries the key request in the final paragraph. What is the most effective way to iterate?"},"options":[{"k":"A","t":{"en":"Give specific feedback: \"Make it warmer and more conversational, and move the request to reschedule into the opening two sentences\""}},{"k":"B","t":{"en":"Send the identical prompt again without any changes and hope the natural variation between responses produces a better draft"}},{"k":"C","t":{"en":"Start a brand-new conversation and retype the original prompt"}},{"k":"D","t":{"en":"Accept the draft as it stands and edit everything manually yourself, since iterating with the model rarely improves anything much"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Lặp lại (iterate) hiệu quả khi phản hồi cụ thể, có thể hành động: nêu rõ điều gì sai và \"tốt hơn\" trông như thế nào, giúp model sửa có chủ đích thay vì tạo lại ngẫu nhiên.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B và C dựa vào may rủi — cùng input thường cho cùng nhược điểm; D bỏ lỡ con đường nhanh nhất khi chỉ cần 1 chỉ dẫn đúng trọng tâm.</em></p>"}},{"id":"d1q4","n":4,"topic":1,"type":"mcq","stem":{"en":"A project manager wants to use Claude for two different tasks: brainstorming names for an internal program, and drafting the program's formal charter. How should the prompting strategy differ between the two?"},"options":[{"k":"A","t":{"en":"Both tasks should use identical prompts, since prompting principles are universal"}},{"k":"B","t":{"en":"The brainstorm should specify exact formatting rules and strict limits; the charter should ask for maximum creativity and give the model complete freedom over structure"}},{"k":"C","t":{"en":"For the brainstorm, ask for many varied options and defer judgment; for the charter, provide structure, required sections, tone, and constraints"}},{"k":"D","t":{"en":"Brainstorming should be avoided, as models cannot generate original ideas"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Điều chỉnh chiến lược theo loại nhiệm vụ: nhiệm vụ phân kỳ (divergent) cần nhiều lựa chọn, đa dạng, ít ràng buộc; nhiệm vụ hội tụ (convergent) như soạn văn bản chính thức cần cấu trúc, giọng văn, yêu cầu rõ ràng.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A bỏ qua việc 2 nhiệm vụ có mục tiêu trái ngược; B áp dụng chiến lược ngược cho từng việc; D sai — tạo ý tưởng là một trong những thế mạnh rõ nhất của model.</em></p>"}},{"id":"d1q5","n":5,"topic":1,"type":"mcq","stem":{"en":"An analyst pastes a table of regional sales figures and asks Claude to \"analyze this.\" The response is a bland restatement of the numbers. Which revised request produces genuinely useful analysis?"},"options":[{"k":"A","t":{"en":"\"Take another look at this data and analyze it again, but this time go much deeper and be far more thorough about it.\""}},{"k":"B","t":{"en":"\"Identify the three regions with the largest quarter-over-quarter decline, suggest explanations to investigate, and flag anything unusual — we're deciding where to focus retention next quarter.\""}},{"k":"C","t":{"en":"\"Analyze this table exactly the way a world-class data scientist would: bring the full weight of statistical expertise, professional intuition, and years of hard-won industry experience to bear on it.\""}},{"k":"D","t":{"en":"\"Summarize this table in half the length.\""}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Prompt phân tích hiệu quả khi nêu rõ câu hỏi cần trả lời, tiêu chí quan trọng, và quyết định mà phân tích phục vụ — biến \"mô tả dữ liệu\" thành \"giúp tôi quyết định\".</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và C chỉ diễn đạt lại yêu cầu mà không nói model cần tìm gì; D yêu cầu rút gọn, ngược hẳn mục tiêu phân tích.</em></p>"}},{"id":"d1q6","n":6,"topic":1,"type":"mcq","stem":{"en":"A communications officer has a detailed technical incident report and must brief the executive team. Which prompt element matters most for getting a usable result on the first pass?"},"options":[{"k":"A","t":{"en":"Asking Claude to keep every technical detail from the report in the briefing so that absolutely nothing is lost in translation"}},{"k":"B","t":{"en":"Requesting the longest possible output to demonstrate thoroughness"}},{"k":"C","t":{"en":"Asking for the briefing to be written in a language the executive team does not speak, so that confidentiality of the incident details is fully preserved"}},{"k":"D","t":{"en":"Stating the audience and needs: \"for non-technical executives — one page, lead with customer impact and cost, end with the three decisions we need\""}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Đối tượng đọc (audience) là chỉ dẫn có đòn bẩy cao nhất khi cần \"dịch\" nội dung: nêu rõ ai đọc, họ quan tâm điều gì, họ cần làm gì — biến tài liệu kỹ thuật thành bản tóm tắt sẵn sàng ra quyết định.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A tái tạo lại đúng vấn đề ban đầu; B nhầm độ dài với giá trị; C là lựa chọn vô nghĩa, đi ngược mục đích của một bản briefing.</em></p>"}},{"id":"d1q7","n":7,"topic":1,"type":"mcq","stem":{"en":"Which TWO elements most improve a prompt for drafting a customer-facing announcement? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Leaving the request deliberately vague so the model can be creative"}},{"k":"B","t":{"en":"Naming the audience and the purpose the announcement must achieve"}},{"k":"C","t":{"en":"Writing the entire prompt in capital letters for emphasis"}},{"k":"D","t":{"en":"Specifying format, length, and tone requirements for the deliverable"}},{"k":"E","t":{"en":"Asking the model to guess what the company probably wants to say"}}],"answer":["B","D"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Đối tượng + mục đích, cùng ràng buộc cụ thể về sản phẩm giao (format, độ dài, giọng văn), là 2 yếu tố giúp model nhắm đúng mục tiêu và tạo đúng hình thức — khác biệt giữa văn bản chung chung và bản nháp dùng được ngay.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và E bỏ đi đúng thông tin quyết định chất lượng; C chỉ thay đổi cách nhấn mạnh chứ không giúp model hiểu rõ hơn.</em></p>"}},{"id":"d1q8","n":8,"topic":1,"type":"mcq","stem":{"en":"An operations associate must turn a 60-page vendor audit into a board-ready one-page summary, using Claude throughout. The work involves five activities: 1. Review the extracted findings against the source report for accuracy 2. Upload the report and have Claude extract the key findings for each audit area 3. Define the summary's audience, purpose, and required structure 4. Have Claude draft the one-page summary from the verified findings 5. Refine the draft's tone and emphasis through targeted feedback. In which order should the activities be carried out?"},"options":[{"k":"A","t":{"en":"2 → 3 → 1 → 4 → 5"}},{"k":"B","t":{"en":"3 → 2 → 1 → 4 → 5"}},{"k":"C","t":{"en":"3 → 2 → 4 → 1 → 5"}},{"k":"D","t":{"en":"2 → 4 → 5 → 1 → 3"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Xác định yêu cầu trước, kiểm chứng trước khi dùng tiếp: xác định mục tiêu/cấu trúc bản tóm tắt (3) để trích xuất có đích nhắm, trích xuất (2), kiểm chứng kết quả trung gian (1), soạn thảo từ dữ liệu đã kiểm chứng (4), tinh chỉnh sau cùng (5). Mỗi bước được kiểm tra trước khi bước sau dùng nó.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A trích xuất trước khi có mục tiêu nên việc trích xuất vô định hướng; C soạn thảo từ dữ liệu chưa kiểm chứng, để lỗi trôi xuống các bước sau; D để cả việc kiểm tra độ chính xác lẫn xác định mục tiêu đến sau khi bản nháp đã tồn tại.</em></p>"}}]},{"n":2,"title":{"en":"Output Evaluation and Validation","vi":"Đánh giá & Kiểm chứng Output"},"questions":[{"id":"d2q1","n":9,"topic":2,"type":"mcq","stem":{"en":"Claude produces a market summary that includes a precise statistic — \"the sector grew 14.2% in 2025, according to the annual industry report\" — which will appear in a board paper. What must happen before this is used?"},"options":[{"k":"A","t":{"en":"Nothing — the precision of the number and the named source together indicate that the claim is reliable enough for the paper"}},{"k":"B","t":{"en":"Ask Claude whether it is sure, and proceed if it confirms"}},{"k":"C","t":{"en":"Verify the figure against the actual industry report, or another authoritative source, before it goes in the board paper"}},{"k":"D","t":{"en":"Round the number to 14% so any error is smaller"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Số liệu chính xác kèm trích dẫn nguồn cụ thể chính là đặc điểm điển hình của ảo giác (hallucination). Mọi khẳng định sự kiện dùng cho tài liệu quan trọng đều phải được đối chiếu với nguồn đáng tin cậy.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A nhầm độ cụ thể với độ tin cậy — chi tiết bịa đặt thường rất cụ thể; B hỏi chính nguồn có thể sai để tự chấm điểm; D thu nhỏ sai số mà không kiểm tra xem có sai số hay không.</em></p>"}},{"id":"d2q2","n":10,"topic":2,"type":"mcq","stem":{"en":"An associate asks Claude to summarize a spreadsheet. The narrative says \"headcount grew in every region,\" but the accompanying table Claude produced shows one region declining. What does this signal, and what should the associate do?"},"options":[{"k":"A","t":{"en":"An internal inconsistency — a reliability warning. Check both claims against the source spreadsheet and correct the output before use"}},{"k":"B","t":{"en":"Trust the narrative, since prose reflects the model's more considered overall reading of the data than a mechanically produced table does"}},{"k":"C","t":{"en":"Trust the table, since numbers are always more reliable than prose"}},{"k":"D","t":{"en":"Average the two claims and move on"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Khi output tự mâu thuẫn, ít nhất 1 phần sai — và chỉ nguồn dữ liệu gốc mới là trọng tài. Mâu thuẫn nội bộ là tín hiệu rất hữu ích cho thấy output cần sửa, không chỉ cần đánh bóng câu chữ.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B và C chọn bên thắng một cách tùy tiện trong khi cả 2 đều có thể sai; D không phải cách xử lý có ý nghĩa với các khẳng định mâu thuẫn.</em></p>"}},{"id":"d2q3","n":11,"topic":2,"type":"mcq","stem":{"en":"HR asks Claude to draft a job advertisement, and the result describes the ideal candidate as a \"young, energetic digital native.\" What is the appropriate response?"},"options":[{"k":"A","t":{"en":"Publish it — AI-generated text is neutral by definition"}},{"k":"B","t":{"en":"Ask Claude to make the ad more exciting"}},{"k":"C","t":{"en":"Keep the wording but add a prominent disclaimer stating that the company is an equal-opportunity employer welcoming applicants of all ages, then publish otherwise unchanged"}},{"k":"D","t":{"en":"Recognize the age-biased framing, revise the ad to describe skills and competencies, and review AI-drafted HR content for bias as standard practice"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Model có thể tái tạo định kiến có sẵn trong ngôn ngữ thường ngày; nội dung tuyển dụng là nơi điều này gây hậu quả pháp lý/đạo đức. Đánh giá output về thiên kiến — và sửa ngay từ gốc — là một phần công việc rà soát của associate.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A sai — văn bản do AI tạo ra kế thừa thiên kiến từ mẫu ngôn ngữ; B càng đánh bóng vấn đề; C chỉ thêm disclaimer mà không sửa nội dung gốc đang có vấn đề.</em></p>"}},{"id":"d2q4","n":12,"topic":2,"type":"mcq","stem":{"en":"Claude drafts a supplier contract clause covering liability caps. The draft reads well and the associate cannot see anything wrong with it. What determines the next step?"},"options":[{"k":"A","t":{"en":"Send it to the supplier — if nothing looks wrong, it is fine"}},{"k":"B","t":{"en":"The stakes: legally binding language requires review by qualified legal counsel before use, however polished the draft appears"}},{"k":"C","t":{"en":"Ask Claude to double-check its own clause carefully against common contract pitfalls and rely on its confirmation"}},{"k":"D","t":{"en":"Shorten the clause so there is less that could be wrong"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Việc quyết định khi nào cần chuyên gia con người rà soát là phán đoán dựa trên MỨC ĐỘ RỦI RO, không phải mức độ tự tin. Ngôn ngữ hợp đồng tạo ra nghĩa vụ ràng buộc pháp lý — thuộc nhóm bắt buộc chuyển cho luật sư, \"đọc có vẻ ổn\" không thể thay thế.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A nhầm sự trôi chảy với tính đúng đắn pháp lý; C để chính người soạn tự chấm bài mình; D giảm số từ chứ không giảm rủi ro.</em></p>"}},{"id":"d2q5","n":13,"topic":2,"type":"mcq","stem":{"en":"An associate wants to fact-check the key claims in a Claude-generated research brief. Which approach constitutes genuine validation?"},"options":[{"k":"A","t":{"en":"Asking Claude to confirm that its brief is accurate"}},{"k":"B","t":{"en":"Regenerating the brief a second time and checking whether the new version says substantially the same thing as the first one did"}},{"k":"C","t":{"en":"Checking each material claim against independent, authoritative sources — official publications or primary data"}},{"k":"D","t":{"en":"Reading the brief carefully for spelling and grammar errors"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Kiểm chứng (validation) nghĩa là so sánh với một \"chuẩn thực tế\" bên ngoài model đã tạo ra nội dung đó. Nguồn độc lập, đáng tin cậy chính là chuẩn đó; không gì được tạo ra trong cùng cuộc hội thoại có thể đóng vai trò này.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A hỏi chính tác giả của khẳng định để tự trọng tài; B chỉ kiểm tra tính nhất quán chứ không phải sự thật — model có thể lặp lại cùng 1 lỗi; D kiểm tra chính tả, không liên quan đến độ chính xác.</em></p>"}},{"id":"d2q6","n":14,"topic":2,"type":"mcq","stem":{"en":"Claude summarizes a 30-page policy document into one page. Before circulating it, the associate wants to confirm the summary is complete, not just accurate. What is the practical check?"},"options":[{"k":"A","t":{"en":"Confirm the summary is exactly one page as requested, since meeting the length requirement is what the instruction actually asked for"}},{"k":"B","t":{"en":"Compare coverage against the source — check the document's section headings and key provisions are each represented or consciously omitted"}},{"k":"C","t":{"en":"Ask Claude whether it left anything out"}},{"k":"D","t":{"en":"Count the words in the summary and the source document and confirm the compression ratio stays consistent from section to section"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Tính đầy đủ (completeness) được kiểm tra bằng cách đối chiếu với CẤU TRÚC của nguồn: rà từng đề mục và điều khoản chính xem đã được phản ánh hay cố ý bỏ qua. Thiếu sót không thể nhìn thấy trong chính bản tóm tắt — phải nhìn vào nơi nó đáng lẽ xuất hiện.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và D đo độ dài chứ không đo độ bao phủ; C yêu cầu chính người tóm tắt tự nhận ra điều mình đã bỏ sót — lỗ hổng nó đã bỏ lỡ cũng sẽ là lỗ hổng nó tiếp tục bỏ lỡ.</em></p>"}},{"id":"d2q7","n":15,"topic":2,"type":"mcq","stem":{"en":"Claude produces an accurate but dense, jargon-heavy analysis. It must now go to a customer advisory panel of non-specialists. What does good output adaptation look like?"},"options":[{"k":"A","t":{"en":"Ask Claude to rewrite it for the panel — plain language, defined terms, lead with customer impact — then review the rewrite for accuracy"}},{"k":"B","t":{"en":"Send the original — accuracy is all that matters"}},{"k":"C","t":{"en":"Delete the technical sections so nothing needs explaining"}},{"k":"D","t":{"en":"Keep the original dense version fully intact and add a comprehensive glossary appendix defining every technical term for the panel members to consult"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Biên tập/điều chỉnh theo đúng đối tượng đọc là kỹ năng đánh giá cốt lõi: giữ nguyên nội dung nhưng định hình lại cho người đọc — sau đó kiểm tra lại độ chính xác, vì việc viết lại có thể tạo ra lỗi mới.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B đưa ra thứ đối tượng không dùng được; C xóa nội dung thay vì chuyển ngữ nó; D bắt người đọc tự làm việc \"dịch\" lẽ ra tác giả phải làm.</em></p>"}},{"id":"d2q8","n":16,"topic":2,"type":"mcq","stem":{"en":"During one working session an associate gets three things from Claude: a quick factual answer, a comparison of four vendors across six criteria, and a polished one-page brief that colleagues will edit and reuse. Which output formats fit?"},"options":[{"k":"A","t":{"en":"Everything as artifacts, since artifacts are the premium format"}},{"k":"B","t":{"en":"Everything inline, to keep the conversation in one place"}},{"k":"C","t":{"en":"The polished brief inline in the chat, the vendor comparison as a separate chat message, and the quick factual answer as its own artifact"}},{"k":"D","t":{"en":"The quick fact inline; the vendor comparison as a structured table; the reusable brief as an artifact to refine and share from"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Chọn định dạng theo cách sử dụng: câu trả lời ngắn hạn để inline trong chat; dữ liệu so sánh nên ở dạng có cấu trúc (bảng); nội dung sẽ được chỉnh sửa/tái sử dụng nhiều lần thuộc về artifact.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và B ép cả 3 công việc khác nhau vào cùng 1 định dạng; C gán mỗi output vào đúng định dạng kém phù hợp nhất với nó.</em></p>"}},{"id":"d2q9","n":17,"topic":2,"type":"mcq","stem":{"en":"An associate has two Claude-drafted versions of a sensitive customer apology and must choose one. What is the soundest way to compare them?"},"options":[{"k":"A","t":{"en":"Choose the longer one, since it covers more"}},{"k":"B","t":{"en":"Define what the message must achieve — acknowledge the failure, take responsibility, state the remedy, match company voice — and assess both drafts against those criteria"}},{"k":"C","t":{"en":"Ask Claude to weigh its own two drafts against each other, explain in detail which it considers the stronger piece of writing, and then send whichever draft the model selects"}},{"k":"D","t":{"en":"Merge both drafts in full so nothing is lost"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> So sánh các output là công việc dựa trên TIÊU CHÍ: nêu rõ \"thành công\" trông như thế nào, rồi chấm cả 2 bản theo tiêu chí đó. Claude có thể hỗ trợ phê bình theo tiêu chí, nhưng con người chịu trách nhiệm mới là người quyết định với 1 thông điệp nhạy cảm.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A dùng độ dài làm thước đo chất lượng; C giao phó cho model quyết định mà chính associate phải chịu trách nhiệm; D gộp cả 2 làm bản dài gấp đôi và pha trộn 2 giọng văn thành không giọng văn nào rõ ràng.</em></p>"}},{"id":"d2q10","n":18,"topic":2,"type":"mcq","stem":{"en":"After a long research conversation, the useful findings are scattered across dozens of messages mixed with dead ends. The material is needed next week by three colleagues. What should the associate do?"},"options":[{"k":"A","t":{"en":"Forward the entire conversation transcript to the three colleagues so they can read through everything and find the useful parts themselves"}},{"k":"B","t":{"en":"Rely on memory and re-ask Claude next week"}},{"k":"C","t":{"en":"Curate it: have Claude consolidate the validated findings into one organized document, review and correct it, and share that"}},{"k":"D","t":{"en":"Copy every message into a spreadsheet row by row"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Tổ chức và chắt lọc là bước biến 1 cuộc hội thoại thành sản phẩm công việc thực sự: gom lại những gì đã được kiểm chứng, cấu trúc cho người đọc, kiểm tra 1 lần, rồi chia sẻ 1 phiên bản chính thức duy nhất.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chuyển nguyên mớ hỗn độn (bao gồm cả các lối đi sai) cho 3 người khác tự đào bới; B đánh cược vào việc tạo lại những gì đã có sẵn; D vẫn giữ nguyên sự lộn xộn, chỉ đổi sang một định dạng khác.</em></p>"}},{"id":"d2q11","n":19,"topic":2,"type":"mcq","stem":{"en":"An associate asks Claude how to configure a setting in their company's internal, custom-built expense tool. Claude confidently provides step-by-step instructions. What should the associate recognize?"},"options":[{"k":"A","t":{"en":"Claude cannot know the internals of a private company tool; the confident steps are likely plausible invention and should be checked against internal documentation"}},{"k":"B","t":{"en":"The confidence of the instructions indicates Claude has genuine knowledge of the tool"}},{"k":"C","t":{"en":"Claude can see the associate's screen and is describing the actual tool"}},{"k":"D","t":{"en":"Internal business tools follow universal design standards and conventions, so generic step-by-step instructions of this kind are dependable for any company's software"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Kỹ năng đánh giá quan trọng là tự hỏi \"model có thực sự biết điều này không?\" Thông tin nội bộ riêng của công ty nằm ngoài phạm vi hiểu biết của bất kỳ model nào; câu trả lời trôi chảy về nó thực chất là suy đoán khớp mẫu, khoác giọng điệu tự tin.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B nhầm sự trôi chảy với kiến thức thật; C gán cho model khả năng nó không hề có trong một cuộc chat; D là suy nghĩ viển vông — công cụ nội bộ khác nhau đúng ở những chi tiết quan trọng nhất.</em></p>"}},{"id":"d2q12","n":20,"topic":2,"type":"mcq","stem":{"en":"Which TWO characteristics of a Claude output most strongly signal that extra verification is needed before use? (Select TWO.)"},"options":[{"k":"A","t":{"en":"The response is well formatted, with clear headings, bullet points, and a professional document structure"}},{"k":"B","t":{"en":"The response contains specific figures, quotations, or citations that will be relied upon"}},{"k":"C","t":{"en":"The response runs longer than two paragraphs, suggesting the model had to work harder to produce it"}},{"k":"D","t":{"en":"The response uses a warm, professional tone"}},{"k":"E","t":{"en":"The response makes claims about very recent events or specialized facts the associate cannot confirm themselves"}}],"answer":["B","E"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Rủi ro tập trung ở nơi khẳng định cụ thể, có hệ quả thực tế, và vượt quá khả năng tự kiểm tra của người đọc: số liệu chính xác, trích dẫn, và các khẳng định về sự kiện gần đây/chuyên môn hẹp.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A, C, D chỉ là đặc điểm hình thức trình bày — không cho biết gì về độ chính xác theo cả 2 chiều.</em></p>"}},{"id":"d2q13","n":21,"topic":2,"type":"mcq","stem":{"en":"A team is defining its standard validation practice for Claude-assisted work. Which TWO practices belong in it? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Check high-stakes factual claims against authoritative external sources before publication"}},{"k":"B","t":{"en":"Ask Claude to rate its own confidence in each output and treat consistently high self-ratings as sufficient verification"}},{"k":"C","t":{"en":"Regenerate each output twice and accept it if the versions agree"}},{"k":"D","t":{"en":"Route specialized content (legal, medical, financial) to a qualified human reviewer before it is relied upon"}},{"k":"E","t":{"en":"Treat any output that survives a spelling check as validated"}}],"answer":["A","D"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Hai trụ cột của việc kiểm chứng: nguồn độc lập cho các khẳng định sự kiện, và chuyên môn con người có chuyên môn cho nội dung đặc thù, có hệ quả lớn. Cả 2 đều so sánh output với thứ gì đó nằm NGOÀI model.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B và C chỉ tái sử dụng chính tín hiệu của model — độ tự tin và sự tự nhất quán không phải bằng chứng; E chỉ kiểm tra chính tả, chưa bao giờ là rủi ro thực sự cần quan tâm.</em></p>"}}]},{"n":3,"title":{"en":"Product and Model Selection","vi":"Lựa chọn Sản phẩm & Model"},"questions":[{"id":"d3q1","n":22,"topic":3,"type":"mcq","stem":{"en":"Every month, an operations associate produces a supplier scorecard using the same 12 reference documents, the same formatting rules, and the same evaluation rubric — currently re-uploading and re-explaining everything each time. Which feature removes this overhead?"},"options":[{"k":"A","t":{"en":"Research mode, so Claude finds the documents on the web"}},{"k":"B","t":{"en":"A longer first message each month containing everything"}},{"k":"C","t":{"en":"A Claude Project holding the reference documents as knowledge and the rules and rubric as instructions, so every monthly chat starts equipped"}},{"k":"D","t":{"en":"Asking Claude at the start of each month to remember the documents and rules from last month and simply carry on from there"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Project tồn tại cho công việc lặp lại trên nền tảng ổn định: knowledge và instructions được cấu hình 1 lần, áp dụng cho mọi cuộc hội thoại trong Project, loại bỏ việc thiết lập lặp lại.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A tìm tài liệu riêng tư trên web công khai — không khả thi; B vẫn phải dựng lại thiết lập thủ công mỗi tháng — chính là vấn đề cần giải quyết; D dựa vào khả năng \"nhớ\" giữa các cuộc hội thoại mà không nên giả định cho quy trình hàng tháng cần kiểm soát.</em></p>"}},{"id":"d3q2","n":23,"topic":3,"type":"mcq","stem":{"en":"A strategy associate needs a comprehensive overview of a market: competitor moves, pricing trends, and recent regulatory changes, drawn from many current sources with citations. Which approach fits?"},"options":[{"k":"A","t":{"en":"A quick chat question with no tools, relying on training knowledge"}},{"k":"B","t":{"en":"Use the research capability, which searches and synthesizes multiple current sources into a cited report"}},{"k":"C","t":{"en":"Ask for the answer as a haiku to force conciseness"}},{"k":"D","t":{"en":"Upload last year's market report and ask Claude to infer what has probably changed across competitors, pricing, and regulation since it was written"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Chọn tính năng theo đúng độ sâu cần thiết: nghiên cứu đa nguồn, cập nhật, có trích dẫn chính là mục đích của tính năng research — một câu trả lời chat đơn thuần không thể thấy diễn biến gần đây hay trích dẫn nguồn trực tiếp.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A cho ra câu trả lời có thể đã lỗi thời, không trích dẫn, cho một nhiệm vụ cần tính cập nhật; C chỉ là gượng ép định dạng, không phải phương pháp; D yêu cầu model tự bịa ra chính thông tin cần được nghiên cứu.</em></p>"}},{"id":"d3q3","n":24,"topic":3,"type":"mcq","stem":{"en":"An associate is developing a client proposal with Claude and expects many rounds of revision — restructuring sections, tightening language, adjusting tone — before it is shared with colleagues. Which way of working fits best?"},"options":[{"k":"A","t":{"en":"Keep each revision as a new pasted block in the chat and scroll to compare"}},{"k":"B","t":{"en":"Retype the full proposal into every message when requesting changes"}},{"k":"C","t":{"en":"Ask for the proposal one paragraph per conversation, in separate chats"}},{"k":"D","t":{"en":"Develop the proposal as an artifact, so there is one evolving document to revise, review, and ultimately share"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Artifact là nơi phù hợp cho nội dung lớn cần chỉnh sửa nhiều lần: một phiên bản duy nhất mà các chỉnh sửa áp dụng trực tiếp lên, dễ xem như một tài liệu và dễ bàn giao khi hoàn tất.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chôn các phiên bản trong lịch sử chat, không có bản gốc duy nhất đáng tin; B là việc lặp lại thủ công thứ artifact tự làm được; C chia 1 tài liệu thành nhiều cuộc hội thoại rời rạc.</em></p>"}},{"id":"d3q4","n":25,"topic":3,"type":"mcq","stem":{"en":"An associate has two tasks today: (1) a nuanced synthesis of three conflicting analyst reports into a strategy recommendation, and (2) reformatting 200 addresses into a standard layout. How should model choice differ?"},"options":[{"k":"A","t":{"en":"The most capable model for the synthesis, where reasoning quality dominates; a fast, low-cost model for the mechanical reformatting"}},{"k":"B","t":{"en":"Use the fastest model for both, since speed always wins"}},{"k":"C","t":{"en":"Use the most capable model for both, since quality always wins"}},{"k":"D","t":{"en":"The fast model for the synthesis and the most capable model for the address reformatting, so that spending balances out across the two tasks over the day"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Các mức model (tier) tồn tại để khớp công việc với nhu cầu thực tế: phán đoán phức tạp xứng đáng với chi phí/độ trễ của model mạnh nhất; việc biến đổi đơn giản thì không — model nhỏ làm nhanh hơn, rẻ hơn mà chất lượng tương đương.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B làm yếu đi nhiệm vụ mà chất lượng suy luận chính là sản phẩm; C trả thừa tiền cho việc model nhẹ đã làm tốt ngang; D đảo ngược logic ở cả 2 việc.</em></p>"}},{"id":"d3q5","n":26,"topic":3,"type":"mcq","stem":{"en":"A support team drafts hundreds of short, routine replies daily. Response speed and cost-per-reply drive the business case; the replies require no complex reasoning. Which model tier fits, and what should confirm the choice?"},"options":[{"k":"A","t":{"en":"The most capable, highest-cost tier — anything customer-facing always justifies maximum capability, regardless of how simple the individual replies are"}},{"k":"B","t":{"en":"Alternate tiers by day of week to spread the cost"}},{"k":"C","t":{"en":"A fast, low-cost tier (such as Haiku-class) suited to high-volume work — confirmed by spot-checking a sample of drafts before standardizing"}},{"k":"D","t":{"en":"Whichever tier was used most recently, for consistency"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Đây đúng kiểu công việc khối lượng lớn/độ phức tạp thấp dành cho tier nhanh. Điểm chuyên nghiệp nằm ở việc kiểm chứng: lấy mẫu kiểm tra chất lượng output trước, rồi mới chuẩn hóa — chọn kèm xác nhận, không phải chọn theo giả định.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A trả phí cao cho thứ nhiệm vụ không cần dùng đến, ở độ trễ workload không chịu nổi; B và D không phải logic lựa chọn nào cả.</em></p>"}},{"id":"d3q6","n":27,"topic":3,"type":"mcq","stem":{"en":"Midway through a long planning conversation, several key decisions have been made that will matter for future work over the coming weeks. What is the right way to make those decisions durable?"},"options":[{"k":"A","t":{"en":"Trust that Claude will remember them whenever asked in future chats"}},{"k":"B","t":{"en":"Persist them deliberately: have Claude produce a decision summary, verify it, and save it somewhere durable — such as the Project's knowledge"}},{"k":"C","t":{"en":"Keep the conversation permanently open in a browser tab and treat that tab as the team's system of record whenever the decisions need to be consulted"}},{"k":"D","t":{"en":"Repeat the entire conversation from scratch whenever the decisions are needed"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Quản lý bộ nhớ đúng cách nghĩa là biết điều gì tồn tại lâu dài và điều gì không — rồi hành động theo đó: kết quả quan trọng được ghi lại, kiểm chứng, và lưu ở nơi công việc sau này thực sự tìm thấy được.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A giả định khả năng ghi nhớ mà một quy trình kéo dài nhiều tuần không nên dựa vào; C biến 1 tab trình duyệt thành điểm lỗi duy nhất; D phải trả lại toàn bộ chi phí công việc mỗi lần cần dùng lại.</em></p>"}},{"id":"d3q7","n":28,"topic":3,"type":"mcq","stem":{"en":"Which TWO situations most clearly call for setting up a Claude Project rather than using standalone chats? (Select TWO.)"},"options":[{"k":"A","t":{"en":"A recurring task where every conversation should draw on the same reference documents and instructions"}},{"k":"B","t":{"en":"A single, one-off question that needs a quick factual answer"}},{"k":"C","t":{"en":"Making the model respond noticeably faster to every request by giving it a dedicated space of its own to work within"}},{"k":"D","t":{"en":"A team wanting consistent behavior — shared context, tone, and rules — across everyone's conversations"}},{"k":"E","t":{"en":"Removing the model's context limits altogether by giving it somewhere to store an unlimited amount of conversation history"}}],"answer":["A","D"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Project phát huy tác dụng khi ngữ cảnh ổn định và được tái sử dụng: công việc cá nhân lặp lại trên 1 nền tảng cố định, và nhóm làm việc cần mọi cuộc hội thoại đều dựa trên cùng kiến thức/chỉ dẫn.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B không cần thiết lập gì cả; C và E gán cho Project những khả năng nó không có — Project tổ chức ngữ cảnh, không tăng tốc model hay xóa bỏ giới hạn ngữ cảnh.</em></p>"}}]},{"n":4,"title":{"en":"Workflow Integration and Solution Design","vi":"Tích hợp Quy trình & Thiết kế Giải pháp"},"questions":[{"id":"d4q1","n":29,"topic":4,"type":"mcq","stem":{"en":"A business analyst has 40 pages of raw stakeholder interview notes for a new intranet project. How can Claude best support the requirements-analysis stage?"},"options":[{"k":"A","t":{"en":"Have Claude analyze the notes and decide the project's final requirements itself, so stakeholders do not need to be consulted or bothered for input a second time"}},{"k":"B","t":{"en":"Have Claude organize the notes into themes, extract needs and pain points, and draft a structured requirements list for the analyst to validate with stakeholders"}},{"k":"C","t":{"en":"Skip the notes and ask Claude what intranets usually require"}},{"k":"D","t":{"en":"Use Claude only to fix the grammar in the notes"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Claude làm tốt phần việc tốn công sức ở giữa quy trình thu thập yêu cầu: cấu trúc hóa input định tính thô thành các chủ đề và yêu cầu ứng viên. Analyst giữ lại các bước phán đoán — xác thực và ưu tiên hóa — cùng những người thực sự sở hữu nhu cầu.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A loại bỏ stakeholder khỏi quyết định về chính nhu cầu của họ; C thay thế bằng khuôn mẫu chung chung thay vì điều stakeholder thực sự nói; D dùng công cụ tổng hợp mạnh chỉ để sửa lỗi chính tả.</em></p>"}},{"id":"d4q2","n":30,"topic":4,"type":"mcq","stem":{"en":"A project manager is kicking off an office relocation and wants help getting from a blank page to a credible plan. What is an effective use of Claude at this stage?"},"options":[{"k":"A","t":{"en":"Ask Claude for the final, approved project plan and circulate it unedited"}},{"k":"B","t":{"en":"Avoid using Claude, since planning requires human intuition only"}},{"k":"C","t":{"en":"Avoid involving Claude until after the plan has been finished by the team, and then use it only to turn the completed plan into a polished set of presentation slides"}},{"k":"D","t":{"en":"Ask Claude to draft a first-pass plan — workstreams, sequencing, risks, stakeholders — then refine it with knowledge of the actual organization and budget"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Hỗ trợ nghiên cứu và lập kế hoạch nghĩa là dùng Claude để vượt qua \"trang giấy trắng\": một bản nháp đầu tiên có cấu trúc mà bối cảnh con người sau đó sửa và hoàn thiện. Bản nháp giúp tăng tốc; kiến thức của người quản lý mới ra quyết định.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A đưa ra 1 kế hoạch chưa từng tiếp xúc thực tế của tổ chức; B bỏ lỡ hàng giờ tăng tốc chỉ vì nguyên tắc; C chỉ dùng Claude để trang trí sau khi phần việc khó đã xong.</em></p>"}},{"id":"d4q3","n":31,"topic":4,"type":"mcq","stem":{"en":"An operations team suspects their invoice-approval process is inefficient but cannot articulate where. How can Claude support process optimization here?"},"options":[{"k":"A","t":{"en":"Describe the process step by step and ask Claude to identify likely bottlenecks, redundant approvals, and questions to investigate, then verify against real data"}},{"k":"B","t":{"en":"Ask Claude to approve the invoices itself from now on"}},{"k":"C","t":{"en":"Have Claude generate a motivational memo about efficiency"}},{"k":"D","t":{"en":"Retire the current process immediately and replace it wholesale with whatever alternative Claude describes as industry best practice for invoice-approval workflows"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Claude là đối tác phân tích mạnh cho công việc quy trình: có thể \"chất vấn\" một quy trình được mô tả, phát hiện các dấu hiệu bất ổn về cấu trúc, và đưa ra giả thuyết. Kỷ luật cần có là coi đó là GIẢ THUYẾT cần kiểm chứng bằng dữ liệu, không phải kết luận.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B nhảy thẳng từ phân tích sang thực thi tự động một kiểm soát tài chính, không có giám sát; C chỉ mang tính hình thức; D thay thế bằng mẫu chung chung không có bằng chứng.</em></p>"}},{"id":"d4q4","n":32,"topic":4,"type":"mcq","stem":{"en":"A content team's workflow is: research → outline → first draft → expert review → publish. The first-draft stage is the chronic bottleneck; expert review works well. How should Claude be integrated?"},"options":[{"k":"A","t":{"en":"Replace the entire workflow — research, outlining, drafting, and the expert review stage included — with a single consolidated Claude step that does it all"}},{"k":"B","t":{"en":"Insert Claude at the publishing stage, since that is the final step"}},{"k":"C","t":{"en":"Augment the bottleneck: use Claude to produce structured first drafts from the outlines, keeping research direction and expert review where they are"}},{"k":"D","t":{"en":"Use Claude to time each stage more precisely"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Tích hợp đúng cách mang tính \"phẫu thuật\": nhắm Claude vào đúng công đoạn đang thực sự giới hạn thông lượng, giữ nguyên các công đoạn đang hoạt động tốt — đặc biệt là cổng kiểm soát chất lượng của con người. Quy trình nhanh hơn mà không rủi ro hơn.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A loại bỏ chính lớp bảo vệ giúp output đáng tin; B tối ưu một công đoạn vốn không phải vấn đề; D chỉ đo công đoạn nghẽn chứ không giải quyết nó.</em></p>"}},{"id":"d4q5","n":33,"topic":4,"type":"mcq","stem":{"en":"A team lead wants to integrate Claude into the department's weekly client-reporting workflow. Five activities are planned: 1. Scale the approach across the whole team as the standard process 2. Map the current workflow and baseline how long each stage takes today 3. Pilot Claude on the chosen stage for several reporting cycles 4. Select the stage where Claude can add the most value at the lowest risk 5. Evaluate the pilot's results against the baseline measures. In which order should the activities be carried out?"},"options":[{"k":"A","t":{"en":"4 → 3 → 2 → 5 → 1"}},{"k":"B","t":{"en":"3 → 2 → 4 → 5 → 1"}},{"k":"C","t":{"en":"2 → 4 → 3 → 1 → 5"}},{"k":"D","t":{"en":"2 → 4 → 3 → 5 → 1"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Hiểu rõ trước khi thay đổi, chứng minh trước khi mở rộng: lập bản đồ và đo cơ sở (baseline) của quy trình (2), chọn công đoạn mục tiêu dựa trên bằng chứng (4), thử nghiệm (3), đánh giá so với baseline (5), và chỉ khi đó mới biến thành chuẩn chung (1). Baseline lấy ở bước 2 chính là điều làm cho việc đánh giá ở bước 5 có ý nghĩa.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chọn công đoạn trước khi hiểu quy trình, baseline lấy muộn không đo được điều pilot đã thay đổi; B thử nghiệm trước khi quyết định Claude phù hợp ở đâu; C mở rộng ra cả đội trước khi đánh giá cho biết pilot có hiệu quả hay không.</em></p>"}},{"id":"d4q6","n":34,"topic":4,"type":"mcq","stem":{"en":"A knowledge worker's typical week includes: triaging a shared inbox into action categories, negotiating contract terms in supplier meetings, condensing project updates into a weekly status report, approving invoices for payment, and mentoring a junior colleague. Which TWO parts of this week are the strongest candidates for integrating Claude as day-to-day support? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Inbox triage: Claude drafts the categorisation and suggested actions, which the worker reviews and confirms"}},{"k":"B","t":{"en":"Supplier negotiations: Claude attends the meetings and negotiates the contract terms"}},{"k":"C","t":{"en":"The status report: Claude drafts it from the collected project updates, for the worker's review and edit"}},{"k":"D","t":{"en":"Invoice approval: Claude reviews and approves the payments autonomously each week, removing the approval bottleneck entirely"}},{"k":"E","t":{"en":"Mentoring: Claude replaces the one-on-one sessions with generated career advice"}}],"answer":["A","C"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Công việc văn bản tần suất cao, dễ kiểm tra lại, với con người soát kết quả chính là nơi Claude tích hợp tốt: bản nháp phân loại hộp thư và bản nháp báo cáo đều là việc xử lý văn bản khối lượng lớn, worker vẫn giữ quyền phán quyết cuối.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B và E là công việc quan hệ con người — đàm phán và cố vấn phụ thuộc vào sự hiện diện, niềm tin, trách nhiệm giải trình mà công cụ không mang được; D giao phó quyết định kiểm soát tài chính tự động cho công cụ, sai cả về rủi ro lẫn giám sát.</em></p>"}},{"id":"d4q7","n":35,"topic":4,"type":"mcq","stem":{"en":"After a successful pilot using Claude for proposal drafting, an associate must present the results to skeptical leadership. Which presentation approach is right?"},"options":[{"k":"A","t":{"en":"Report concrete outcomes — drafting time cut from six hours to two, quality maintained per reviewer scores — alongside honest limitations"}},{"k":"B","t":{"en":"Claim the tool is flawless to secure the budget quickly"}},{"k":"C","t":{"en":"Present only the limitations to appear rigorous and cautious"}},{"k":"D","t":{"en":"Keep the presentation deliberately free of specific numbers and measurements, so leadership has nothing concrete to challenge or pick apart"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Truyền đạt giá trị cần cả bằng chứng lẫn sự trung thực: lợi ích đo lường được cùng các hạn chế được nêu rõ ràng. Sự kết hợp này tạo niềm tin bền vững — và bảo vệ sáng kiến khi các hạn chế chắc chắn sẽ bộc lộ sau này.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B đặt kỳ vọng rồi sẽ vỡ khi thực tế xảy ra; C chôn vùi 1 kết quả thực sự dưới sự thận trọng mang tính hình thức; D đánh đổi uy tín lấy việc \"không thể bị bác bỏ\".</em></p>"}},{"id":"d4q8","n":36,"topic":4,"type":"mcq","stem":{"en":"An associate's team loves their Claude-assisted triage workflow and now wants it to run automatically: connected to the CRM via API, triggered on every new ticket, with no one initiating chats. What should the associate do?"},"options":[{"k":"A","t":{"en":"Build the CRM API integration personally over the weekend, using code generated by Claude, so the team doesn't have to wait for anyone"}},{"k":"B","t":{"en":"Tell the team automation of this kind is impossible"}},{"k":"C","t":{"en":"Recognize this has crossed into technical implementation — API integration and automated triggering — and escalate to a developer or Architect resource"}},{"k":"D","t":{"en":"Simulate the automation by hand: personally copy every new ticket from the CRM into Claude throughout the day and paste the triage results back into the CRM"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Biết rõ ranh giới vai trò là năng lực cốt lõi của Associate: tính năng nền tảng, quy trình làm việc, và Project nằm trong phạm vi; tích hợp API và kích hoạt tự động là công việc kỹ thuật thuộc nhóm Architect/developer, với associate đóng góp phần thiết kế quy trình đã được kiểm chứng.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A đưa công việc kỹ thuật sản xuất ra ngoài phạm vi và lưới an toàn của vai trò; B sai — việc này khả thi, chỉ là không thuộc phần associate tự xây; D biến 1 người thành \"API thủ công\".</em></p>"}},{"id":"d4q9","n":37,"topic":4,"type":"mcq","stem":{"en":"An associate is designing the pilot for their department's first Claude workflow. Which TWO practices give the pilot the best chance of producing a trustworthy result? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Roll it out across the entire organization at once, so the pilot sample is as large as it possibly be"}},{"k":"B","t":{"en":"Choose a frequent, low-risk task where outputs are easy to check against reality"}},{"k":"C","t":{"en":"Pick the department's highest-stakes process so the pilot proves maximum value"}},{"k":"D","t":{"en":"Define success measures — time saved, quality maintained, adoption — before the pilot starts"}},{"k":"E","t":{"en":"Avoid measuring the current process, to keep the comparison unbiased"}}],"answer":["B","D"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Pilot hợp lý kết hợp một \"bãi thử\" hợp lý — đủ thường xuyên để tạo ra bằng chứng, đủ an toàn để chứa được sai sót — với tiêu chí thành công được cố định từ trước, để kết quả là một phép đo chứ không phải cảm nhận chủ quan.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và C tối đa hóa phạm vi ảnh hưởng trước khi điều gì được chứng minh; E loại bỏ chính baseline giúp các con số của pilot có ý nghĩa.</em></p>"}},{"id":"d4q10","n":38,"topic":4,"type":"mcq","stem":{"en":"A research associate is preparing a competitive-landscape briefing. Which TWO uses of Claude add genuine value to this workflow? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Synthesizing a stack of collected articles and reports into organized themes and points of disagreement between sources"}},{"k":"B","t":{"en":"Serving as the final authority on which competitor claims are true"}},{"k":"C","t":{"en":"Producing a structured comparison of competitors across chosen dimensions as a reviewable starting draft"}},{"k":"D","t":{"en":"Eliminating the need for anyone to check any of the briefing's claims before it is circulated to the wider leadership group"}},{"k":"E","t":{"en":"Deciding the company's competitive strategy autonomously from the briefing"}}],"answer":["A","C"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Đóng góp của Claude cho quy trình nghiên cứu là cấu trúc hóa và tổng hợp với tốc độ nhanh: biến tài liệu nguồn thành các chủ đề có tổ chức và bản so sánh có thể rà soát, để con người sau đó kiểm chứng và đưa ra phán đoán.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B, D, E đều chuyển Claude từ vai trò tăng tốc công việc sang vai trò nắm giữ sự thật và ra quyết định — những phần việc phải luôn thuộc về con người.</em></p>"}}]},{"n":5,"title":{"en":"Configuration and Knowledge Management","vi":"Cấu hình & Quản lý Tri thức"},"questions":[{"id":"d5q1","n":39,"topic":5,"type":"mcq","stem":{"en":"An associate begins every conversation in their reporting Project by pasting the same three paragraphs: the team's tone rules, the report structure, and formatting requirements. What is the correct configuration fix?"},"options":[{"k":"A","t":{"en":"Keep pasting the paragraphs at the start of every conversation — the repetition helps the model learn the rules permanently over time"}},{"k":"B","t":{"en":"Shorten the three paragraphs so pasting is faster"}},{"k":"C","t":{"en":"Attach the three paragraphs as a knowledge file in the Project and hope Claude notices and applies it in every conversation"}},{"k":"D","t":{"en":"Move the standing rules into the Project's custom instructions, where they apply to every conversation automatically"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Các quy tắc hành vi cố định — giọng văn, cấu trúc, định dạng — chính là mục đích của Project instructions: cấu hình 1 lần, áp dụng cho mọi cuộc hội thoại, không thể quên dán.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A hiểu sai cơ chế — không có gì được \"học\" giữa các cuộc hội thoại, việc lặp lại thủ công còn dễ bị bỏ sót; B chỉ tối ưu cách làm sai thay vì loại bỏ nó; C đặt quy tắc hành vi vào nơi dành cho nội dung tham khảo, làm yếu đi hiệu lực của chúng.</em></p>"}},{"id":"d5q2","n":40,"topic":5,"type":"mcq","stem":{"en":"Setting up a Project for contract-renewal support, an associate wonders what to upload as knowledge. The team drive holds ~2,000 files; about 15 are actually relevant: current templates, the pricing sheet, and negotiation guidelines. What should be uploaded?"},"options":[{"k":"A","t":{"en":"The entire team drive of roughly 2,000 files, so that no piece of information could ever be missing when it turns out to be needed"}},{"k":"B","t":{"en":"The 15 relevant, current documents — a curated knowledge base of what the work draws on, maintained as things change"}},{"k":"C","t":{"en":"Nothing — knowledge uploads are unnecessary if prompts are good"}},{"k":"D","t":{"en":"Only the oldest documents on the drive, since they carry the most accumulated history of how the work has been done"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Chắt lọc kiến thức quan trọng hơn khối lượng kiến thức: một bộ nguồn tập trung, cập nhật giúp việc truy xuất chính xác và câu trả lời có căn cứ. Nội dung upload chính là điều Project coi là \"đúng\" — hãy chắt lọc nó cẩn thận.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chôn 15 tài liệu tín hiệu dưới 1.985 tài liệu nhiễu và lỗi thời; C buộc mỗi cuộc hội thoại phải tự cung cấp lại điều Project lẽ ra đã có sẵn; D tối ưu đúng sai thuộc tính cần có.</em></p>"}},{"id":"d5q3","n":41,"topic":5,"type":"mcq","stem":{"en":"A team's status-report documents live in Google Drive and are updated by several colleagues throughout the week. The associate wants Claude to work from the latest versions without manual re-uploading. What is the right approach, and what should be checked first?"},"options":[{"k":"A","t":{"en":"Use the Google Drive connector so Claude accesses the current files directly — after confirming the connection complies with data and access policies"}},{"k":"B","t":{"en":"Re-upload every file into the Project each morning before starting work, treating the routine as a useful discipline-building ritual for the whole team"}},{"k":"C","t":{"en":"Ask colleagues to stop updating the documents so versions stay stable"}},{"k":"D","t":{"en":"Have Claude guess what probably changed since the last upload"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Connector được tạo ra đúng cho mục đích này: truy cập trực tiếp file đang làm việc thay vì ảnh chụp đã cũ. Bước chuyên nghiệp là kiểm tra về mặt quản trị — xác nhận connector có thể truy cập gì và việc truy cập đó tuân thủ chính sách.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B chính là gánh nặng thủ công mà tính năng này giúp loại bỏ; C uốn quy trình của team theo một lỗ hổng công cụ vốn đã có giải pháp; D mời gọi việc bịa đặt trong khi dữ liệu thật chỉ cách 1 connector.</em></p>"}},{"id":"d5q4","n":42,"topic":5,"type":"mcq","stem":{"en":"Which of the following is the most effective set of system-level instructions for a customer-communications Project?"},"options":[{"k":"A","t":{"en":"\"Be consistently helpful and professional, always do a good job, use sound judgment at all times, communicate clearly, and make every customer as happy as possible.\""}},{"k":"B","t":{"en":"\"Never make mistakes.\""}},{"k":"C","t":{"en":"\"You draft customer-service replies for a software company. Tone: warm, plain English, no jargon. Always: acknowledge the issue, state next steps. Never: promise refunds (escalate instead) or exceed 200 words.\""}},{"k":"D","t":{"en":"The company's complete 30-page policy and procedures manual, pasted in as instructions in full — every policy, exception, and historical amendment since 2015 — so that no conceivable situation is left uncovered"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Chỉ dẫn hiệu quả cần cụ thể, có cấu trúc, mang tính hành vi: Claude đang đóng vai trò gì, giọng văn ra sao, điều gì luôn phải xảy ra, điều gì không bao giờ được xảy ra, cùng các ràng buộc cứng. Mỗi dòng đều có thể áp dụng trong mọi câu trả lời.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và B chỉ là mong muốn chung chung, không thay đổi hành vi cụ thể nào; D nhấn chìm các quy tắc thực sự cần dùng trong một kho tài liệu lưu trữ — nơi đó thuộc về knowledge (đã được chắt lọc), nếu có.</em></p>"}},{"id":"d5q5","n":43,"topic":5,"type":"mcq","stem":{"en":"An associate is configuring a Project and has two assets: (1) rules about how Claude should behave — tone, structure, escalation triggers; and (2) reference material Claude should draw on — the product catalog and policy documents. Where does each belong?"},"options":[{"k":"A","t":{"en":"Both pasted into the first message of every chat"}},{"k":"B","t":{"en":"Behavioral rules in the Project's custom instructions; reference material as Project knowledge"}},{"k":"C","t":{"en":"Both uploaded as knowledge files, keeping instructions empty"}},{"k":"D","t":{"en":"Behavioral rules uploaded as knowledge documents, with the product catalog written into the custom instructions field instead"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Hai bề mặt cấu hình có vai trò khác nhau: instructions chi phối hành vi ở MỌI LƯỢT trả lời; knowledge là thư viện tham khảo được tra cứu khi liên quan. Đặt đúng mỗi tài sản vào đúng chỗ giúp cả 2 hoạt động như thiết kế.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A bỏ qua việc cấu hình để quay lại lặp lại thủ công; C hạ cấp quy tắc cố định thành tài liệu mà Claude có thể tham khảo hoặc không; D đảo ngược hoàn toàn 2 bề mặt.</em></p>"}},{"id":"d5q6","n":44,"topic":5,"type":"mcq","stem":{"en":"Sales reps report that the quoting Project keeps citing superseded prices. Investigation shows the Project knowledge contains \"pricing_2024.xlsx,\" while current prices took effect in January. What does proper knowledge maintenance look like?"},"options":[{"k":"A","t":{"en":"Add a chat instruction each time: \"ignore the old prices you may have seen\""}},{"k":"B","t":{"en":"Upload the new pricing file into the Project knowledge alongside the old one, so that both versions remain available for reference"}},{"k":"C","t":{"en":"Tell the reps to mentally adjust the quoted figures"}},{"k":"D","t":{"en":"Remove the outdated file, upload the current pricing document, and put knowledge sources on a review cycle"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Bảo trì cấu hình nghĩa là kho kiến thức phải theo sát thực tế: nguồn đã lỗi thời cần được GỠ BỎ — không chỉ bổ sung thêm — và có chu kỳ rà soát định kỳ để nội dung nhạy cảm theo thời gian như bảng giá không âm thầm trở nên sai lệch.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A xử lý một lỗi cấu hình bằng câu \"thần chú\" lặp lại mỗi lần chat; B để 2 nguồn mâu thuẫn cùng cạnh tranh khi truy xuất; C biến sai số thành chuyện thường trong báo giá khách hàng.</em></p>"}},{"id":"d5q7","n":45,"topic":5,"type":"mcq","stem":{"en":"An associate is setting up a Claude Project to support the team's proposal-writing process. Five setup activities are involved: 1. Test the Project with a realistic sample task and review the output 2. Write the Project's custom instructions: tone, structure, and escalation rules 3. Upload the curated reference documents as Project knowledge 4. Create the Project 5. Refine the instructions and knowledge based on what the test revealed. In which order should the activities be carried out?"},"options":[{"k":"A","t":{"en":"4 → 1 → 2 → 3 → 5"}},{"k":"B","t":{"en":"2 → 3 → 4 → 5 → 1"}},{"k":"C","t":{"en":"4 → 2 → 3 → 1 → 5"}},{"k":"D","t":{"en":"4 → 2 → 3 → 5 → 1"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Project phải tồn tại trước khi được cấu hình (4), cấu hình — instructions và knowledge (2, 3) — diễn ra trước khi đánh giá, và việc tinh chỉnh (5) chỉ có ý nghĩa khi đã có 1 bài kiểm thử (1) cho biết điều gì cần học hỏi. Cấu hình → kiểm thử → tinh chỉnh chính là vòng lặp mà prompting tốt cũng tuân theo.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A kiểm thử 1 Project chưa được cấu hình nên bài test không cho biết gì về thiết lập; B cấu hình 1 Project chưa tồn tại và tinh chỉnh trước khi kiểm thử; D tinh chỉnh trước khi chạy bài test lẽ ra phải cho biết cần tinh chỉnh gì.</em></p>"}}]},{"n":6,"title":{"en":"Governance, Risk, and Responsible Use","vi":"Quản trị, Rủi ro & Sử dụng Có trách nhiệm"},"questions":[{"id":"d6q1","n":46,"topic":6,"type":"mcq","stem":{"en":"Which of the following tasks is the associate right to treat as an appropriate, low-risk use of Claude without additional approvals?"},"options":[{"k":"A","t":{"en":"Producing the company's official written response to a regulator's formal inquiry, and sending it out without any human review"}},{"k":"B","t":{"en":"Analyzing an unredacted export of customer identity records from the CRM"}},{"k":"C","t":{"en":"Turning the associate's own rough notes from an internal team meeting into organized minutes, reviewed before sharing"}},{"k":"D","t":{"en":"Generating a diagnosis for an employee's described medical symptoms"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Phán đoán về mức độ phù hợp của việc sử dụng cân nhắc độ nhạy dữ liệu, mức độ rủi ro, và sự giám sát. Nội dung nội bộ, không nhạy cảm, do chính người dùng tạo ra, có con người rà soát trước khi chia sẻ — nằm hoàn toàn trong vùng an toàn.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A là giao tiếp bên ngoài có rủi ro cao mà bước rà soát lại bị bỏ qua; B xử lý dữ liệu cá nhân thuộc diện quản lý mà không có biện pháp bảo vệ; D là một phán đoán y khoa chuyên môn mà không công cụ chat nào nên đưa ra.</em></p>"}},{"id":"d6q2","n":47,"topic":6,"type":"mcq","stem":{"en":"An HR associate wants Claude's help analyzing turnover patterns using a spreadsheet that includes employee names, salaries, and health-leave records. Organizational policy restricts sharing sensitive personal data. What is the correct approach?"},"options":[{"k":"A","t":{"en":"Upload it as-is; internal analysis doesn't count as sharing"}},{"k":"B","t":{"en":"De-identify first — remove or pseudonymize identifiers, keep only the fields the analysis needs — and confirm compliance with the data policy"}},{"k":"C","t":{"en":"Upload the file as it is, but instruct Claude at the start of the conversation to treat the contents as strictly confidential and promise not to share them"}},{"k":"D","t":{"en":"Analyze only the names column, since names alone reveal nothing"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Thực hành đúng với dữ liệu nhạy cảm là tối thiểu hóa: loại bỏ danh tính, chỉ giữ lại trường dữ liệu phân tích thực sự cần, và kiểm tra cách làm với chính sách. Giá trị phân tích vẫn giữ nguyên; rủi ro lộ dữ liệu thì không còn.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A hiểu sai chính sách — việc đưa dữ liệu vào 1 công cụ đã là một sự kiện tiết lộ; C thay thế một biện pháp kiểm soát thực sự bằng 1 câu dặn dò trong chat; D ngược đời, giữ lại đúng phần định danh và bỏ đi phần cần phân tích.</em></p>"}},{"id":"d6q3","n":48,"topic":6,"type":"mcq","stem":{"en":"A consultant working with a healthcare client is asked to run patient-feedback records through Claude to find service-improvement themes. Health data is subject to specific regulation. What must happen before any records are processed?"},"options":[{"k":"A","t":{"en":"Proceed — feedback records don't feel like medical records"}},{"k":"B","t":{"en":"Proceed, but delete the conversation afterwards"}},{"k":"C","t":{"en":"Run a small sample of the records through first, and wait to see whether the client or anyone else raises an objection before processing the full set"}},{"k":"D","t":{"en":"Confirm the regulatory and contractual position first — engage the client's privacy or compliance function and process the data only as they approve"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Các nhóm dữ liệu chịu quản lý đảo ngược thứ tự mặc định: việc cho phép phải có TRƯỚC khi xử lý. Bộ phận tuân thủ xác định quy định và thỏa thuận với khách hàng cho phép những gì — công việc của tư vấn viên là hỏi trước, không phải xin lỗi sau.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A thay thế phân tích pháp lý bằng cảm tính — phản hồi của bệnh nhân hoàn toàn có thể chứa thông tin sức khỏe; B xóa bằng chứng của một vi phạm thay vì ngăn chặn nó; C chỉ làm vi phạm nhỏ hơn, không làm nó hợp pháp.</em></p>"}},{"id":"d6q4","n":49,"topic":6,"type":"mcq","stem":{"en":"An associate discovers a teammate has been pasting confidential company documents into a personal, free AI chatbot account because \"it's the same model anyway.\" What is the governance-correct response?"},"options":[{"k":"A","t":{"en":"Explain the problem, direct the teammate to the sanctioned workspace, and follow the organization's process for reporting the data exposure"}},{"k":"B","t":{"en":"Ignore it — the underlying model quality is indeed similar, so the work product is the same wherever the documents happen to be pasted"}},{"k":"C","t":{"en":"Join in, because the free account saves budget"}},{"k":"D","t":{"en":"Quietly delete the teammate's chat history and say nothing"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Tuân thủ chính sách AI của tổ chức nghĩa là dùng đúng kênh đã được phê duyệt — workspace doanh nghiệp tồn tại chính vì các bảo vệ dữ liệu theo hợp đồng và kiểm soát quản trị của nó — và coi việc đưa dữ liệu bảo mật vào công cụ chưa được phê duyệt là một sự cố cần báo cáo, không phải một bí mật cần giữ kín.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B và C nhầm lẫn giữa năng lực model với vấn đề quản trị — điều khoản tài khoản, chứ không phải bản thân model, mới là vấn đề; D xóa bằng chứng mà vẫn để nguyên cả sự lộ dữ liệu lẫn hành vi sai.</em></p>"}},{"id":"d6q5","n":50,"topic":6,"type":"mcq","stem":{"en":"A marketing lead asks an associate to have Claude write a dozen enthusiastic customer testimonials, each attributed to a fictional customer name, for the company website. How should the associate respond?"},"options":[{"k":"A","t":{"en":"Write them — every company polishes its testimonials"}},{"k":"B","t":{"en":"Decline and explain that fabricated testimonials presented as real customers are deceptive — then offer legitimate alternatives"}},{"k":"C","t":{"en":"Write them, but attribute each testimonial to a first name only, so that no complete fictional identity is created and the risk is reduced"}},{"k":"D","t":{"en":"Write them and add a tiny footnote reading \"illustrative\""}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Sử dụng có đạo đức đặt ranh giới ở sự lừa dối: nội dung tạo ra \"bằng chứng xã hội\" giả mạo gây hiểu lầm cho công chúng, bất kể ai gõ ra nó. Phản hồi chuyên nghiệp là từ chối kèm theo đề xuất những cách làm hợp pháp để đạt cùng mục tiêu kinh doanh.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A biến việc bịa đặt thành chuyện \"đánh bóng\" bình thường; C và D chỉ là giảm nhẹ mang tính hình thức cho cùng 1 sự lừa dối — người đọc vẫn bị cho rằng khách hàng thật đã nói những điều không ai từng nói.</em></p>"}},{"id":"d6q6","n":51,"topic":6,"type":"mcq","stem":{"en":"An associate uses Claude to draft a vendor-evaluation report, edits it, and submits it to their director. The report contains an error that later causes a problem. Who is accountable for the error?"},"options":[{"k":"A","t":{"en":"Claude, since it generated the sentence containing the error"}},{"k":"B","t":{"en":"Anthropic, as the maker of the tool"}},{"k":"C","t":{"en":"The associate who authored and submitted the report — AI assistance does not transfer accountability for one's work product"}},{"k":"D","t":{"en":"No one — errors that originate from AI-assisted work are an accepted cost of the technology and are nobody's individual fault in particular"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Trách nhiệm giải trình đi theo việc tác giả hóa và nộp bài, không phải theo việc \"ai gõ chữ\". Người ký duyệt/nộp sản phẩm có hỗ trợ của AI là người sở hữu nó — đây chính là lý do việc kiểm chứng và rà soát là bước bắt buộc, không phải phép lịch sự.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và B nhầm 1 công cụ với 1 bên chịu trách nhiệm — không tổ chức nào chấp nhận lý do \"phần mềm viết ra nó\"; D mô tả một thế giới mà không sản phẩm công việc nào có thể được tin tưởng.</em></p>"}},{"id":"d6q7","n":52,"topic":6,"type":"mcq","stem":{"en":"A colleague going through a divorce asks an associate to have Claude determine \"what custody arrangement I'm legally entitled to\" so they can act on it directly. What should the associate recognize?"},"options":[{"k":"A","t":{"en":"This asks the tool to substitute for professional legal advice on a high-stakes personal matter — the determination belongs with a qualified lawyer"}},{"k":"B","t":{"en":"Claude's answer will be binding, so it should be worded carefully"}},{"k":"C","t":{"en":"It's fine as long as the jurisdiction is specified precisely"}},{"k":"D","t":{"en":"The request is acceptable, because family law matters are considerably simpler and more standardized than corporate law and well within the tool's reach"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Nhận diện tình huống sử dụng không phù hợp bao gồm \"phép thử thay thế\": khi yêu cầu là một PHÁN QUYẾT CHUYÊN MÔN mà ai đó sẽ hành động theo — pháp lý, y tế, tài chính — vai trò của công cụ chỉ còn là chuẩn bị/giúp hiểu, còn phán quyết thuộc về chuyên gia có chuyên môn.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B gán cho câu trả lời chat 1 hiệu lực pháp lý nó không thể có; C chỉ sửa 1 chi tiết đầu vào trong khi vấn đề về bản chất vẫn còn nguyên; D vừa sai vừa không liên quan đến việc có cần tư vấn chuyên môn hay không.</em></p>"}},{"id":"d6q8","n":53,"topic":6,"type":"mcq","stem":{"en":"Before uploading a dataset to Claude for analysis, which TWO checks should an associate perform? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Whether the file's formatting is attractive"}},{"k":"B","t":{"en":"Whether the dataset contains personal, confidential, or regulated information requiring removal, de-identification, or special handling"}},{"k":"C","t":{"en":"Whether the file was created recently enough for the analysis to be interesting and worth the effort of uploading and running in the first place"}},{"k":"D","t":{"en":"Whether the organization's AI and data policies permit this category of data to be used with this tool, in this workspace"}},{"k":"E","t":{"en":"Whether the dataset is large enough to look impressive"}}],"answer":["B","D"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Kỷ luật trước khi upload có 2 \"cổng\" cần qua: kiểm tra chính dữ liệu xem có nội dung nhạy cảm hay không, và xác nhận mục đích sử dụng có nằm trong chính sách cho loại dữ liệu và nền tảng đó. Qua được cả 2 mới an toàn để bắt đầu phân tích.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A, C, E chỉ là đặc điểm thẩm mỹ/không liên quan, không ảnh hưởng gì đến việc upload có phù hợp hay không.</em></p>"}},{"id":"d6q9","n":54,"topic":6,"type":"mcq","stem":{"en":"Which TWO practices belong in a team's responsible-AI working norms? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Disclose AI assistance where organizational policy or the context requires it, rather than presenting AI-drafted work as unaided"}},{"k":"B","t":{"en":"Allow Claude outputs to be sent onward to external parties automatically, without a review step, so that speed of delivery is maximized for the team"}},{"k":"C","t":{"en":"Keep humans accountable for decisions that affect people — hiring, performance, customer commitments — with AI limited to support"}},{"k":"D","t":{"en":"Treat an output as verified once the model has reviewed its own work"}},{"k":"E","t":{"en":"Discourage colleagues from questioning or second-guessing AI-produced analysis once it has been circulated, so that team efficiency is maintained"}}],"answer":["A","C"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Chuẩn mực sử dụng AI có trách nhiệm dựa trên sự minh bạch và trách nhiệm giải trình của con người: trung thực về vai trò của AI ở những nơi quan trọng, và con người — chứ không phải model — là người sở hữu các quyết định có hệ quả tới con người.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B loại bỏ đúng bước rà soát ở nơi rủi ro cao nhất; D là một dạng kiểm chứng vòng tròn (model tự chấm bài chính mình); E đảo ngược một văn hóa làm việc lành mạnh — sự soi xét kết quả AI chính là lưới an toàn, không phải trở ngại.</em></p>"}}]},{"n":7,"title":{"en":"Troubleshooting and Optimization","vi":"Khắc phục Sự cố & Tối ưu hóa"},"questions":[{"id":"d7q1","n":55,"topic":7,"type":"mcq","stem":{"en":"Claude's answers to an associate's competitive-analysis questions keep coming back generic and surface-level. What should the associate examine first?"},"options":[{"k":"A","t":{"en":"Whether Claude is having a bad day, by waiting and retrying tomorrow"}},{"k":"B","t":{"en":"The prompt itself: does it supply the company's context, the competitors, the decision it feeds, and the criteria that matter?"}},{"k":"C","t":{"en":"The subscription tier, since analytical depth of this kind is presumably a feature reserved for the more expensive paid subscription plans"}},{"k":"D","t":{"en":"The time of day the questions are sent"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Chẩn đoán luôn bắt đầu từ đầu vào: output chung chung là dấu hiệu điển hình của 1 prompt thiếu ngữ cảnh. Model trả lời đúng câu hỏi mà nó thực sự được hỏi — ngữ cảnh cụ thể cho ra kết quả cụ thể.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A, C, D đều tìm nguyên nhân bên ngoài — tâm trạng, gói cước, giờ giấc — cho 1 vấn đề mà nguyên nhân gần như luôn nằm ngay trong nội dung prompt.</em></p>"}},{"id":"d7q2","n":56,"topic":7,"type":"mcq","stem":{"en":"An associate's mega-prompt contains fourteen requirements for a report. The output consistently satisfies most of them but drops two or three — different ones each time. What is the likely cause and fix?"},"options":[{"k":"A","t":{"en":"The model is being deliberately selective; add a line demanding total obedience"}},{"k":"B","t":{"en":"The requirements are fundamentally impossible to satisfy together in any single document; permanently delete half of them so that the remaining half can actually be met"}},{"k":"C","t":{"en":"Fourteen is fine — the real problem is not saying 'please'"}},{"k":"D","t":{"en":"Instruction overload: too many requirements competing in one request — group and prioritize them, or decompose into sequential steps"}}],"answer":["D"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Việc bỏ sót chỉ dẫn khác nhau ở mỗi lần chạy chính là dấu hiệu điển hình của tình trạng quá tải chỉ dẫn. Cách khắc phục mang tính cấu trúc: giảm số yêu cầu cạnh tranh cùng lúc trong 1 lượt, bằng cách nhóm/ưu tiên hóa hoặc phân rã thành các bước tuần tự.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chẩn đoán sai 1 kiểu mẫu do giới hạn năng lực thành ra \"chống đối\"; B loại bỏ các yêu cầu mà thực ra đều có thể đạt được nếu chia thành nhiều lượt; C chỉ là mê tín.</em></p>"}},{"id":"d7q3","n":57,"topic":7,"type":"mcq","stem":{"en":"In a team's client-reporting Project, every conversation starts with Claude using the wrong tone, and every user manually corrects it mid-chat. What is the right fix?"},"options":[{"k":"A","t":{"en":"Fix it at the source: update the Project's custom instructions to specify the required tone, so every conversation starts correct"}},{"k":"B","t":{"en":"Keep correcting each conversation manually as the team already does — it only takes a message or two at the start of every chat to put right"}},{"k":"C","t":{"en":"Ask the team to accept the default tone to save effort"}},{"k":"D","t":{"en":"Start every chat by insulting the previous answer to motivate improvement"}}],"answer":["A"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Một lỗi lặp lại ở MỌI cuộc hội thoại là lỗi về CẤU HÌNH, không phải lỗi của từng cuộc hội thoại. Một lần cập nhật chỉ dẫn sửa cho mọi cuộc hội thoại sau này; sửa từng cuộc hội thoại chỉ sửa được 1 lần, mãi mãi phải lặp lại.</p><p><b>Vì sao các đáp án khác sai:</b> <em>B biến chính phần việc phát sinh thêm thành thói quen thể chế hóa, trong khi cấu hình có thể loại bỏ nó; C chấp nhận một khiếm khuyết chất lượng dù đã có cách sửa chỉ tốn 1 dòng; D chỉ là nhiễu — giọng văn do chỉ dẫn quyết định, không phải do dọa nạt.</em></p>"}},{"id":"d7q4","n":58,"topic":7,"type":"mcq","stem":{"en":"Deep into a marathon conversation that has covered several topics, Claude begins conflating earlier drafts, responding slowly, and missing recent corrections. What is happening, and what is the practical response?"},"options":[{"k":"A","t":{"en":"The model is permanently degraded and the account should be reset"}},{"k":"B","t":{"en":"Nothing is wrong — conversations behave identically at any length, so the drafts and corrections are all being tracked exactly as they were at the start"}},{"k":"C","t":{"en":"Accumulated context has grown long and muddled. Have Claude summarize the current state, verify it, and continue in a fresh conversation seeded with it"}},{"k":"D","t":{"en":"Type the corrections in capital letters so they outweigh the older content"}}],"answer":["C"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Hội thoại dài, trải nhiều chủ đề sẽ tích tụ ngữ cảnh đến mức dần gây bất lợi. Mẫu hình \"tóm tắt rồi khởi động lại\" giữ lại điều quan trọng — các quyết định đã kiểm chứng và trạng thái hiện tại — và loại bỏ phần rối rắm đang làm giảm chất lượng câu trả lời.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A gán nhầm 1 tình trạng ở cấp độ cuộc hội thoại cho cả tài khoản; B phủ nhận chính triệu chứng đang được mô tả; D chỉ thêm sự nhấn mạnh vào đúng cái ngữ cảnh đã quá tải.</em></p>"}},{"id":"d7q5","n":59,"topic":7,"type":"mcq","stem":{"en":"Every week an associate spends fifteen minutes re-explaining the same report requirements to Claude before starting the actual weekly report. What is the right optimization?"},"options":[{"k":"A","t":{"en":"Accept the fifteen minutes as the cost of quality"}},{"k":"B","t":{"en":"Make the setup reusable: capture the standing requirements once in a Project's instructions, so each week starts at the work"}},{"k":"C","t":{"en":"Stop explaining the requirements and accept lower-quality reports"}},{"k":"D","t":{"en":"Rotate the weekly task among the whole team, so that no single person has to bear the same fifteen minutes of re-explaining every single week"}}],"answer":["B"],"multi":false,"explain":{"text":"<p><b>Vì sao đúng:</b> Tối ưu hóa nhắm vào chi phí lặp lại: bất cứ điều gì được giải thích giống hệt nhau ở mỗi chu kỳ thuộc về cấu hình có thể tái sử dụng. Thiết lập 1 lần biến 15 phút mỗi tuần thành 0.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A chấp nhận trả 1 chi phí lặp lại trong khi đã có cách sửa chỉ cần làm 1 lần; C đánh đổi chất lượng lấy thời gian trong khi không cần phải hy sinh cái nào; D chỉ phân bổ lại sự lãng phí chứ không loại bỏ nó.</em></p>"}},{"id":"d7q6","n":60,"topic":7,"type":"mcq","stem":{"en":"An associate is systematically improving an underperforming prompt. Which TWO practices make the improvement process reliable? (Select TWO.)"},"options":[{"k":"A","t":{"en":"Rewrite the entire prompt completely from scratch on every attempt, so no weak wording survives"}},{"k":"B","t":{"en":"Change several elements at once to converge faster"}},{"k":"C","t":{"en":"Change one element at a time, so each change's effect can be attributed"}},{"k":"D","t":{"en":"Switch to a different AI product at the first sign of trouble"}},{"k":"E","t":{"en":"Test each revision against the same example input, so results are compared like-for-like"}}],"answer":["C","E"],"multi":true,"explain":{"text":"<p><b>Vì sao đúng:</b> Lặp lại (iterate) đáng tin cậy giống như 1 thí nghiệm công bằng: thay đổi 1 thứ, giữ nguyên input kiểm thử, quan sát sự khác biệt. Đó là cách để biết thay đổi nào thực sự giúp ích, thay vì chỉ đoán mò.</p><p><b>Vì sao các đáp án khác sai:</b> <em>A và B phá hỏng khả năng quy kết nguyên nhân — khi mọi thứ đều thay đổi cùng lúc, không rút ra được bài học nào; D bỏ cuộc chẩn đoán để chuyển sang nhảy công cụ.</em></p>"}}]}]};
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const ICON = {
+  flag:'<svg viewBox="0 0 12 14" aria-hidden="true"><path d="M1.6 1v12M1.6 1.6h8.8l-2 3.2 2 3.2H1.6z" stroke-linejoin="round"/></svg>',
+  down:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v8m0 0 3-3m-3 3-3-3M1.5 12.5h11" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  up:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 9.5v-8m0 0 3 3m-3-3-3 3M1.5 12.5h11" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  trash:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 3.5h10M5.5 3.5V2h3v1.5M3.2 3.5l.6 9h6.4l.6-9M6 6v4M8 6v4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+const strip = s => String(s ?? "").replace(/<[^>]+>/g," ");
+const fold = s => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+                  .replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase();
+const pad2 = n => String(n).padStart(2,"0");
+const clock = s => `${pad2(Math.floor(s/60))}:${pad2(s%60)}`;
+const pct = (a,b) => b ? Math.round(a/b*100) : 0;
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+/* ---------- lưu trữ ---------- */
+const store = (() => {
+  let ok = false, mem = {};
+  try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); ok = true; } catch(e){}
+  return { ok,
+    get(k){ try{ return ok ? localStorage.getItem(k) : (mem[k] ?? null); }catch(e){ return mem[k] ?? null; } },
+    set(k,v){ try{ ok ? localStorage.setItem(k,v) : (mem[k]=v); }catch(e){ mem[k]=v; } },
+    del(k){ try{ ok ? localStorage.removeItem(k) : delete mem[k]; }catch(e){ delete mem[k]; } } };
+})();
+const KEY = "examtrainer." + DATA.meta.code;
+
+/* ---------- i18n giao diện ---------- */
+const T = {
+vi:{
+  sub:"Bộ đề luyện thi", mStudy:"Ôn tập", mExam:"Thi thử", mStats:"Thống kê",
+  lSearch:"Tìm trong đề", searchHint:"Gõ có dấu hay không dấu đều tìm được.", phSearch:"Tìm theo từ khoá…",
+  lStatus:"Trạng thái", lType:"Dạng câu", lTopics:"Chủ đề & mức thuộc bài", lData:"Dữ liệu học",
+  bExport:"Xuất tiến độ", bImport:"Nhập tiến độ", bReset:"Xoá hết",
+  sAll:"Tất cả", sTodo:"Chưa làm", sRight:"Đã đúng", sWrong:"Đã sai", sFlag:"Đánh dấu",
+  kAll:"Tất cả", kMcq:"Chọn phương án", kYesno:"Có / Không", kDrop:"Từ danh sách",
+  studyTitle:"Ôn tập", studyLead:n=>`${n} câu khớp bộ lọc. Đề gốc tiếng Anh, phần phân tích viết bằng tiếng Việt.`,
+  check:"Kiểm tra", reveal:"Xem đáp án", again:"Làm lại", flag:"Đánh dấu", unflag:"Bỏ đánh dấu",
+  pickFirst:"Trả lời rồi bấm Kiểm tra", answered:"Đã trả lời", partial:(a,b)=>`Đã trả lời ${a}/${b}`,
+  markYou:"Bạn chọn", markOk:"Đáp án",
+  yes:"Có", no:"Không",
+  ansTitle:"Đáp án đúng", verdictOk:"Chính xác", verdictBad:"Chưa đúng", verdictNone:"Chỉ xem đáp án",
+  secKey:"Phân tích từ khóa", secElim:"Phương pháp loại trừ", secExp:"Giải thích", secNote:"Ghi chú của bạn",
+  notePh:"Viết lại ý bạn hay quên…", source:"Nguồn",
+  confH:"Độ tin cậy cao", confM:"Độ tin cậy trung bình", confL:"Độ tin cậy thấp — nên kiểm chứng",
+  multi:n=>`Chọn ${n}`, topicN:n=>`Chủ đề ${n}`, qN:n=>`Câu ${n}`,
+  tYesno:"Có / Không", tDrop:"Chọn từ danh sách",
+  emptyT:"Không có câu nào khớp", emptyD:"Đổi từ khoá hoặc bỏ bớt bộ lọc ở cột trái.",
+  progress:"Tiến độ ôn tập", attempted:"Đã chấm", accuracy:"Độ chính xác", flagged:"Đã đánh dấu",
+  queue:"Cần ôn lại", queueEmpty:"Chưa có câu nào sai hoặc được đánh dấu.",
+  keysTitle:"Phím tắt",
+  examSetup:"Thiết lập bài thi", examLead:"Đề được trộn ngẫu nhiên. Hết giờ sẽ tự nộp bài.",
+  fCount:"Số câu", fTime:"Thời gian · phút", fScope:"Phạm vi", fShuffle:"Trộn thứ tự phương án",
+  fSource:"Nguồn câu hỏi", srcAll:"Toàn bộ ngân hàng", srcWrong:"Chỉ câu từng làm sai", srcFlag:"Chỉ câu đã đánh dấu",
+  optYes:"Có", optNo:"Không", allTopics:"Tất cả chủ đề",
+  poolInfo:(n,c)=>`Khả dụng ${n} câu · sẽ lấy ${c} câu · để 0 phút nếu không muốn giới hạn giờ`, notEnough:"Nguồn câu hỏi đang trống. Chọn phạm vi hoặc nguồn khác.",
+  start:"Bắt đầu làm bài", resume:"Tiếp tục bài đang làm", discard:"Bỏ bài đang làm",
+  inProgress:"Bạn có một bài thi chưa nộp.",
+  examRun:"Đang làm bài", qPos:(a,b)=>`Câu ${a}/${b}`,
+  prev:"Câu trước", next:"Câu sau", submit:"Nộp bài", timeLeft:"Thời gian còn lại", palette:"Bảng câu",
+  answeredN:"Đã trả lời",
+  confirmSubmitT:"Nộp bài?", confirmSubmitD:n=>`Còn ${n} câu chưa trả lời. Các câu này tính là sai.`,
+  confirmSubmitD0:"Bạn đã trả lời hết. Nộp bài để xem kết quả.",
+  cancel:"Huỷ", confirm:"Nộp bài", timeUp:"Hết giờ — bài thi đã được nộp tự động.",
+  resultTitle:"Kết quả", passed:"Đạt", failed:"Chưa đạt", passNote:p=>`Ngưỡng đạt ${p}%`,
+  fCorrect:"Câu đúng", fWrong:"Câu sai", fBlank:"Bỏ trống", fTime2:"Thời gian",
+  byTopic:"Kết quả theo chủ đề", reviewAll:"Xem lại tất cả", reviewWrong:"Chỉ câu sai", retry:"Làm bài mới",
+  scoreLbl:"điểm",
+  statsTitle:"Thống kê", statsLead:"Số liệu lưu trên máy bạn, không gửi đi đâu cả.",
+  colTopic:"Chủ đề", colDone:"Đã chấm", colRight:"Đúng", colAcc:"Chính xác",
+  histTitle:"Lịch sử thi thử", histEmpty:"Chưa có lần thi nào.",
+  colWhen:"Thời điểm", colScope:"Phạm vi", colScore:"Điểm", colDetail:"Đúng/Tổng", colDur:"Thời gian",
+  noStore:"Trình duyệt đang chặn lưu trữ — tiến độ chỉ giữ trong phiên này. Dùng “Xuất tiến độ” để giữ lại.",
+  okStore:"Tiến độ được lưu tự động trên máy bạn.",
+  resetT:"Xoá toàn bộ tiến độ?", resetD:"Câu trả lời, ghi chú, đánh dấu và lịch sử thi sẽ mất. Không khôi phục được.",
+  del:"Xoá hết", exported:"Đã tải file tiến độ", imported:"Đã nhập tiến độ", badFile:"File không đọc được",
+  kPick:"Chọn phương án A–D", kCheck:"Kiểm tra / xem đáp án", kFlag:"Đánh dấu câu",
+  kNav:"Câu trước / câu sau", kSearch:"Nhảy vào ô tìm kiếm", kHelp:"Bảng phím tắt", kEsc:"Đóng hộp thoại",
+  close:"Đóng"
+},
+en:{
+  sub:"Exam question bank", mStudy:"Study", mExam:"Mock exam", mStats:"Stats",
+  lSearch:"Search", searchHint:"Accents are optional.", phSearch:"Search by keyword…",
+  lStatus:"Status", lType:"Question type", lTopics:"Topics & mastery", lData:"Your data",
+  bExport:"Export", bImport:"Import", bReset:"Erase all",
+  sAll:"All", sTodo:"Not done", sRight:"Correct", sWrong:"Wrong", sFlag:"Flagged",
+  kAll:"All", kMcq:"Multiple choice", kYesno:"Yes / No", kDrop:"Drop-down",
+  studyTitle:"Study", studyLead:n=>`${n} questions match. Stems are in English; the analysis is written in Vietnamese.`,
+  check:"Check", reveal:"Show answer", again:"Try again", flag:"Flag", unflag:"Unflag",
+  pickFirst:"Answer, then press Check", answered:"Answered", partial:(a,b)=>`Answered ${a}/${b}`,
+  markYou:"You picked", markOk:"Answer",
+  yes:"Yes", no:"No",
+  ansTitle:"Correct answer", verdictOk:"Correct", verdictBad:"Not quite", verdictNone:"Answer shown",
+  secKey:"Keyword analysis", secElim:"Ruling out the rest", secExp:"Explanation", secNote:"Your note",
+  notePh:"Jot down what you keep forgetting…", source:"Source",
+  confH:"High confidence", confM:"Medium confidence", confL:"Low confidence — verify this one",
+  multi:n=>`Choose ${n}`, topicN:n=>`Topic ${n}`, qN:n=>`Q${n}`,
+  tYesno:"Yes / No", tDrop:"Drop-down",
+  emptyT:"Nothing matches", emptyD:"Change the search term or clear a filter on the left.",
+  progress:"Study progress", attempted:"Graded", accuracy:"Accuracy", flagged:"Flagged",
+  queue:"Worth another look", queueEmpty:"No wrong or flagged questions yet.",
+  keysTitle:"Keyboard",
+  examSetup:"Set up the exam", examLead:"Questions are shuffled. The paper is submitted automatically when time runs out.",
+  fCount:"Questions", fTime:"Time · minutes", fScope:"Scope", fShuffle:"Shuffle options",
+  fSource:"Draw from", srcAll:"Whole bank", srcWrong:"Only ones I got wrong", srcFlag:"Only flagged ones",
+  optYes:"Yes", optNo:"No", allTopics:"All topics",
+  poolInfo:(n,c)=>`${n} available · drawing ${c} · set 0 minutes for no time limit`, notEnough:"That source is empty. Pick another scope or source.",
+  start:"Start", resume:"Resume your paper", discard:"Discard it",
+  inProgress:"You have an unfinished paper.",
+  examRun:"In progress", qPos:(a,b)=>`Question ${a}/${b}`,
+  prev:"Previous", next:"Next", submit:"Submit", timeLeft:"Time left", palette:"Questions",
+  answeredN:"Answered",
+  confirmSubmitT:"Submit now?", confirmSubmitD:n=>`${n} questions are still blank. Blanks are marked wrong.`,
+  confirmSubmitD0:"Everything is answered. Submit to see your result.",
+  cancel:"Cancel", confirm:"Submit", timeUp:"Time is up — your paper was submitted automatically.",
+  resultTitle:"Result", passed:"Passed", failed:"Not yet", passNote:p=>`Pass mark ${p}%`,
+  fCorrect:"Correct", fWrong:"Wrong", fBlank:"Blank", fTime2:"Time",
+  byTopic:"Breakdown by topic", reviewAll:"Review everything", reviewWrong:"Only wrong ones", retry:"New attempt",
+  scoreLbl:"score",
+  statsTitle:"Stats", statsLead:"Everything is stored on your own machine and never sent anywhere.",
+  colTopic:"Topic", colDone:"Graded", colRight:"Correct", colAcc:"Accuracy",
+  histTitle:"Mock exam history", histEmpty:"No attempts yet.",
+  colWhen:"When", colScope:"Scope", colScore:"Score", colDetail:"Correct/Total", colDur:"Time",
+  noStore:"Your browser is blocking storage — progress lasts for this session only. Use Export to keep it.",
+  okStore:"Progress is saved automatically on this machine.",
+  resetT:"Erase all progress?", resetD:"Answers, notes, flags and exam history will be gone for good.",
+  del:"Erase", exported:"Progress file downloaded", imported:"Progress imported", badFile:"Could not read that file",
+  kPick:"Pick option A–D", kCheck:"Check / show answer", kFlag:"Flag question",
+  kNav:"Previous / next question", kSearch:"Jump to search", kHelp:"Keyboard shortcuts", kEsc:"Close dialog",
+  close:"Close"
+}};
+let L = "vi";
+const t = (k,...a) => { const v = T[L][k]; return typeof v === "function" ? v(...a) : v; };
+/* văn bản song ngữ: luôn hiện bản tiếng Anh (đề gốc), kèm bản Việt khi giao diện là VI */
+const tx = o => !o ? "" : o.en + (L === "vi" && o.vi ? `<span class="gloss">${o.vi}</span>` : "");
+
+/* ---------- dữ liệu phẳng ---------- */
+const ALL = [], BY_ID = {};
+DATA.topics.forEach(tp => tp.questions.forEach(q => {
+  q.idx = ALL.length + 1;
+  q.hay = fold(strip([q.stem.en, q.stem.vi,
+    (q.options||[]).map(o => o.t.en + " " + (o.t.vi||"")).join(" "),
+    (q.rows||[]).map(r => r.t.en + " " + (r.t.vi||"")).join(" "),
+    (q.blanks||[]).map(b => (b.opts||[]).map(o => o.en).join(" ")).join(" "),
+    q.explain && (q.explain.key || q.explain.text), (q.explain && q.explain.elim || []).join(" ")
+  ].filter(Boolean).join(" ")));
+  ALL.push(q); BY_ID[q.id] = q;
+}));
+const TOPICS = DATA.topics.map(d => d.n);
+const TYPES = [...new Set(ALL.map(q => q.type))];
+const PASS = DATA.meta.pass || 70;
+
+/* ============================================================
+   LOGIC THEO DẠNG CÂU
+   ============================================================ */
+function blankAnswer(q){
+  if(q.type === "mcq")   return [];
+  if(q.type === "yesno") return q.rows.map(() => null);
+  return q.blanks.map(() => null);
+}
+function answeredCount(q, a){
+  if(q.type === "mcq") return (a||[]).length;
+  return (a||[]).filter(v => v !== null && v !== undefined).length;
+}
+function totalParts(q){
+  if(q.type === "mcq") return q.answer.length;
+  if(q.type === "yesno") return q.rows.length;
+  return q.blanks.length;
+}
+function isComplete(q, a){ return answeredCount(q,a) >= totalParts(q); }
+function isCorrect(q, a){
+  if(!a) return false;
+  if(q.type === "mcq")
+    return a.length === q.answer.length && [...a].sort().join("") === [...q.answer].sort().join("");
+  if(q.type === "yesno") return q.rows.every((r,i) => a[i] === r.a);
+  return q.blanks.every((b,i) => a[i] === b.a);
+}
+function stampHTML(q){
+  if(q.type === "mcq")
+    return `<div class="stamp"><span class="t">${t("ansTitle")}</span><span class="v">${q.answer.join(" ")}</span></div>`;
+  if(q.type === "yesno")
+    return `<div class="stamp"><span class="t">${t("ansTitle")}</span><span class="v">${
+      q.rows.map(r => r.a === "Y" ? "Y" : "N").join(" ")}</span></div>`;
+  return `<div class="stamp txt"><span class="t">${t("ansTitle")}</span><span class="v">${
+    q.blanks.map(b => strip(b.opts[b.a].en)).join(" · ")}</span></div>`;
+}
+
+/* ---------- thân câu hỏi (dùng chung cho ôn tập / thi / xem lại) ---------- */
+function bodyHTML(q, a, done, act){
+  const P = act ? `data-act="${act}"` : "";
+  if(q.type === "mcq"){
+    return `<ul class="opts">` + q.options.map(o => {
+      const right = q.answer.includes(o.k), pick = (a||[]).includes(o.k);
+      return `<li><button class="opt" ${P} data-k="${o.k}" data-right="${right?1:0}" data-pick="${pick?1:0}"
+          ${done?'aria-disabled="true"':""}>
+        <span class="k">${o.k}</span><span class="tx">${tx(o.t)}</span>
+        <span class="mk mk-you">${t("markYou")}</span><span class="mk mk-ok">${t("markOk")}</span>
+      </button></li>`; }).join("") + `</ul>`;
+  }
+  if(q.type === "yesno"){
+    return `<ul class="ynlist">` + q.rows.map((r,i) => {
+      const v = a ? a[i] : null;
+      const right = v !== null && v === r.a;
+      return `<li class="yn" data-right="${right?1:0}">
+        <div class="ynt">${tx(r.t)}</div>
+        <div class="ynb" role="group">
+          <button ${P} data-i="${i}" data-v="Y" data-correct="${r.a==="Y"?1:0}" aria-pressed="${v==="Y"}">${t("yes")}</button>
+          <button ${P} data-i="${i}" data-v="N" data-correct="${r.a==="N"?1:0}" aria-pressed="${v==="N"}">${t("no")}</button>
+        </div></li>`; }).join("") + `</ul>`;
+  }
+  return `<div class="blanks">` + q.blanks.map((b,i) => {
+    const v = a ? a[i] : null;
+    const right = v !== null && v === b.a;
+    return `<div class="blank" data-right="${right?1:0}">
+      ${b.label ? `<span class="blabel">${tx(b.label)}</span>` : ""}
+      <label class="sel ${v!==null?"on":""}">
+        <select ${P} data-i="${i}">
+          <option value="">— —</option>
+          ${b.opts.map((o,j) => {
+            const en = strip(o.en), vi = o.vi ? strip(o.vi) : "";
+            return `<option value="${j}" ${v===j?"selected":""}${vi?` title="${esc(vi)}"`:""}>${esc(en)}</option>`;
+          }).join("")}
+        </select><span class="cap"></span>
+      </label>
+      <span class="ansline ${right?"ok":"bad"}">${t("ansTitle")}: ${esc(strip(b.opts[b.a].en))}${
+        L === "vi" && b.opts[b.a].vi ? ` — ${esc(strip(b.opts[b.a].vi))}` : ""}</span>
+    </div>`; }).join("") + `</div>`;
+}
+
+/* ---------- khối giải thích ---------- */
+function noteHTML(r){
+  return `<div class="notewrap"><span class="lbl">${t("secNote")}</span>
+    <textarea data-act="note" rows="2" placeholder="${esc(t("notePh"))}">${esc(r.note||"")}</textarea></div>`;
+}
+function revealHTML(q, verdict, extra){
+  const e = q.explain || {};
+  const two = !!(e.key && e.elim && e.elim.length);
+  let secs = "";
+  if(e.key)  secs += `<div><h4 class="sech">${t("secKey")}</h4><p class="prose">${e.key}</p></div>`;
+  if(e.elim && e.elim.length)
+    secs += `<div><h4 class="sech">${t("secElim")}</h4><ul class="elim">${e.elim.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  if(e.text) secs += `<div><h4 class="sech">${t("secExp")}</h4><p class="prose">${e.text}</p></div>`;
+  const conf = q.conf ? `<span class="conf ${q.conf.toLowerCase()}">${t("conf"+q.conf.toUpperCase())}</span>` : "";
+  return `<div class="rev">
+    <div class="revtop">${stampHTML(q)}${verdict}${conf}</div>
+    <div class="revgrid ${two?"two":""}">${secs}</div>
+    ${q.cite ? `<p class="cite">${t("source")}: ${q.cite}</p>` : ""}
+    ${extra || ""}
+  </div>`;
+}
+
+/* ============================================================
+   TRẠNG THÁI
+   ============================================================ */
+const S = { mode:"study", f:{topic:"all",status:"all",type:"all",q:""},
+            p:{}, history:[], cur:null, exam:null, reviewWrongOnly:false };
+const rec = id => (S.p[id] ||= { a:null, done:0, ok:null, flag:0, note:"", n:0 });
+const ansOf = q => { const r = rec(q.id); if(!r.a) r.a = blankAnswer(q); return r.a; };
+
+function save(){
+  const e = S.exam;
+  const exam = (e && e.phase === "run") ? {
+    ids:e.list.map(x=>x.id), order:e.order, answers:e.answers, flags:e.flags,
+    pos:e.pos, started:e.started, duration:e.duration, cfg:e.cfg } : null;
+  store.set(KEY, JSON.stringify({ v:2, lang:L, theme:document.documentElement.dataset.theme,
+                                  p:S.p, history:S.history, exam }));
+}
+function load(){
+  try{
+    const d = JSON.parse(store.get(KEY) || "{}");
+    if(d.p) S.p = d.p;
+    if(Array.isArray(d.history)) S.history = d.history;
+    if(d.lang) L = d.lang;
+    if(d.exam && d.exam.ids){
+      const list = d.exam.ids.map(id => {
+        const q = BY_ID[id]; if(!q) return null;
+        const ord = d.exam.order && d.exam.order[id];
+        if(ord && q.options) return Object.assign({}, q, { options: ord.map(k => q.options.find(o=>o.k===k)).filter(Boolean) });
+        return q;
+      }).filter(Boolean);
+      if(list.length === d.exam.ids.length)
+        S.exam = { phase:"run", list, order:d.exam.order, answers:d.exam.answers||{}, flags:d.exam.flags||{},
+                   pos:d.exam.pos||0, started:d.exam.started, duration:d.exam.duration, cfg:d.exam.cfg, timer:null };
+    }
+  }catch(e){}
+}
+
+/* ---------- lọc ---------- */
+function filtered(){
+  const term = fold(S.f.q.trim());
+  return ALL.filter(q => {
+    if(S.f.topic !== "all" && q.topic !== +S.f.topic) return false;
+    if(S.f.type !== "all" && q.type !== S.f.type) return false;
+    const r = S.p[q.id];
+    if(S.f.status === "todo"  && r && r.done) return false;
+    if(S.f.status === "right" && !(r && r.ok === true)) return false;
+    if(S.f.status === "wrong" && !(r && r.ok === false)) return false;
+    if(S.f.status === "flag"  && !(r && r.flag)) return false;
+    if(term && !q.hay.includes(term)) return false;
+    return true;
+  });
+}
+function statsOf(list){
+  let done=0, right=0, flag=0;
+  list.forEach(q => { const r=S.p[q.id]; if(!r) return;
+    if(r.ok === true || r.ok === false){ done++; if(r.ok) right++; }
+    if(r.flag) flag++; });
+  return { done, right, flag, total:list.length };
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderAll(){ renderRail(); renderMain(); renderAside(); applyI18n(); }
+
+function applyI18n(){
+  document.documentElement.lang = L;
+  $$("[data-t]").forEach(el => { const v = T[L][el.dataset.t]; if(typeof v === "string") el.textContent = v; });
+  $$("[data-t-ph]").forEach(el => { const v = T[L][el.dataset.tPh]; if(typeof v === "string") el.placeholder = v; });
+  $("#storeNote").textContent = store.ok ? t("okStore") : t("noStore");
+  $$("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === L));
+  $$("[data-mode]").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === S.mode));
+}
+
+function renderRail(){
+  // một hàm dựng hàng dùng chung cho MỌI danh sách lọc — thêm bộ lọc mới thì
+  // gọi lại nó, đừng đẻ ra kiểu hiển thị thứ hai.
+  const listRow = (key, cur, v, lab, count, mark) =>
+    `<button class="srow" data-f-key="${key}" data-v="${v}" aria-pressed="${String(v)===String(cur)}">
+      <span class="dot ${mark||""}"></span><span class="nm">${esc(lab)}</span><span class="ct">${count}</span>
+    </button>`;
+
+  // ----- trạng thái -----
+  const counts = (() => {
+    let todo=0, right=0, wrong=0, flag=0;
+    ALL.forEach(q => { const r = S.p[q.id];
+      if(!r || !r.done) todo++;
+      if(r && r.ok === true) right++;
+      if(r && r.ok === false) wrong++;
+      if(r && r.flag) flag++; });
+    return {all:ALL.length, todo, right, wrong, flag};
+  })();
+  $("#fStatus").innerHTML = [
+    ["all", t("sAll"), ""], ["todo", t("sTodo"), ""], ["right", t("sRight"), "g"],
+    ["wrong", t("sWrong"), "r"], ["flag", t("sFlag"), "f"]
+  ].map(([v,lab,mk]) => listRow("status", S.f.status, v, lab, counts[v], mk)).join("");
+
+  // ----- dạng câu: chỉ hiện khi đề có từ hai dạng trở lên -----
+  const typeInfo = {mcq:[t("kMcq"),"m-mcq"], yesno:[t("kYesno"),"m-yesno"], dropdown:[t("kDrop"),"m-drop"]};
+  const typeBlock = $("#fTypeBlk");
+  if(TYPES.length < 2) typeBlock.classList.add("hide");
+  else {
+    typeBlock.classList.remove("hide");
+    const tc = Object.fromEntries(TYPES.map(x => [x, ALL.filter(q => q.type === x).length]));
+    $("#fType").innerHTML = listRow("type", S.f.type, "all", t("kAll"), ALL.length, "")
+      + TYPES.map(x => listRow("type", S.f.type, x, typeInfo[x][0], tc[x], typeInfo[x][1])).join("");
+  }
+
+  const row = (v, name, list) => {
+    const s = statsOf(list);
+    return `<button class="trow" data-f-key="topic" data-v="${v}" aria-pressed="${String(v)===String(S.f.topic)}">
+      <span class="nm">${esc(name)}</span><span class="ct">${s.done}/${s.total}</span>
+      <span class="meter"><i class="g" style="width:${pct(s.right,s.total)}%"></i><i class="r" style="width:${pct(s.done-s.right,s.total)}%"></i></span>
+    </button>`;
+  };
+  $("#fTopics").innerHTML = row("all", t("sAll"), ALL) +
+    TOPICS.map(n => row(n, t("topicN", n), ALL.filter(q => q.topic === n))).join("");
+}
+
+function renderAside(){
+  const box = $("#asideBody");
+  if(S.mode === "exam" && S.exam && S.exam.phase === "run"){ box.innerHTML = asideExam(); return; }
+  if(S.mode === "stats"){ box.innerHTML = asideKeys(); return; }
+  box.innerHTML = asideStudy() + asideKeys();
+}
+function asideStudy(){
+  const s = statsOf(ALL);
+  const queue = ALL.filter(q => { const r = S.p[q.id]; return r && (r.ok === false || r.flag); }).slice(0,40);
+  return `<div class="blk">
+    <span class="lbl">${t("progress")}</span>
+    <div class="bigbar"><i style="width:${pct(s.right,s.total)}%;background:var(--ok)"></i><i style="width:${pct(s.done-s.right,s.total)}%;background:var(--bad)"></i></div>
+    <div class="kv"><span>${t("attempted")}</span><b>${s.done}/${s.total}</b></div>
+    <div class="kv"><span>${t("accuracy")}</span><b>${s.done?pct(s.right,s.done)+"%":"—"}</b></div>
+    <div class="kv"><span>${t("flagged")}</span><b>${s.flag}</b></div>
+  </div>
+  <div class="blk only-lg">
+    <span class="lbl">${t("queue")} · ${queue.length}</span>
+    ${queue.length ? `<div class="queue">` + queue.map(q => {
+        const r = S.p[q.id];
+        return `<button class="qbtn ${r.ok===false?"is-wrong":"is-flag"}" data-jump="${q.id}">
+          <span class="n">${pad2(q.idx)}</span><span class="t">${esc(strip(q.stem.en).slice(0,64))}</span></button>`;
+      }).join("") + `</div>` : `<p class="note">${t("queueEmpty")}</p>`}
+  </div>`;
+}
+function asideKeys(){
+  const r = (k,d) => `<div class="keyrow"><kbd>${k}</kbd><span>${d}</span></div>`;
+  return `<div class="blk only-lg"><span class="lbl">${t("keysTitle")}</span><div class="keys">
+    ${r("A–D",t("kPick"))}${r("↵",t("kCheck"))}${r("F",t("kFlag"))}${r("← →",t("kNav"))}${r("/",t("kSearch"))}
+  </div></div>`;
+}
+function asideExam(){
+  const e = S.exam;
+  const left = e.duration ? Math.max(0, e.duration - Math.floor((Date.now()-e.started)/1000)) : null;
+  const ans = e.list.filter((q,i) => isComplete(q, e.answers[i])).length;
+  return `<div class="blk">
+    <span class="lbl">${t("timeLeft")}</span>
+    <div class="timer ${left!==null&&left<60?"low":""}" id="timerOut">${left===null?"∞":clock(left)}</div>
+  </div>
+  <div class="blk">
+    <span class="lbl">${t("answeredN")}</span>
+    <div class="bigbar"><i style="width:${pct(ans,e.list.length)}%;background:var(--pick)"></i></div>
+    <div class="kv"><span>${t("answeredN")}</span><b>${ans}/${e.list.length}</b></div>
+  </div>
+  <div class="blk"><span class="lbl">${t("palette")}</span>
+    <div class="pal">${e.list.map((q,i)=>`<button class="pd ${isComplete(q,e.answers[i])?"is-ans":""} ${e.flags[i]?"is-flag":""} ${i===e.pos?"is-cur":""}" data-go="${i}">${i+1}</button>`).join("")}</div>
+  </div>`;
+}
+
+/* ---------- vùng chính ---------- */
+function renderMain(){
+  const v = $("#view");
+  v.innerHTML = S.mode === "study" ? viewStudy() : S.mode === "stats" ? viewStats() : viewExam();
+}
+
+function viewStudy(){
+  const list = filtered();
+  const head = `<header class="head">
+      <div><h2>${t("studyTitle")}</h2><p>${t("studyLead", list.length)}</p></div>
+      <div class="r"><span class="lbl">${esc(DATA.meta.code)}</span></div></header>`;
+  if(!list.length) return head + `<div class="empty"><b>${t("emptyT")}</b>${t("emptyD")}</div>`;
+  return head + list.map(recordHTML).join("");
+}
+
+function typeTag(q){
+  if(q.type === "yesno") return `<span class="tag multi">${t("tYesno")}</span>`;
+  if(q.type === "dropdown") return `<span class="tag multi">${t("tDrop")}</span>`;
+  if(q.multi) return `<span class="tag multi">${t("multi", q.answer.length)}</span>`;
+  return "";
+}
+
+function recordHTML(q){
+  const r = rec(q.id), a = ansOf(q);
+  const tags = [`<span class="tag">${esc(t("topicN", q.topic))}</span>`,
+                `<span class="tag">${esc(t("qN", q.n))}</span>`, typeTag(q)];
+  if(r.done && r.ok === true)  tags.push(`<span class="tag ok">${t("verdictOk")}</span>`);
+  if(r.done && r.ok === false) tags.push(`<span class="tag bad">${t("verdictBad")}</span>`);
+  tags.push(`<button class="flagbtn" data-act="flag" aria-pressed="${!!r.flag}"
+      title="${esc(r.flag?t("unflag"):t("flag"))}" aria-label="${esc(r.flag?t("unflag"):t("flag"))}">${ICON.flag}</button>`);
+
+  const n = answeredCount(q,a), total = totalParts(q);
+  const bar = r.done
+    ? `<button class="btn" data-act="again">${t("again")}</button>`
+    : `<button class="btn solid" data-act="check" ${isComplete(q,a)?"":"disabled"}>${t("check")}</button>
+       <button class="btn" data-act="reveal">${t("reveal")}</button>
+       <span class="note">${n===0 ? t("pickFirst") : n>=total ? t("answered") : t("partial", n, total)}</span>`;
+
+  const verdict = r.ok === true  ? `<span class="verdict ok">${t("verdictOk")}</span>`
+                : r.ok === false ? `<span class="verdict bad">${t("verdictBad")}</span>`
+                : `<span class="note">${t("verdictNone")}</span>`;
+
+  return `<article class="rec ${S.cur===q.id?"cur":""}" id="rec-${q.id}" data-id="${q.id}" data-done="${r.done?1:0}">
+    <div class="rechead"><span class="idx">${pad2(q.idx)}</span><div class="tags">${tags.join("")}</div></div>
+    <p class="stem">${tx(q.stem)}</p>
+    ${q.img ? `<img class="qimg" src="${q.img}" alt="" data-zoom>` : ""}
+    <div class="qbody">${bodyHTML(q, a, r.done, "ans")}</div>
+    <div class="bar">${bar}</div>
+    ${revealHTML(q, verdict, noteHTML(r))}
+  </article>`;
+}
+
+function refreshRecord(id, focusSel){
+  const q = BY_ID[id];
+  let node = document.getElementById("rec-"+id);
+  if(!q || !node) return;
+  node.outerHTML = recordHTML(q);
+  node = document.getElementById("rec-"+id);
+  if(node && focusSel){ const n = node.querySelector(focusSel); if(n) n.focus(); }
+}
+
+/* ---------- ghi nhận câu trả lời ---------- */
+function applyAnswer(q, a, el){
+  if(q.type === "mcq"){
+    const k = el.dataset.k;
+    if(q.answer.length > 1){
+      const i = a.indexOf(k);
+      if(i >= 0) a.splice(i,1);
+      else { if(a.length >= q.answer.length) a.shift(); a.push(k); }
+    } else { a.length = 0; if(!el.dataset.was) a.push(k); }
+  } else if(q.type === "yesno"){
+    const i = +el.dataset.i;
+    a[i] = a[i] === el.dataset.v ? null : el.dataset.v;
+  } else {
+    const i = +el.dataset.i;
+    a[i] = el.value === "" ? null : +el.value;
+  }
+}
+
+/* ============================================================
+   THI THỬ
+   ============================================================ */
+function examPool(cfg){
+  let p = ALL;
+  if(cfg.topic !== "all") p = p.filter(q => q.topic === +cfg.topic);
+  if(cfg.source === "wrong") p = p.filter(q => { const r=S.p[q.id]; return r && r.ok === false; });
+  if(cfg.source === "flag")  p = p.filter(q => { const r=S.p[q.id]; return r && r.flag; });
+  return p;
+}
+function viewExam(){
+  const e = S.exam;
+  if(!e || e.phase === "setup") return examSetup();
+  if(e.phase === "run") return examRun();
+  return examResult();
+}
+function selectHTML(name, cur, opts){
+  return `<label class="fldw"><span class="lbl">${name}</span>
+    <span class="sel"><select data-cfg="${opts.key}">${
+      opts.items.map(([v,lab]) => `<option value="${esc(v)}" ${String(v)===String(cur)?"selected":""}>${esc(lab)}</option>`).join("")
+    }</select><span class="cap"></span></span></label>`;
+}
+function examSetup(){
+  const cfg = (S.exam && S.exam.cfg) || { count:30, mins:45, topic:"all", shuffle:"yes", source:"all" };
+  const n = examPool(cfg).length;
+  const resume = S.exam && S.exam.phase === "run";
+  return `<header class="head"><div><h2>${t("examSetup")}</h2><p>${t("examLead")}</p></div></header>
+  ${resume ? `<div class="panel"><p class="prose" style="margin-bottom:14px">${t("inProgress")}</p>
+     <div class="act"><button class="btn solid" data-act="resume">${t("resume")}</button>
+     <button class="btn danger" data-act="discard">${t("discard")}</button></div></div>` : ""}
+  <div class="panel">
+    <div class="grid2">
+      ${selectHTML(t("fSource"), cfg.source, {key:"source", items:[["all",t("srcAll")],["wrong",t("srcWrong")],["flag",t("srcFlag")]]})}
+      ${selectHTML(t("fScope"), cfg.topic, {key:"topic", items:[["all",t("allTopics")], ...TOPICS.map(x=>[x,t("topicN",x)])]})}
+      <label class="fldw"><span class="lbl">${t("fCount")}</span>
+        <input class="fld" style="padding:9px 12px;font-size:13.5px;background:var(--paper)" type="number" data-cfg="count" min="1" max="${Math.max(1,n)}" value="${Math.min(cfg.count,Math.max(1,n))}"></label>
+      <label class="fldw"><span class="lbl">${t("fTime")}</span>
+        <input class="fld" style="padding:9px 12px;font-size:13.5px;background:var(--paper)" type="number" data-cfg="mins" min="0" value="${cfg.mins}"></label>
+      ${selectHTML(t("fShuffle"), cfg.shuffle, {key:"shuffle", items:[["yes",t("optYes")],["no",t("optNo")]]})}
+    </div>
+    <p class="note" style="margin:18px 0 14px">${n ? t("poolInfo", n, Math.min(cfg.count,n)) : t("notEnough")}</p>
+    <button class="btn solid" data-act="start" ${n?"":"disabled"}>${t("start")}</button>
+  </div>`;
+}
+function examRun(){
+  const e = S.exam, q = e.list[e.pos];
+  const a = e.answers[e.pos] || (e.answers[e.pos] = blankAnswer(q));
+  const left = e.duration ? Math.max(0, e.duration - Math.floor((Date.now()-e.started)/1000)) : null;
+  return `<header class="head">
+      <div><h2>${t("examRun")}</h2><p>${t("qPos", e.pos+1, e.list.length)}</p></div>
+      <div class="r"><span class="lbl">${t("timeLeft")}</span><div class="timer" id="timerHead">${left===null?"∞":clock(left)}</div></div>
+    </header>
+  <article class="rec" data-done="0">
+    <div class="rechead"><span class="idx">${pad2(e.pos+1)}</span>
+      <div class="tags"><span class="tag">${esc(t("topicN", q.topic))}</span>${typeTag(q)}${e.flags[e.pos]?`<span class="tag flag">${t("flag")}</span>`:""}</div></div>
+    <p class="stem">${tx(q.stem)}</p>
+    ${q.img ? `<img class="qimg" src="${q.img}" alt="" data-zoom>` : ""}
+    <div class="qbody">${bodyHTML(q, a, false, "eans")}</div>
+    <div class="bar">
+      <button class="btn" data-act="eprev" ${e.pos?"":"disabled"}>← ${t("prev")}</button>
+      <button class="btn" data-act="enext" ${e.pos<e.list.length-1?"":"disabled"}>${t("next")} →</button>
+      <button class="btn sm" data-act="eflag">${e.flags[e.pos]?t("unflag"):t("flag")}</button>
+      <span class="grow"></span>
+      <button class="btn solid" data-act="esubmit">${t("submit")}</button>
+    </div>
+  </article>`;
+}
+function examResult(){
+  const R = S.exam.result;
+  const p = R.pct >= PASS, C = 2*Math.PI*58;
+  const rows = TOPICS.map(n => {
+    const d = R.detail.filter(x => x.q.topic === n);
+    if(!d.length) return "";
+    const c = d.filter(x => x.ok).length;
+    return `<tr><td>${esc(t("topicN",n))}</td><td class="num">${d.length}</td><td class="num">${c}</td>
+      <td class="num">${pct(c,d.length)}%</td>
+      <td><span class="sbar"><i style="width:${pct(c,d.length)}%;background:var(--ok)"></i><i style="width:${pct(d.length-c,d.length)}%;background:var(--bad)"></i></span></td></tr>`;
+  }).join("");
+
+  const shown = S.reviewWrongOnly ? R.detail.filter(x => !x.ok) : R.detail;
+  const review = shown.map(d => {
+    const q = d.q;
+    const verdict = `<span class="verdict ${d.ok?"ok":"bad"}">${d.ok?t("verdictOk"):t("verdictBad")}</span>`;
+    return `<article class="rec" data-done="1">
+      <div class="rechead"><span class="idx">${pad2(R.detail.indexOf(d)+1)}</span>
+        <div class="tags"><span class="tag">${esc(t("topicN",q.topic))}</span>${typeTag(q)}
+        <span class="tag ${d.ok?"ok":"bad"}">${d.ok?t("verdictOk"):t("verdictBad")}</span></div></div>
+      <p class="stem">${tx(q.stem)}</p>
+      ${q.img ? `<img class="qimg" src="${q.img}" alt="" data-zoom>` : ""}
+      <div class="qbody">${bodyHTML(q, d.given, true, null)}</div>
+      ${revealHTML(q, verdict)}
+    </article>`;
+  }).join("");
+
+  return `<header class="head"><div><h2>${t("resultTitle")}</h2><p>${t("passNote",PASS)}</p></div></header>
+  <div class="panel"><div class="score">
+    <div class="ring"><svg width="132" height="132" viewBox="0 0 132 132">
+      <circle cx="66" cy="66" r="58" fill="none" stroke="var(--rule)" stroke-width="9"/>
+      <circle cx="66" cy="66" r="58" fill="none" stroke="${p?"var(--ok)":"var(--flag)"}" stroke-width="9"
+              stroke-dasharray="${C}" stroke-dashoffset="${C*(1-R.pct/100)}"/></svg>
+      <div class="n"><b>${R.pct}%</b><span>${t("scoreLbl")}</span></div></div>
+    <div>
+      <div class="result-h ${p?"ok":"bad"}">${p?t("passed"):t("failed")}</div>
+      <div class="figs">
+        <div class="fig"><b style="color:var(--ok)">${R.correct}</b><span class="lbl">${t("fCorrect")}</span></div>
+        <div class="fig"><b style="color:var(--bad)">${R.wrong}</b><span class="lbl">${t("fWrong")}</span></div>
+        <div class="fig"><b>${R.blank}</b><span class="lbl">${t("fBlank")}</span></div>
+        <div class="fig"><b>${clock(R.secs)}</b><span class="lbl">${t("fTime2")}</span></div>
+      </div>
+      <div class="act" style="margin-top:18px">
+        <button class="btn solid" data-act="newexam">${t("retry")}</button>
+        <button class="btn" data-act="togglewrong">${S.reviewWrongOnly?t("reviewAll"):t("reviewWrong")}</button>
+      </div></div></div></div>
+  <div class="panel"><span class="lbl">${t("byTopic")}</span>
+    <div class="tw"><table><thead><tr><th>${t("colTopic")}</th><th class="num">${t("colDone")}</th>
+    <th class="num">${t("colRight")}</th><th class="num">${t("colAcc")}</th><th></th></tr></thead>
+    <tbody>${rows}</tbody></table></div></div>
+  ${review}`;
+}
+
+function viewStats(){
+  const s = statsOf(ALL);
+  const rows = TOPICS.map(n => {
+    const st = statsOf(ALL.filter(q => q.topic === n));
+    return `<tr><td>${esc(t("topicN",n))}</td><td class="num">${st.done}/${st.total}</td>
+      <td class="num">${st.right}</td><td class="num">${st.done?pct(st.right,st.done)+"%":"—"}</td>
+      <td><span class="sbar"><i style="width:${pct(st.right,st.total)}%;background:var(--ok)"></i><i style="width:${pct(st.done-st.right,st.total)}%;background:var(--bad)"></i></span></td></tr>`;
+  }).join("");
+  const hist = S.history.length ? S.history.slice().reverse().map(h =>
+      `<tr><td>${esc(new Date(h.at).toLocaleString(L==="vi"?"vi-VN":"en-GB"))}</td><td>${esc(h.scope)}</td>
+       <td class="num">${h.pct}%</td><td class="num">${h.c}/${h.t}</td><td class="num">${clock(h.secs)}</td></tr>`).join("")
+    : `<tr><td colspan="5" style="color:var(--ink-3);font-family:var(--serif);font-weight:400">${t("histEmpty")}</td></tr>`;
+
+  return `<header class="head"><div><h2>${t("statsTitle")}</h2><p>${t("statsLead")}</p></div></header>
+  <div class="panel"><div class="figs">
+    <div class="fig"><b>${s.done}/${s.total}</b><span class="lbl">${t("attempted")}</span></div>
+    <div class="fig"><b style="color:var(--ok)">${s.done?pct(s.right,s.done):0}%</b><span class="lbl">${t("accuracy")}</span></div>
+    <div class="fig"><b style="color:var(--flag)">${s.flag}</b><span class="lbl">${t("flagged")}</span></div>
+    <div class="fig"><b>${S.history.length}</b><span class="lbl">${t("histTitle")}</span></div>
+  </div></div>
+  <div class="panel"><span class="lbl">${t("byTopic")}</span><div class="tw"><table><thead><tr>
+    <th>${t("colTopic")}</th><th class="num">${t("colDone")}</th><th class="num">${t("colRight")}</th>
+    <th class="num">${t("colAcc")}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
+  <div class="panel"><span class="lbl">${t("histTitle")}</span><div class="tw"><table><thead><tr>
+    <th>${t("colWhen")}</th><th>${t("colScope")}</th><th class="num">${t("colScore")}</th>
+    <th class="num">${t("colDetail")}</th><th class="num">${t("colDur")}</th></tr></thead><tbody>${hist}</tbody></table></div></div>`;
+}
+
+/* ============================================================
+   HÀNH ĐỘNG
+   ============================================================ */
+function checkRecord(id, revealOnly){
+  const q = BY_ID[id], r = rec(id), a = ansOf(q);
+  r.done = 1;
+  r.ok = (revealOnly && answeredCount(q,a) === 0) ? null : isCorrect(q, a);
+  r.n = (r.n||0) + 1;
+  save(); refreshRecord(id); renderRail(); renderAside();
+}
+function setMode(m){
+  S.mode = m;
+  if(m === "exam" && !S.exam) S.exam = { phase:"setup", cfg:{count:30,mins:45,topic:"all",shuffle:"yes",source:"all"} };
+  if(m === "exam" && S.exam.phase === "run" && !S.exam.timer && S.exam.duration){
+    tickTimer(); S.exam.timer = setInterval(tickTimer, 1000);
+  }
+  renderAll(); window.scrollTo({top:0});
+}
+function startExam(){
+  const cfg = S.exam.cfg, pool = examPool(cfg);
+  if(!pool.length) return;
+  const count = Math.max(1, Math.min(+cfg.count || 1, pool.length));
+  const picked = shuffle(pool).slice(0, count);
+  const order = {};
+  const list = picked.map(q => {
+    if(cfg.shuffle === "yes" && q.options){
+      const opts = shuffle(q.options);
+      order[q.id] = opts.map(o => o.k);
+      return Object.assign({}, q, { options: opts });
+    }
+    return q;
+  });
+  clearInterval(S.exam.timer);
+  S.exam = { phase:"run", list, order, answers:{}, flags:{}, pos:0, started:Date.now(),
+             duration:(+cfg.mins||0)*60, cfg, timer:null };
+  if(S.exam.duration){ tickTimer(); S.exam.timer = setInterval(tickTimer, 1000); }
+  save(); renderAll(); window.scrollTo({top:0});
+}
+function tickTimer(){
+  const e = S.exam;
+  if(!e || e.phase !== "run" || !e.duration) return;
+  const left = e.duration - Math.floor((Date.now()-e.started)/1000);
+  const txt = clock(Math.max(0,left));
+  ["timerOut","timerHead"].forEach(id => {
+    const n = document.getElementById(id);
+    if(n){ n.textContent = txt; n.classList.toggle("low", left < 60); }
+  });
+  if(left <= 0){ gradeExam(); toast(t("timeUp")); }
+}
+function gradeExam(){
+  const e = S.exam;
+  if(!e || e.phase !== "run") return;
+  clearInterval(e.timer); e.timer = null;
+  let correct = 0, blank = 0;
+  const detail = e.list.map((q,i) => {
+    const given = e.answers[i] || blankAnswer(q);
+    const filled = answeredCount(q, given) > 0;
+    if(!filled) blank++;
+    const ok = filled && isCorrect(q, given);
+    if(ok) correct++;
+    const r = rec(q.id);
+    if(filled){ r.a = JSON.parse(JSON.stringify(given)); r.done = 1; r.ok = ok; r.n = (r.n||0)+1; }
+    if(e.flags[i]) r.flag = 1;
+    return { q, given, ok };
+  });
+  const secs = Math.floor((Date.now()-e.started)/1000);
+  const scope = e.cfg.topic === "all" ? t("allTopics") : t("topicN", e.cfg.topic);
+  e.result = { detail, correct, wrong:e.list.length-correct, blank, pct:pct(correct,e.list.length), secs };
+  e.phase = "result"; S.mode = "exam"; S.reviewWrongOnly = false;
+  S.history.push({ at:new Date().toISOString(), pct:e.result.pct, c:correct, t:e.list.length, secs, scope });
+  save(); renderAll(); window.scrollTo({top:0});
+}
+
+/* ---------- hộp thoại ---------- */
+function dialog(title, body, confirmLabel, onYes, danger){
+  const ov = document.createElement("div");
+  ov.className = "ov";
+  ov.innerHTML = `<div class="box" role="dialog" aria-modal="true"><h3>${esc(title)}</h3><p>${esc(body)}</p>
+    <div class="act"><button class="btn" data-no>${esc(t("cancel"))}</button>
+    ${confirmLabel?`<button class="btn ${danger?"danger":"solid"}" data-yes>${esc(confirmLabel)}</button>`:""}</div></div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener("click", ev => {
+    if(ev.target === ov || ev.target.hasAttribute("data-no")) ov.remove();
+    if(ev.target.hasAttribute("data-yes")){ ov.remove(); onYes && onYes(); }
+  });
+  (ov.querySelector("[data-yes]") || ov.querySelector("[data-no]")).focus();
+}
+function helpDialog(){
+  const rows = [["A B C D",t("kPick")],["Enter",t("kCheck")],["F",t("kFlag")],["← →",t("kNav")],["/",t("kSearch")],["?",t("kHelp")],["Esc",t("kEsc")]];
+  const ov = document.createElement("div");
+  ov.className = "ov";
+  ov.innerHTML = `<div class="box" role="dialog" aria-modal="true"><h3>${esc(t("keysTitle"))}</h3>
+    <div class="keys" style="margin-bottom:18px">${rows.map(([k,d])=>`<div class="keyrow"><kbd>${esc(k)}</kbd><span>${esc(d)}</span></div>`).join("")}</div>
+    <div class="act"><button class="btn" data-no>${esc(t("close"))}</button></div></div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener("click", ev => { if(ev.target === ov || ev.target.hasAttribute("data-no")) ov.remove(); });
+  ov.querySelector("[data-no]").focus();
+}
+function zoom(src){
+  const ov = document.createElement("div");
+  ov.className = "ov zoom";
+  ov.innerHTML = `<img src="${src}" alt="">`;
+  ov.addEventListener("click", () => ov.remove());
+  document.body.appendChild(ov);
+}
+let toastTimer = null;
+function toast(msg){
+  $$(".toast").forEach(n => n.remove());
+  const n = document.createElement("div");
+  n.className = "toast"; n.textContent = msg; n.setAttribute("role","status");
+  document.body.appendChild(n);
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), 2800);
+}
+
+/* ---------- xuất / nhập ---------- */
+function exportData(){
+  const blob = new Blob([JSON.stringify({v:2, code:DATA.meta.code, exportedAt:new Date().toISOString(),
+                                         p:S.p, history:S.history}, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `${DATA.meta.code.toLowerCase()}-progress-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(a.href); toast(t("exported"));
+}
+function importData(file){
+  const fr = new FileReader();
+  fr.onload = () => {
+    try{
+      const d = JSON.parse(fr.result);
+      if(!d || typeof d.p !== "object") throw 0;
+      S.p = d.p; S.history = Array.isArray(d.history) ? d.history : [];
+      save(); renderAll(); toast(t("imported"));
+    }catch(e){ toast(t("badFile")); }
+  };
+  fr.onerror = () => toast(t("badFile"));
+  fr.readAsText(file);
+}
+
+/* ============================================================
+   SỰ KIỆN
+   ============================================================ */
+document.addEventListener("click", ev => {
+  if(ev.target.matches("[data-zoom]")){ zoom(ev.target.src); return; }
+  // <select> do bộ lắng nghe "change" lo. Nếu để lọt vào đây, việc vẽ lại bản
+  // ghi sẽ thay thế chính phần tử đang mở, làm danh sách đóng sập ngay khi bấm.
+  if(ev.target.tagName === "SELECT") return;
+  const el = ev.target.closest("[data-mode],[data-lang],[data-f-key],[data-act],[data-jump],[data-go]");
+  if(!el) return;
+
+  if(el.dataset.mode){ setMode(el.dataset.mode); return; }
+  if(el.dataset.lang){ L = el.dataset.lang; save(); renderAll(); return; }
+  if(el.dataset.fKey){
+    S.f[el.dataset.fKey] = el.dataset.v;
+    renderRail(); renderMain();
+    if(window.innerWidth < 900) document.body.classList.remove("rail-open");
+    return;
+  }
+  if(el.dataset.jump){
+    const id = el.dataset.jump;
+    if(S.mode !== "study") S.mode = "study";
+    S.f = {topic:"all",status:"all",type:"all",q:""}; $("#search").value = "";
+    renderAll();
+    const n = document.getElementById("rec-"+id);
+    if(n) n.scrollIntoView({behavior:"smooth",block:"start"});
+    return;
+  }
+  if(el.dataset.go !== undefined && S.exam && S.exam.phase === "run"){
+    S.exam.pos = +el.dataset.go; save(); renderMain(); renderAside(); window.scrollTo({top:0}); return;
+  }
+
+  const recEl = el.closest(".rec"), id = recEl && recEl.dataset.id, act = el.dataset.act;
+  switch(act){
+    case "ans": {
+      if(!id) break;
+      const q = BY_ID[id], r = rec(id);
+      if(r.done) break;
+      const a = ansOf(q);
+      if(q.type === "mcq" && q.answer.length === 1 && a[0] === el.dataset.k) el.dataset.was = "1";
+      applyAnswer(q, a, el);
+      save();
+      refreshRecord(id, q.type === "mcq" ? `[data-act="ans"][data-k="${el.dataset.k}"]`
+                                         : `[data-act="ans"][data-i="${el.dataset.i}"]`);
+      break;
+    }
+    case "check":  if(id) checkRecord(id, false); break;
+    case "reveal": if(id) checkRecord(id, true);  break;
+    case "again": {
+      if(!id) break;
+      const r = rec(id); r.a = blankAnswer(BY_ID[id]); r.done = 0; r.ok = null;
+      save(); refreshRecord(id, '[data-act="check"]'); renderRail(); renderAside(); break;
+    }
+    case "flag": {
+      if(!id) break;
+      const r = rec(id); r.flag = r.flag ? 0 : 1;
+      save(); refreshRecord(id, '.flagbtn'); renderRail(); renderAside(); break;
+    }
+    case "start":  startExam(); break;
+    case "resume": S.exam.phase = "run"; renderAll(); break;
+    case "discard": clearInterval(S.exam.timer);
+                    S.exam = {phase:"setup", cfg:S.exam.cfg}; save(); renderAll(); break;
+    case "eans": {
+      const e = S.exam, q = e.list[e.pos];
+      const a = e.answers[e.pos] || (e.answers[e.pos] = blankAnswer(q));
+      if(q.type === "mcq" && q.answer.length === 1 && a[0] === el.dataset.k) el.dataset.was = "1";
+      applyAnswer(q, a, el);
+      save(); renderMain(); renderAside(); break;
+    }
+    case "eprev": S.exam.pos = Math.max(0, S.exam.pos-1); save(); renderMain(); renderAside(); window.scrollTo({top:0}); break;
+    case "enext": S.exam.pos = Math.min(S.exam.list.length-1, S.exam.pos+1); save(); renderMain(); renderAside(); window.scrollTo({top:0}); break;
+    case "eflag": S.exam.flags[S.exam.pos] = !S.exam.flags[S.exam.pos]; save(); renderMain(); renderAside(); break;
+    case "esubmit": {
+      const e = S.exam;
+      const blank = e.list.filter((q,i) => answeredCount(q, e.answers[i]) === 0).length;
+      dialog(t("confirmSubmitT"), blank ? t("confirmSubmitD", blank) : t("confirmSubmitD0"), t("confirm"), gradeExam);
+      break;
+    }
+    case "newexam": clearInterval(S.exam.timer);
+                    S.exam = {phase:"setup", cfg:S.exam.cfg}; save(); renderAll(); window.scrollTo({top:0}); break;
+    case "togglewrong": S.reviewWrongOnly = !S.reviewWrongOnly; renderMain(); break;
+  }
+});
+
+document.addEventListener("input", ev => {
+  const el = ev.target;
+  if(el.id === "search"){ S.f.q = el.value; renderMain(); return; }
+  if(el.dataset.act === "note"){
+    const r = el.closest(".rec");
+    if(r){ rec(r.dataset.id).note = el.value; clearTimeout(el._tm); el._tm = setTimeout(save, 400); }
+    return;
+  }
+  if(el.dataset.cfg && S.exam){ S.exam.cfg[el.dataset.cfg] = el.value; renderMain(); }
+});
+document.addEventListener("change", ev => {
+  const el = ev.target;
+  if(el.dataset.cfg && S.exam){ S.exam.cfg[el.dataset.cfg] = el.value; renderMain(); return; }
+  if(el.dataset.act === "ans"){
+    const r = el.closest(".rec"), q = BY_ID[r.dataset.id];
+    if(rec(q.id).done) return;
+    applyAnswer(q, ansOf(q), el);
+    save(); refreshRecord(q.id, `[data-act="ans"][data-i="${el.dataset.i}"]`); return;
+  }
+  if(el.dataset.act === "eans"){
+    const e = S.exam, q = e.list[e.pos];
+    const a = e.answers[e.pos] || (e.answers[e.pos] = blankAnswer(q));
+    applyAnswer(q, a, el); save(); renderMain(); renderAside(); return;
+  }
+  if(el.id === "fileIn" && el.files && el.files[0]){ importData(el.files[0]); el.value = ""; }
+});
+
+document.addEventListener("focusin", ev => {
+  const r = ev.target.closest && ev.target.closest(".rec");
+  if(r && r.dataset.id && r.dataset.id !== S.cur){
+    const prev = S.cur ? document.getElementById("rec-"+S.cur) : null;
+    if(prev) prev.classList.remove("cur");
+    S.cur = r.dataset.id; r.classList.add("cur");
+  }
+});
+
+$("#themeBtn").addEventListener("click", () => {
+  document.documentElement.dataset.theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  save();
+});
+$("#helpBtn").addEventListener("click", helpDialog);
+$("#railToggle").addEventListener("click", e => {
+  e.currentTarget.setAttribute("aria-expanded", document.body.classList.toggle("rail-open"));
+});
+$("#btnExport").addEventListener("click", exportData);
+$("#btnImport").addEventListener("click", () => $("#fileIn").click());
+$("#btnReset").addEventListener("click", () =>
+  dialog(t("resetT"), t("resetD"), t("del"), () => {
+    S.p = {}; S.history = []; S.cur = null;
+    if(S.exam) clearInterval(S.exam.timer);
+    S.exam = null;
+    store.del(KEY); save(); renderAll(); toast(t("del"));
+  }, true));
+
+document.addEventListener("keydown", ev => {
+  const tag = (ev.target.tagName || "").toLowerCase();
+  const typing = tag === "input" || tag === "textarea" || tag === "select";
+  if(ev.key === "Escape"){ $$(".ov").forEach(n => n.remove()); if(typing) ev.target.blur(); return; }
+  if(typing) return;
+  if(ev.key === "/"){ ev.preventDefault(); $("#search").focus(); return; }
+  if(ev.key === "?"){ ev.preventDefault(); helpDialog(); return; }
+  if(document.querySelector(".ov")) return;
+
+  const e = S.exam, inExam = S.mode === "exam" && e && e.phase === "run";
+  if(inExam){
+    if(ev.key === "ArrowLeft"  && e.pos > 0){ e.pos--; save(); renderMain(); renderAside(); return; }
+    if(ev.key === "ArrowRight" && e.pos < e.list.length-1){ e.pos++; save(); renderMain(); renderAside(); return; }
+    if(/^[a-fA-F]$/.test(ev.key) && ev.key.toLowerCase() !== "f"){
+      const b = document.querySelector(`[data-act="eans"][data-k="${ev.key.toUpperCase()}"]`);
+      if(b) b.click(); return;
+    }
+    if(ev.key.toLowerCase() === "f"){ e.flags[e.pos] = !e.flags[e.pos]; save(); renderMain(); renderAside(); return; }
+    return;
+  }
+  if(S.mode === "study" && S.cur){
+    const node = document.getElementById("rec-"+S.cur);
+    if(!node) return;
+    if(/^[a-fA-F]$/.test(ev.key) && ev.key.toLowerCase() !== "f"){
+      const b = node.querySelector(`[data-act="ans"][data-k="${ev.key.toUpperCase()}"]`);
+      if(b) b.click(); return;
+    }
+    if(ev.key === "Enter"){
+      const b = node.querySelector('[data-act="check"]:not([disabled])') || node.querySelector('[data-act="reveal"]');
+      if(b) b.click(); return;
+    }
+    if(ev.key.toLowerCase() === "f"){ const b = node.querySelector('[data-act="flag"]'); if(b) b.click(); return; }
+    if(ev.key === "ArrowDown" || ev.key === "ArrowRight"){ ev.preventDefault(); stepRecord(1); return; }
+    if(ev.key === "ArrowUp"   || ev.key === "ArrowLeft"){  ev.preventDefault(); stepRecord(-1); return; }
+  }
+});
+function stepRecord(d){
+  const list = $$(".rec");
+  const i = list.findIndex(n => n.dataset.id === S.cur);
+  const next = list[Math.max(0, Math.min(list.length-1, i+d))];
+  if(next){ const b = next.querySelector(".opt, .ynb button, select"); if(b) b.focus(); next.scrollIntoView({block:"nearest"}); }
+}
+
+/* ---------- khởi động ---------- */
+$("#markCode").textContent = DATA.meta.code;
+$$("[data-icon]").forEach(el => el.outerHTML = ICON[el.dataset.icon]);
+load();
+if(S.exam && S.exam.phase === "run"){ S.mode = "exam"; if(S.exam.duration){ tickTimer(); S.exam.timer = setInterval(tickTimer,1000); } }
+renderAll();
+
+</script>
+</body>
+</html>
